@@ -1,0 +1,41 @@
+{
+	"name": "@yesmaintenance/scripts",
+	"version": "0.0.1",
+	"type": "module",
+	"repository": {
+		"directory": "scripts",
+		"type": "git",
+		"url": "https://github.com/yesmaintenance/scripts.git"
+	},
+	"homepage": "https://github.com/yesmaintenance/scripts#readme",
+	"bugs": {
+		"url": "https://github.com/yesmaintenance/scripts/issues"
+	},
+	"bin": {
+		"maintenance": "./dist/index.js"
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "lightrix build src/**/*.ts -c config/esbuild.ts",
+		"maintenance": "ts-node src/index.ts"
+	},
+	"dependencies": {
+		"@octokit/core": "4.1.0",
+		"all-the-package-repos": "2.0.509",
+		"commander": "9.4.1",
+		"deepmerge-ts": "4.2.2",
+		"dotenv": "16.0.3",
+		"fast-glob": "3.2.12",
+		"zod": "3.19.1"
+	},
+	"devDependencies": {
+		"@lightrix/config": "0.0.5",
+		"@lightrix/scripts": "0.0.12",
+		"@types/node": "18.11.4",
+		"ts-node": "10.9.1"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
