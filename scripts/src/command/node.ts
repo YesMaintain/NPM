@@ -87,7 +87,7 @@ const writeWorkflows = async (files: containers) => {
               working-directory: .${packageDirectory}
             - uses: actions/upload-artifact@v3.1.1
               with:
-                  name: .${packageDirectory}-node-\${{ matrix.node-version }}-dist
+                  name: ${packageDirectory.replaceAll('/', '-')}-node-\${{ matrix.node-version }}-dist
                   path: .${packageDirectory}/dist
 `);
 											}
