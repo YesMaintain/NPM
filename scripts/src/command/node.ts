@@ -19,10 +19,10 @@ const writeWorkflows = async (files: containers) => {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages()
 		)) {
-			const githubDir = directory + "/.github";
+			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
-			if (path == "/workflows/" && name == "node.yml") {
+			if (path === "/workflows/" && name === "node.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
@@ -73,7 +73,7 @@ const writeWorkflows = async (files: containers) => {
 								)
 							) {
 								const values = packageJson[key];
-								if (key == "scripts") {
+								if (key === "scripts") {
 									for (const scripts in values) {
 										if (
 											Object.prototype.hasOwnProperty.call(
@@ -81,10 +81,14 @@ const writeWorkflows = async (files: containers) => {
 												scripts
 											)
 										) {
-											if (scripts == "build") {
+											if (scripts === "build") {
 												workflowBase.add(`
             - run: pnpm run build
               working-directory: .${packageDirectory}
+            - uses: actions/upload-artifact@v3.1.1
+              with:
+                  name: node-\${{ matrix.node-version }}-dist-.${packageDirectory}
+                  path: .${packageDirectory}/dist
 `);
 											}
 										}
