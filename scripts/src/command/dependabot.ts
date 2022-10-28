@@ -18,10 +18,10 @@ const writeWorkflows = async (files: containers) => {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages()
 		)) {
-			const githubDir = directory + "/.github";
+			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
-			if (path == "/") {
+			if (path === "/") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
