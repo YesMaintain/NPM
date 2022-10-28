@@ -46,11 +46,6 @@ const commands: Set<{
 		action: (await import("../command/readme.js")).default,
 	},
 	{
-		name: "tsconfig",
-		description: "Generate tsconfig.json",
-		action: (await import("../command/tsconfig.js")).default,
-	},
-	{
 		name: "node",
 		type: "workflow",
 		description: "Put node into GitHub Actions.",
@@ -67,7 +62,7 @@ const commands: Set<{
 		description: "Trigger all workflow tasks.",
 		action: async () => {
 			commands.forEach((command) => {
-				if (command.type == "workflow") {
+				if (command.type === "workflow") {
 					command.action();
 				}
 			});

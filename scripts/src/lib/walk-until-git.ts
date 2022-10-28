@@ -8,11 +8,11 @@ const walkUntilGit = async (
 	const path = dirname(search);
 	const originalPath = startedFrom ? startedFrom : path;
 
-	if (path == search) {
+	if (path === search) {
 		return originalPath;
 	}
 
-	return fs.existsSync(path + "/.git")
+	return fs.existsSync(`${path}/.git`)
 		? path
 		: await walkUntilGit(path, originalPath);
 };
