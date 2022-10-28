@@ -1,5 +1,5 @@
-import request from "../lib/request.js";
 import env from "../lib/env.js";
+import request from "../lib/request.js";
 
 const user = env.GITHUB_USER;
 

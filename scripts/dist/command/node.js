@@ -11,6 +11,6 @@ import t from"fs";import{dirname as u}from"path";import k from"../lib/git-direct
               working-directory: .${r}
             - uses: actions/upload-artifact@v3.1.1
               with:
-                  name: ${r.replaceAll("/","-")}-node-\${{ matrix.node-version }}-dist
+                  name: .${r.replaceAll("/","-")}-node-\${{ matrix.node-version }}-dist
                   path: .${r}/dist
 `)}}}if(a.size>1){try{await t.promises.mkdir(`${o}${e}`,{recursive:!0})}catch{console.log(`Could not create: ${o}${e}`)}try{await t.promises.writeFile(`${o}${e}${n}`,`${Array.from(a).join("")}`)}catch{console.log(`Could not create workflow for: ${o}/dependabot.yml`)}}else try{await t.promises.access(`${o}${e}${n}`,t.constants.F_OK);try{await t.promises.rm(`${o}${e}${n}`)}catch{console.log(`Could not remove ${e}${n} for: ${o}`)}}catch{}}};var A=async()=>{await v(b)};export{A as default};
