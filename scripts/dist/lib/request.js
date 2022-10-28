@@ -1,0 +1,1 @@
+import{Octokit as c}from"@octokit/core";import e from"../lib/env.js";const n=new c({auth:e.GITHUB_AUTH_TOKEN}),i=async(t,o={},s="octokit")=>{try{switch(console.log(`Successfully ${t}`),s){case"octokit":return await n.request(t,o)}}catch{console.log(`Could not ${t}`)}};var l=i;export{l as default};

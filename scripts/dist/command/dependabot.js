@@ -1,4 +1,4 @@
-import e from"fs";import{dirname as l}from"path";import w from"../lib/git-directories.js";import $ from"../lib/package-types.js";import d from"../lib/packages.js";import y from"../options/dependabot.js";const g=async p=>{for(const{path:o,name:r,workflow:f}of p)for(const[s,m]of await w(await d())){const t=s+"/.github",a=await f();if(o=="/")for(const i of m){const c=l(i).replace(s,""),n=(await $()).get(i.split("/").pop());a.add(`
+import e from"fs";import{dirname as l}from"path";import w from"../lib/git-directories.js";import $ from"../lib/package-types.js";import d from"../lib/packages.js";import y from"../options/dependabot.js";const g=async p=>{for(const{path:o,name:r,workflow:f}of p)for(const[s,m]of await w(await d())){const t=`${s}/.github`,a=await f();if(o==="/")for(const i of m){const c=l(i).replace(s,""),n=(await $()).get(i.split("/").pop());a.add(`
     - package-ecosystem: "${typeof n<"u"?n:(()=>{switch(i.split(".").pop()){case"csproj":return"nuget";default:return"npm"}})()}"
       directory: "${c||"/"}"
       schedule:
