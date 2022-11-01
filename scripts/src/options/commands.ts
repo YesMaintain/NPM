@@ -41,11 +41,6 @@ const commands: Set<{
 		action: (await import("../command/edit.js")).default,
 	},
 	{
-		name: "readme",
-		description: "Generate readmes. Inserts badges.",
-		action: (await import("../command/readme.js")).default,
-	},
-	{
 		name: "node",
 		type: "workflow",
 		description: "Put node into GitHub Actions.",
