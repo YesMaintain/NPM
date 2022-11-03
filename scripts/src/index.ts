@@ -19,6 +19,6 @@ commands?.forEach((command) => {
 	command.arguments?.forEach((argument) => {
 		commandProgram.argument(argument.name, argument.description);
 	});
-}); /* Triggering a GitHub Action. */
+});
 
 program.parse();
