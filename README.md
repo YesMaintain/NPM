@@ -58,7 +58,7 @@ Enable all the features that GitHub offers for all the repositories that you
 have access to:
 
 ```sh
-maintenance edit-features
+maintenance edit
 ```
 
 Create a `node.yml` file in the `.github/workflows` directory for each
@@ -79,12 +79,6 @@ Run all workflow tasks.
 
 ```sh
 maintenance workflows
-```
-
-Squash all commits that contain `Cleanup`.
-
-```sh
-maintenance squash
 ```
 
 Find all the `package.json` files in the project, and then star all the
