@@ -40,7 +40,7 @@ const starUsed = async () => {
 
 		for (const key in packageJson) {
 			if (Object.prototype.hasOwnProperty.call(packageJson, key)) {
-				if (key == "dependencies" || key == "devDependencies") {
+				if (key === "dependencies" || key === "devDependencies") {
 					for (const dependency in packageJson[key]) {
 						if (
 							Object.prototype.hasOwnProperty.call(

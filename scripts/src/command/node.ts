@@ -94,6 +94,13 @@ const writeWorkflows = async (files: containers) => {
                   path: .${packageDirectory}/dist
 `);
 											}
+
+											if (scripts === "test") {
+												workflowBase.add(`
+            - run: pnpm run test
+              working-directory: .${packageDirectory}
+`);
+											}
 										}
 									}
 								}
