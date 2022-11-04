@@ -1,15 +1,15 @@
 {
 	"name": "@yesmaintenance/scripts",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"type": "module",
 	"repository": {
 		"directory": "scripts",
 		"type": "git",
-		"url": "https://github.com/yesmaintenance/scripts.git"
+		"url": "https://github.com/yesmaintenance/npm.git"
 	},
-	"homepage": "https://github.com/yesmaintenance/scripts#readme",
+	"homepage": "https://github.com/yesmaintenance/npm#readme",
 	"bugs": {
-		"url": "https://github.com/yesmaintenance/scripts/issues"
+		"url": "https://github.com/yesmaintenance/npm/issues"
 	},
 	"bin": {
 		"maintenance": "./dist/index.js"
