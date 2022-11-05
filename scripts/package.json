@@ -14,7 +14,11 @@
 	"bin": {
 		"maintenance": "./dist/index.js"
 	},
+	"engines": {
+		"node": ">=14.21.0"
+	},
 	"main": "./dist/index.js",
+	"exports": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
 		"build": "lightrix build src/**/*.ts",
@@ -22,7 +26,7 @@
 	},
 	"dependencies": {
 		"@octokit/core": "4.1.0",
-		"all-the-package-repos": "2.0.530",
+		"all-the-package-repos": "2.0.534",
 		"commander": "9.4.1",
 		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
@@ -31,7 +35,7 @@
 	},
 	"devDependencies": {
 		"@lightrix/config": "0.0.6",
-		"@lightrix/scripts": "0.0.13",
+		"@lightrix/scripts": "0.0.14",
 		"@types/node": "18.11.9",
 		"ts-node": "10.9.1"
 	},

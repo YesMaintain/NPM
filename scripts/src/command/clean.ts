@@ -11,10 +11,11 @@ const repos: {
 	owner: string;
 	name: string;
 }[] = [];
+
 /**
  * It deletes all GitHub Actions logs and runs for all of your repositories
  */
-const clean = async () => {
+const clean = async (repositories: string[] = []) => {
 	for (const repo of (await request(`GET /users/${user}/repos`)).data) {
 		repos.push({
 			owner: user,
@@ -37,43 +38,55 @@ const clean = async () => {
 	}
 
 	// start: repos
+	let pass;
+
 	for (const repo of repos) {
-		// start: actions/caches
-		for (const cache of (
-			await request(
-				`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
-				{ owner: repo.owner, repo: repo.name }
-			)
-		).data.actions_caches) {
-			await request(
-				`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
-				{
-					owner: repo.owner,
-					repo: repo.name,
-					cache_id: cache.id,
-				}
-			);
+		for (const repository of repositories) {
+			if (repo.name === repository) {
+				pass = true;
+			} else {
+				pass = false;
+			}
 		}
-		// end: actions/caches
 
-		// start: actions/runs
-		for (const run of (
-			await request(
-				`GET /repos/${repo.owner}/${repo.name}/actions/runs`,
-				{ owner: repo.owner, repo: repo.name }
-			)
-		).data.workflow_runs) {
-			await request(
-				`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}`,
-				{ owner: repo.owner, repo: repo.name, run_id: run.id }
-			);
+		if (typeof pass === "undefined" || pass) {
+			// start: actions/caches
+			for (const cache of (
+				await request(
+					`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
+					{ owner: repo.owner, repo: repo.name }
+				)
+			).data.actions_caches) {
+				await request(
+					`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
+					{
+						owner: repo.owner,
+						repo: repo.name,
+						cache_id: cache.id,
+					}
+				);
+			}
+			// end: actions/caches
 
-			await request(
-				`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}/logs`,
-				{ owner: repo.owner, repo: repo.name, run_id: run.id }
-			);
+			// start: actions/runs
+			for (const run of (
+				await request(
+					`GET /repos/${repo.owner}/${repo.name}/actions/runs`,
+					{ owner: repo.owner, repo: repo.name }
+				)
+			).data.workflow_runs) {
+				await request(
+					`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}`,
+					{ owner: repo.owner, repo: repo.name, run_id: run.id }
+				);
+
+				await request(
+					`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}/logs`,
+					{ owner: repo.owner, repo: repo.name, run_id: run.id }
+				);
+			}
+			// end: actions/runs
 		}
-		// end: actions/runs
 	}
 	// end: repos
 };

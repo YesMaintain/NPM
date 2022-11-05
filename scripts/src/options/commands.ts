@@ -15,6 +15,12 @@ const commands: Set<{
 	{
 		name: "clean",
 		description: "Clean GitHub repositories",
+		arguments: new Set([
+			{
+				name: "[repositories...]",
+				description: "Repositories to clean.",
+			},
+		]),
 		action: (await import("../command/clean.js")).default,
 	},
 	{
