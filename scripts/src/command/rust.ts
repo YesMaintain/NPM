@@ -70,7 +70,7 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await fs.promises.writeFile(
 						`${githubDir}${path}${name}`,
-						`${Array.from(workflowBase).join("")}`
+						`${ [...workflowBase].join("")}`
 					);
 				} catch {
 					console.log(

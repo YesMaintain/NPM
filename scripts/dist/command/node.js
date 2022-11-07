@@ -16,4 +16,4 @@ import n from"fs";import{dirname as y}from"path";import k from"../lib/git-direct
 `),p==="test"&&i.add(`
             - run: pnpm run test
               working-directory: .${t}
-`))}}}if(i.size>1){try{await n.promises.mkdir(`${o}${e}`,{recursive:!0})}catch{console.log(`Could not create: ${o}${e}`)}try{await n.promises.writeFile(`${o}${e}${r}`,`${Array.from(i).join("")}`)}catch{console.log(`Could not create workflow for: ${o}/dependabot.yml`)}}else try{await n.promises.access(`${o}${e}${r}`,n.constants.F_OK);try{await n.promises.rm(`${o}${e}${r}`)}catch{console.log(`Could not remove ${e}${r} for: ${o}`)}}catch{}}};var A=async()=>{await v(b)};export{A as default};
+`))}}}if(i.size>1){try{await n.promises.mkdir(`${o}${e}`,{recursive:!0})}catch{console.log(`Could not create: ${o}${e}`)}try{await n.promises.writeFile(`${o}${e}${r}`,`${[...i].join("")}`)}catch{console.log(`Could not create workflow for: ${o}/dependabot.yml`)}}else try{await n.promises.access(`${o}${e}${r}`,n.constants.F_OK);try{await n.promises.rm(`${o}${e}${r}`)}catch{console.log(`Could not remove ${e}${r} for: ${o}`)}}catch{}}};var J=async()=>{await v(b)};export{J as default};

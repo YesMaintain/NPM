@@ -10,7 +10,7 @@ const packages = async () =>
 	new Set<string>([
 		...(await FastGlob(
 			[
-				...Array.from((await packageTypes()).keys()).map(
+				...[...(await packageTypes()).keys()].map(
 					(_package) => `**/${_package}`
 				),
 				"!**/node_modules",
