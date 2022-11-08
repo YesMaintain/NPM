@@ -1,5 +1,5 @@
 import FastGlob from "fast-glob";
-import fs from "fs";
+import * as fs from "fs";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 

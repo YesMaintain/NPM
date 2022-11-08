@@ -1,4 +1,4 @@
-import fs from "fs";
+import * as fs from "fs";
 import { basename, dirname } from "path";
 
 import gitDirectories from "../lib/git-directories.js";
