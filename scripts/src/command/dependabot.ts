@@ -16,35 +16,32 @@ import type { containers } from "../options/workflow.js";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages()
+			await packages(),
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
 			if (path === "/") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
-						directory,
-						""
-					);
+					const packageDirectory = dirname(_package).replace(directory, "");
 
 					const environment = (await packageTypes()).get(
-						_package.split("/").pop()
+						_package.split("/").pop(),
 					);
 
 					workflowBase.add(`
     - package-ecosystem: "${
-		typeof environment !== "undefined"
-			? environment
-			: (() => {
-					switch (_package.split(".").pop()) {
-						case "csproj":
-							return "nuget";
-						default:
-							return "npm";
-					}
-			  })()
-	}"
+			typeof environment !== "undefined"
+				? environment
+				: (() => {
+						switch (_package.split(".").pop()) {
+							case "csproj":
+								return "nuget";
+							default:
+								return "npm";
+						}
+				  })()
+		}"
       directory: "${packageDirectory ? packageDirectory : "/"}"
       schedule:
           interval: "daily"
@@ -65,26 +62,24 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await fs.promises.writeFile(
 						`${githubDir}${path}${name}`,
-						`${ [...workflowBase].join("")}`
+						`${[...workflowBase].join("")}`,
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/dependabot.yml`
+						`Could not create workflow for: ${githubDir}/dependabot.yml`,
 					);
 				}
 			} else {
 				try {
 					await fs.promises.access(
 						`${githubDir}${path}${name}`,
-						fs.constants.F_OK
+						fs.constants.F_OK,
 					);
 
 					try {
 						await fs.promises.rm(`${githubDir}${path}${name}`);
 					} catch {
-						console.log(
-							`Could not remove ${path}${name} for: ${githubDir}`
-						);
+						console.log(`Could not remove ${path}${name} for: ${githubDir}`);
 					}
 				} catch {}
 			}

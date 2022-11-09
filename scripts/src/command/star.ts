@@ -20,10 +20,10 @@ const starUsed = async () => {
 		(
 			await fs.promises.readFile(
 				resolve(
-					`${__dirname}/../../node_modules/all-the-package-repos/data/packages.json`
-				)
+					`${__dirname}/../../node_modules/all-the-package-repos/data/packages.json`,
+				),
 			)
-		).toString()
+		).toString(),
 	);
 
 	const dependencies = new Set<string>();
@@ -35,7 +35,7 @@ const starUsed = async () => {
 
 	for (const packageFile of packages) {
 		const packageJson = JSON.parse(
-			(await fs.promises.readFile(packageFile)).toString()
+			(await fs.promises.readFile(packageFile)).toString(),
 		);
 
 		for (const key in packageJson) {
@@ -43,10 +43,7 @@ const starUsed = async () => {
 				if (key === "dependencies" || key === "devDependencies") {
 					for (const dependency in packageJson[key]) {
 						if (
-							Object.prototype.hasOwnProperty.call(
-								packageJson[key],
-								dependency
-							)
+							Object.prototype.hasOwnProperty.call(packageJson[key], dependency)
 						) {
 							dependencies.add(dependency);
 						}

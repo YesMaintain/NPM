@@ -14,11 +14,11 @@ export default async (url: string = "") => {
 	// start: starred
 	try {
 		await octokit.request(
-			`PUT /user/starred/${url.replace("https://github.com/", "")}`
+			`PUT /user/starred/${url.replace("https://github.com/", "")}`,
 		);
 
 		console.log(
-			`Starred repository: ${url.replace("https://github.com/", "")}`
+			`Starred repository: ${url.replace("https://github.com/", "")}`,
 		);
 	} catch (error) {
 		console.log(`Could not star repository: ${url}`);

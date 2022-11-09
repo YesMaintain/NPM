@@ -11,7 +11,7 @@ const packages = async () =>
 		...(await FastGlob(
 			[
 				...[...(await packageTypes()).keys()].map(
-					(_package) => `**/${_package}`
+					(_package) => `**/${_package}`,
 				),
 				"!**/node_modules",
 				"!**/target",
@@ -71,7 +71,7 @@ const packages = async () =>
 			{
 				absolute: true,
 				cwd: env.BASE_DIR,
-			}
+			},
 		)),
 	]);
 

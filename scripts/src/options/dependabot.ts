@@ -17,9 +17,7 @@ const files: containers = new Set([
 			new Set([
 				(
 					await fs.promises.readFile(
-						resolve(
-							`${__dirname}/../../src/templates/.github/dependabot.yml`
-						)
+						resolve(`${__dirname}/../../src/templates/.github/dependabot.yml`),
 					)
 				).toString(),
 			]),
@@ -32,8 +30,8 @@ const files: containers = new Set([
 				(
 					await fs.promises.readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/dependabot.yml`
-						)
+							`${__dirname}/../../src/templates/.github/workflows/dependabot.yml`,
+						),
 					)
 				).toString(),
 			]),

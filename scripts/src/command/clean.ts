@@ -54,7 +54,10 @@ const clean = async (repositories: string[] = []) => {
 			for (const cache of (
 				await request(
 					`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
-					{ owner: repo.owner, repo: repo.name }
+					{
+						owner: repo.owner,
+						repo: repo.name,
+					}
 				)
 			).data.actions_caches) {
 				await request(
@@ -72,7 +75,10 @@ const clean = async (repositories: string[] = []) => {
 			for (const run of (
 				await request(
 					`GET /repos/${repo.owner}/${repo.name}/actions/runs`,
-					{ owner: repo.owner, repo: repo.name }
+					{
+						owner: repo.owner,
+						repo: repo.name,
+					}
 				)
 			).data.workflow_runs) {
 				await request(
