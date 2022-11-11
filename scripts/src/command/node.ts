@@ -17,21 +17,29 @@ import type { containers } from "../options/workflow.js";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages(),
+			await packages()
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
 			if (path === "/workflows/" && name === "node.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(directory, "");
-					const packageFile = (await fs.promises.readFile(_package)).toString();
+					const packageDirectory = dirname(_package).replace(
+						directory,
+						""
+					);
+					const packageFile = (
+						await fs.promises.readFile(_package)
+					).toString();
 
 					const environment = (await packageTypes()).get(
-						_package.split("/").pop(),
+						_package.split("/").pop()
 					);
 
-					if (typeof environment !== "undefined" && environment === "npm") {
+					if (
+						typeof environment !== "undefined" &&
+						environment === "npm"
+					) {
 						const packageJson = JSON.parse(packageFile);
 
 						for (const bundle of [
@@ -58,18 +66,31 @@ const writeWorkflows = async (files: containers) => {
 						}
 
 						for (const key in packageJson) {
-							if (Object.prototype.hasOwnProperty.call(packageJson, key)) {
+							if (
+								Object.prototype.hasOwnProperty.call(
+									packageJson,
+									key
+								)
+							) {
 								const values = packageJson[key];
 								if (key === "scripts") {
 									for (const scripts in values) {
-										if (Object.prototype.hasOwnProperty.call(values, scripts)) {
+										if (
+											Object.prototype.hasOwnProperty.call(
+												values,
+												scripts
+											)
+										) {
 											if (scripts === "build") {
 												workflowBase.add(`
             - run: pnpm run build
               working-directory: .${packageDirectory}
             - uses: actions/upload-artifact@v3.1.1
               with:
-                  name: .${packageDirectory.replaceAll("/", "-")}-node-\${{ matrix.node-version }}-dist
+                  name: .${packageDirectory.replaceAll(
+						"/",
+						"-"
+					)}-node-\${{ matrix.node-version }}-dist
                   path: .${packageDirectory}/dist
 `);
 											}
@@ -101,24 +122,26 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await fs.promises.writeFile(
 						`${githubDir}${path}${name}`,
-						`${[...workflowBase].join("")}`,
+						`${[...workflowBase].join("")}`
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/dependabot.yml`,
+						`Could not create workflow for: ${githubDir}/dependabot.yml`
 					);
 				}
 			} else {
 				try {
 					await fs.promises.access(
 						`${githubDir}${path}${name}`,
-						fs.constants.F_OK,
+						fs.constants.F_OK
 					);
 
 					try {
 						await fs.promises.rm(`${githubDir}${path}${name}`);
 					} catch {
-						console.log(`Could not remove ${path}${name} for: ${githubDir}`);
+						console.log(
+							`Could not remove ${path}${name} for: ${githubDir}`
+						);
 					}
 				} catch {}
 			}

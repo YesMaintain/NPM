@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/core";
 import type { OctokitResponse } from "@octokit/types";
 import { deepmerge } from "deepmerge-ts";
-
+import etag from "etag";
 import env from "../lib/env.js";
 
 const octokit = new Octokit({
@@ -18,12 +18,12 @@ const request = async (
 
 		switch (type) {
 			case "octokit": {
+				console.log(etag(where));
 				return await octokit.request(
 					where,
 					deepmerge(_with, {
 						headers: {
-							"If-None-Match":
-								"19a5941476078432824fadaeb04143d60602c3e00dac483c4ddc2f7af86c1e75",
+							"If-None-Match": etag(where),
 						},
 					})
 				);

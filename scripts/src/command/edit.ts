@@ -28,7 +28,8 @@ const edit = async () => {
 			name: org.login,
 		});
 
-		for (const repo of (await request(`GET /orgs/${org.login}/repos`)).data) {
+		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
+			.data) {
 			repos.push({
 				owner: org.login,
 				name: repo.name,
@@ -59,12 +60,14 @@ const edit = async () => {
 	// start: repos
 	for (const repo of repos) {
 		// start: vulnerability-alerts
-		await request(`PUT /repos/${repo.owner}/${repo.name}/vulnerability-alerts`);
+		await request(
+			`PUT /repos/${repo.owner}/${repo.name}/vulnerability-alerts`
+		);
 		// end: vulnerability-alerts
 
 		// start: automated-security-fixes
 		await request(
-			`PUT /repos/${repo.owner}/${repo.name}/automated-security-fixes`,
+			`PUT /repos/${repo.owner}/${repo.name}/automated-security-fixes`
 		);
 		// end: automated-security-fixes
 
@@ -86,10 +89,13 @@ const edit = async () => {
 		// end: patch
 
 		// start: actions/permissions
-		await request(`PUT /repos/${repo.owner}/${repo.name}/actions/permissions`, {
-			enabled: true,
-			allowed_actions: "all",
-		});
+		await request(
+			`PUT /repos/${repo.owner}/${repo.name}/actions/permissions`,
+			{
+				enabled: true,
+				allowed_actions: "all",
+			}
+		);
 		// end: actions/permissions
 
 		// start: actions/permissions/workflow
@@ -98,7 +104,7 @@ const edit = async () => {
 			{
 				default_workflow_permissions: "write",
 				can_approve_pull_request_reviews: true,
-			},
+			}
 		);
 		// end: actions/permissions/workflow
 
@@ -111,7 +117,7 @@ const edit = async () => {
 			`PUT /repos/${repo.owner}/${repo.name}/actions/permissions/access`,
 			{
 				access_level: "organization",
-			},
+			}
 		);
 		// end: actions/permissions/access
 	}

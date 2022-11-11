@@ -1,7 +1,8 @@
 {
 	"name": "@yesmaintenance/scripts",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"type": "module",
+	"license": "MIT",
 	"repository": {
 		"directory": "scripts",
 		"type": "git",
@@ -11,33 +12,30 @@
 	"bugs": {
 		"url": "https://github.com/yesmaintenance/npm/issues"
 	},
+	"private": false,
 	"bin": {
 		"maintenance": "./dist/index.js"
 	},
-	"engines": {
-		"node": ">=14.21.0"
-	},
 	"main": "./dist/index.js",
-	"exports": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"build": "lightrix build src/**/*.ts",
-		"maintenance": "ts-node src/index.ts"
+		"build": "lightrix build src/**/*.ts"
 	},
 	"dependencies": {
 		"@octokit/core": "4.1.0",
-		"all-the-package-repos": "2.0.543",
+		"all-the-package-repos": "2.0.545",
 		"commander": "9.4.1",
+		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
+		"etag": "1.8.1",
 		"fast-glob": "3.2.12",
 		"zod": "3.19.1"
 	},
 	"devDependencies": {
 		"@lightrix/config": "0.0.6",
 		"@lightrix/scripts": "0.0.14",
-		"@types/node": "18.11.9",
-		"deepmerge-ts": "4.2.2",
-		"ts-node": "10.9.1"
+		"@types/etag": "1.8.1",
+		"@types/node": "18.11.9"
 	},
 	"publishConfig": {
 		"access": "public"

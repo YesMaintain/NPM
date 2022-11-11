@@ -18,8 +18,8 @@ const files: containers = new Set([
 				(
 					await fs.promises.readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/rust.yml`,
-						),
+							`${__dirname}/../../src/templates/.github/workflows/rust.yml`
+						)
 					)
 				).toString(),
 			]),
