@@ -43,6 +43,12 @@ const commands: Set<{
 	},
 	{
 		name: "edit",
+		arguments: new Set([
+			{
+				name: "[repositories...]",
+				description: "Repositories to edit.",
+			},
+		]),
 		description: "Edit features for all repositories.",
 		action: (await import("../command/edit.js")).default,
 	},

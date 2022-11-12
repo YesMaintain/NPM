@@ -32,7 +32,7 @@ const writeWorkflows = async (files: containers) => {
 
 					if (typeof environment !== "undefined" && environment === "cargo") {
 						workflowBase.add(`
-            - uses: actions/cache@v3
+            - uses: actions/cache@v3.0.11
               with:
                   path: |
                       ~/.cargo/bin/

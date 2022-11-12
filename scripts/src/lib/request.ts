@@ -18,7 +18,6 @@ const request = async (
 
 		switch (type) {
 			case "octokit": {
-				console.log(etag(where));
 				return await octokit.request(
 					where,
 					deepmerge(_with, {
