@@ -2,7 +2,6 @@
 	"name": "@yesmaintenance/scripts",
 	"version": "0.0.4",
 	"type": "module",
-	"license": "MIT",
 	"repository": {
 		"directory": "scripts",
 		"type": "git",
@@ -12,6 +11,7 @@
 	"bugs": {
 		"url": "https://github.com/yesmaintenance/npm/issues"
 	},
+	"license": "MIT",
 	"private": false,
 	"bin": {
 		"maintenance": "./dist/index.js"
@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@octokit/core": "4.1.0",
-		"all-the-package-repos": "2.0.547",
+		"all-the-package-repos": "2.0.548",
 		"commander": "9.4.1",
 		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
