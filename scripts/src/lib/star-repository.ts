@@ -20,7 +20,7 @@ export default async (url: string = "") => {
 		console.log(
 			`Starred repository: ${url.replace("https://github.com/", "")}`
 		);
-	} catch (error) {
+	} catch (_error) {
 		console.log(`Could not star repository: ${url}`);
 	}
 	// end: starred

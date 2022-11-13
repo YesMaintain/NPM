@@ -15,6 +15,7 @@ const __dirname = dirname(__filename);
  */
 const starUsed = async () => {
 	const repositories: {
+		// rome-ignore lint:
 		[key: string]: any;
 	} = JSON.parse(
 		(

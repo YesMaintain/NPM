@@ -8,7 +8,7 @@ import env from "./env.js";
 const gits = async () =>
 	new Set<string>(
 		[
-			...(await FastGlob([`**/.git`], {
+			...(await FastGlob(["**/.git"], {
 				absolute: true,
 				cwd: env.BASE_DIR,
 			})),

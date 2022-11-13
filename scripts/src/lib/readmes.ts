@@ -8,7 +8,7 @@ import env from "./env.js";
 const packages = async () => {
 	return new Set<string>(
 		[
-			...(await FastGlob([`**/README.md`], {
+			...(await FastGlob(["**/README.md"], {
 				absolute: true,
 				cwd: env.BASE_DIR,
 			})),

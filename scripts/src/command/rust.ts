@@ -19,10 +19,10 @@ const writeWorkflows = async (files: containers) => {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages(),
 		)) {
-			const githubDir = directory + "/.github";
+			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
-			if (path == "/workflows/" && name == "rust.yml") {
+			if (path === "/workflows/" && name === "rust.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(directory, "");
 
