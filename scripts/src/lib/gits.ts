@@ -6,11 +6,13 @@ import env from "./env.js";
  * It returns a set of all the git repositories in the current directory
  */
 const gits = async () =>
-	new Set<string>([
-		...(await FastGlob([`**/.git`], {
-			absolute: true,
-			cwd: env.BASE_DIR,
-		})),
-	]);
+	new Set<string>(
+		[
+			...(await FastGlob([`**/.git`], {
+				absolute: true,
+				cwd: env.BASE_DIR,
+			})),
+		].sort()
+	);
 
 export default gits;

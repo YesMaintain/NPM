@@ -1,1 +1,1 @@
-import t from"fast-glob";import e from"./env.js";const r=async()=>new Set([...await t(["**/README.md"],{absolute:!0,cwd:e.BASE_DIR})]);var n=r;export{n as default};
+import t from"fast-glob";import r from"./env.js";const e=async()=>new Set([...await t(["**/README.md"],{absolute:!0,cwd:r.BASE_DIR})].sort());var s=e;export{s as default};
