@@ -28,7 +28,7 @@ const request = async (
 				);
 			}
 		}
-	} catch (e) {
+	} catch (_e) {
 		console.log(`Could not ${where}`);
 	}
 };
