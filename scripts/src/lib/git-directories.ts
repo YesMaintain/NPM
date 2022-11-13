@@ -12,7 +12,7 @@ const gitDirectories = async (globs: Set<string>) => {
 		const gitDir = await walkUntilGit(glob);
 
 		if (!results.has(gitDir)) {
-			results.set(gitDir, new Set<string>([glob]));
+			results.set(gitDir, new Set<string>([glob].sort()));
 		} else {
 			results.set(gitDir, results.get(gitDir).add(glob));
 		}

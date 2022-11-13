@@ -44,14 +44,14 @@ const writeWorkflows = async (files: containers) => {
 
 						for (const bundle of [
 							"bundledDependencies",
-							"peerDependencies",
-							"peerDependenciesMeta",
+							"bundleDependencies",
 							"dependencies",
-							"optionalDependencies",
 							"devDependencies",
 							"extensionDependencies",
-							"bundleDependencies",
-						]) {
+							"optionalDependencies",
+							"peerDependencies",
+							"peerDependenciesMeta",
+						].sort()) {
 							if (typeof packageJson[bundle] !== "undefined") {
 								workflowBase.add(`
             - uses: actions/setup-node@v3.5.1
