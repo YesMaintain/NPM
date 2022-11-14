@@ -22,7 +22,8 @@ const starUsed = async () => {
 			await fs.promises.readFile(
 				resolve(
 					`${__dirname}/../../node_modules/all-the-package-repos/data/packages.json`
-				)
+				),
+				"utf-8"
 			)
 		).toString()
 	);
@@ -36,7 +37,7 @@ const starUsed = async () => {
 
 	for (const packageFile of packages) {
 		const packageJson = JSON.parse(
-			(await fs.promises.readFile(packageFile)).toString()
+			(await fs.promises.readFile(packageFile, "utf-8")).toString()
 		);
 
 		for (const key in packageJson) {

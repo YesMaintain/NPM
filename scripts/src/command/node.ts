@@ -29,7 +29,7 @@ const writeWorkflows = async (files: containers) => {
 						""
 					);
 					const packageFile = (
-						await fs.promises.readFile(_package)
+						await fs.promises.readFile(_package, "utf-8")
 					).toString();
 
 					const environment = (await packageTypes()).get(

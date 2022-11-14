@@ -18,8 +18,9 @@ const files: containers = new Set([
 				(
 					await fs.promises.readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/node.yml`,
+							`${__dirname}/../../src/templates/.github/workflows/node.yml`
 						),
+						"utf-8"
 					)
 				).toString(),
 			]),

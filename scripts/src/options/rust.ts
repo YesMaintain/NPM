@@ -19,7 +19,8 @@ const files: containers = new Set([
 					await fs.promises.readFile(
 						resolve(
 							`${__dirname}/../../src/templates/.github/workflows/rust.yml`
-						)
+						),
+						"utf-8"
 					)
 				).toString(),
 			]),
