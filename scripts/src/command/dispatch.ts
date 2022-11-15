@@ -17,20 +17,20 @@ const dispatch = async (repositories: string[] | Set<string> = []) => {
 		name: string;
 	}[] = [];
 
-	for (const repo of (await request(`GET /users/${user}/repos`)).data) {
+	for (const repo of (await request(`GET /users/${user}/repos`))?.data) {
 		repos.push({
 			owner: user,
 			name: repo.name,
 		});
 	}
 
-	for (const org of (await request(`GET /users/${user}/orgs`)).data) {
+	for (const org of (await request(`GET /users/${user}/orgs`))?.data) {
 		orgs.push({
 			name: org.login,
 		});
 
 		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
-			.data) {
+			?.data) {
 			repos.push({
 				owner: org.login,
 				name: repo.name,
@@ -60,7 +60,7 @@ const dispatch = async (repositories: string[] | Set<string> = []) => {
 					`GET /repos/${repo.owner}/${repo.name}/actions/workflows`,
 					{ owner: repo.owner, repo: repo.name }
 				)
-			).data.workflows) {
+			)?.data?.workflows) {
 				await request(
 					`POST /repos/${repo.owner}/${repo.name}/actions/workflows/${workflow.id}/dispatches`,
 					{

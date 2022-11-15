@@ -16,20 +16,20 @@ const repos: {
  * It deletes all GitHub Actions logs and runs for all of your repositories
  */
 const clean = async (repositories: string[] = []) => {
-	for (const repo of (await request(`GET /users/${user}/repos`)).data) {
+	for (const repo of (await request(`GET /users/${user}/repos`))?.data) {
 		repos.push({
 			owner: user,
 			name: repo.name,
 		});
 	}
 
-	for (const org of (await request(`GET /users/${user}/orgs`)).data) {
+	for (const org of (await request(`GET /users/${user}/orgs`))?.data) {
 		orgs.push({
 			name: org.login,
 		});
 
 		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
-			.data) {
+			?.data) {
 			repos.push({
 				owner: org.login,
 				name: repo.name,
@@ -59,7 +59,7 @@ const clean = async (repositories: string[] = []) => {
 						repo: repo.name,
 					}
 				)
-			).data.actions_caches) {
+			)?.data?.actions_caches) {
 				await request(
 					`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
 					{
@@ -80,7 +80,7 @@ const clean = async (repositories: string[] = []) => {
 						repo: repo.name,
 					}
 				)
-			).data.workflow_runs) {
+			)?.data?.workflow_runs) {
 				await request(
 					`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}`,
 					{ owner: repo.owner, repo: repo.name, run_id: run.id }

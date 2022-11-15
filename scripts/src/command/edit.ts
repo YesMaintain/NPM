@@ -17,14 +17,14 @@ const edit = async (repositories: string[] | Set<string> = []) => {
 		name: string;
 	}[] = [];
 
-	for (const repo of (await request(`GET /users/${user}/repos`)).data) {
+	for (const repo of (await request(`GET /users/${user}/repos`))?.data) {
 		repos.push({
 			owner: user,
 			name: repo.name,
 		});
 	}
 
-	for (const org of (await request(`GET /users/${user}/orgs`)).data) {
+	for (const org of (await request(`GET /users/${user}/orgs`))?.data) {
 		orgs.push({
 			name: org.login,
 		});
