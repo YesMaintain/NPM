@@ -15,7 +15,7 @@ const repos: {
 /**
  * It deletes all GitHub Actions logs and runs for all of your repositories
  */
-const clean = async (repositories?: string[]) => {
+const clean = async (repositories: string[] = []) => {
 	for (const repo of (await request(`GET /users/${user}/repos`)).data) {
 		repos.push({
 			owner: user,
