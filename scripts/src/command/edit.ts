@@ -1,11 +1,7 @@
 import env from "../lib/env.js";
 import request from "../lib/request.js";
 
-/**
- * It enables all the security features for all the repositories in the organization
- * @param {string[] | Set<string>} repositories - string[] | Set<string> = []
- */
-const edit = async (repositories: string[] | Set<string> = []) => {
+export default async (repositories: string[] | Set<string> = []) => {
 	const user = env.GITHUB_USER;
 
 	const orgs: {
@@ -136,5 +132,3 @@ const edit = async (repositories: string[] | Set<string> = []) => {
 	}
 	// end: repos
 };
-
-export default edit;

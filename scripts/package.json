@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@octokit/core": "4.1.0",
-		"all-the-package-repos": "2.0.553",
+		"all-the-package-repos": "2.0.555",
 		"commander": "9.4.1",
 		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
@@ -33,7 +33,7 @@
 	},
 	"devDependencies": {
 		"@lightrix/config": "0.0.6",
-		"@lightrix/scripts": "0.0.15",
+		"@lightrix/scripts": "0.0.16",
 		"@octokit/types": "8.0.0",
 		"@types/etag": "1.8.1",
 		"@types/node": "18.11.9"
