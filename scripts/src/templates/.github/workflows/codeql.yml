@@ -1,7 +1,7 @@
 name: "CodeQL"
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
+    group: codeql-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 permissions:
