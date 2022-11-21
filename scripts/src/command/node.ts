@@ -1,11 +1,11 @@
 import * as fs from "fs";
 import { dirname } from "path";
 
-import gitDirectories from "../lib/git-directories.js";
-import packageTypes from "../lib/package-types.js";
-import packages from "../lib/packages.js";
-import node from "../options/node.js";
-import type { containers } from "../options/workflow.js";
+import gitDirectories from "./../lib/git-directories.js";
+import packageTypes from "./../lib/package-types.js";
+import packages from "./../lib/packages.js";
+import node from "./../options/node.js";
+import type { containers } from "./../options/workflow.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,

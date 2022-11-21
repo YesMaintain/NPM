@@ -1,5 +1,5 @@
-import env from "../lib/env.js";
-import request from "../lib/request.js";
+import env from "./../lib/env.js";
+import request from "./../lib/request.js";
 
 /**
  * It gets all the repositories of the user and dispatches all the workflows of the repositories
