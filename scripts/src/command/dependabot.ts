@@ -50,15 +50,15 @@ const writeWorkflows = async (files: containers) => {
           interval: "daily"
       versioning-strategy: ${
 			typeof environment !== "undefined"
-				? environment
-				: (() => {
-						switch (_package.split(".").pop()) {
+				? (() => {
+						switch (environment) {
 							case "cargo":
 								return "lockfile-only";
 							default:
 								return "increase";
 						}
 				  })()
+				: "increase"
 		}
 `);
 				}
