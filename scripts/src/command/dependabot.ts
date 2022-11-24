@@ -48,7 +48,18 @@ const writeWorkflows = async (files: containers) => {
       directory: "${packageDirectory ? packageDirectory : "/"}"
       schedule:
           interval: "daily"
-      versioning-strategy: increase
+      versioning-strategy: ${
+			typeof environment !== "undefined"
+				? environment
+				: (() => {
+						switch (_package.split(".").pop()) {
+							case "cargo":
+								return "lockfile-only";
+							default:
+								return "increase";
+						}
+				  })()
+		}
 `);
 				}
 			}
