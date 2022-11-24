@@ -83,15 +83,9 @@ const writeWorkflows = async (files: containers) => {
 										) {
 											if (scripts === "build") {
 												workflowBase.add(`
-    build:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [14, 16, 18]
-        needs: install
-        steps:
             - run: pnpm run build
               working-directory: .${packageDirectory}
+
             - uses: actions/upload-artifact@v3.1.1
               with:
                   name: .${packageDirectory.replaceAll(
