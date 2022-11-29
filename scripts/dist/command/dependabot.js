@@ -1,4 +1,4 @@
-import*as t from"fs";import{dirname as m}from"path";import d from"./../lib/git-directories.js";import w from"./../lib/package-types.js";import $ from"./../lib/packages.js";import u from"./../options/dependabot.js";const y=async p=>{for(const{path:o,name:r,workflow:f}of p)for(const[c,l]of await d(await $())){const e=`${c}/.github`,i=await f();if(o==="/")for(const s of l){const n=m(s).replace(c,""),a=(await w()).get(s.split("/").pop());i.add(`
+import*as t from"fs";import{dirname as m}from"path";import d from"../lib/git-directories.js";import w from"../lib/package-types.js";import $ from"../lib/packages.js";import u from"../options/dependabot.js";const y=async p=>{for(const{path:o,name:r,workflow:f}of p)for(const[c,l]of await d(await $())){const e=`${c}/.github`,i=await f();if(o==="/")for(const s of l){const n=m(s).replace(c,""),a=(await w()).get(s.split("/").pop());i.add(`
     - package-ecosystem: "${typeof a<"u"?a:(()=>{switch(s.split(".").pop()){case"csproj":return"nuget";default:return"npm"}})()}"
       directory: "${n||"/"}"
       schedule:
