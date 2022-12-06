@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@octokit/core": "4.1.0",
-		"all-the-package-repos": "2.0.593",
+		"all-the-package-repos": "2.0.595",
 		"commander": "9.4.1",
 		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
@@ -36,7 +36,7 @@
 		"@lightrix/scripts": "0.0.19",
 		"@octokit/types": "8.0.0",
 		"@types/etag": "1.8.1",
-		"@types/node": "18.11.10"
+		"@types/node": "18.11.11"
 	},
 	"publishConfig": {
 		"access": "public"
