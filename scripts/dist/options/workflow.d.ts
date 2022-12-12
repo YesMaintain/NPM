@@ -1,6 +1,5 @@
-export interface containers extends Set<{
+export type containers = Set<{
     path: string;
     name: string;
     workflow: () => Promise<Set<string>>;
-}> {
-}
+}>;
