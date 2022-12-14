@@ -17,20 +17,26 @@ import type { containers } from "../options/workflow.js";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages(),
+			await packages()
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
 			if (path === "/workflows/" && name === "rust.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(directory, "");
-
-					const environment = (await packageTypes()).get(
-						_package.split("/").pop(),
+					const packageDirectory = dirname(_package).replace(
+						directory,
+						""
 					);
 
-					if (typeof environment !== "undefined" && environment === "cargo") {
+					const environment = (await packageTypes()).get(
+						_package.split("/").pop()
+					);
+
+					if (
+						typeof environment !== "undefined" &&
+						environment === "cargo"
+					) {
 						workflowBase.add(`
             - uses: actions/cache@v3.0.11
               with:
@@ -45,14 +51,14 @@ const writeWorkflows = async (files: containers) => {
               with:
                 command: build
                 args: --release --all-features --manifest-path .${packageDirectory}/${basename(
-							_package,
+							_package
 						)}
 `);
 					}
 				}
 			}
 
-		// rome-ignore lint/nursery/noPrecisionLoss:
+			// rome-ignore lint/nursery/noPrecisionLoss:
 			if (workflowBase.size > 1) {
 				try {
 					await fs.promises.mkdir(`${githubDir}${path}`, {
@@ -65,24 +71,26 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await fs.promises.writeFile(
 						`${githubDir}${path}${name}`,
-						`${[...workflowBase].join("")}`,
+						`${[...workflowBase].join("")}`
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/dependabot.yml`,
+						`Could not create workflow for: ${githubDir}/dependabot.yml`
 					);
 				}
 			} else {
 				try {
 					await fs.promises.access(
 						`${githubDir}${path}${name}`,
-						fs.constants.F_OK,
+						fs.constants.F_OK
 					);
 
 					try {
 						await fs.promises.rm(`${githubDir}${path}${name}`);
 					} catch {
-						console.log(`Could not remove ${path}${name} for: ${githubDir}`);
+						console.log(
+							`Could not remove ${path}${name} for: ${githubDir}`
+						);
 					}
 				} catch {}
 			}
