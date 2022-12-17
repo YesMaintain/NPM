@@ -49,6 +49,10 @@ const starUsed = async () => {
 			await fetch(`https://registry.npmjs.org/${dependency}`)
 		).json();
 
+		if (!packageJson.repository || !packageJson.repository.url) {
+			continue;
+		}
+
 		star(packageJson.repository.url);
 	}
 };

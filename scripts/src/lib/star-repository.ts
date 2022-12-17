@@ -11,17 +11,19 @@ export default async (url: string = "") => {
 		return;
 	}
 
+	const properUrl = url
+		.replace("git://", "https://")
+		.replace("https://github.com/", "")
+		.replace("git+", "")
+		.replace(".git", "");
+
 	// start: starred
 	try {
-		await octokit.request(
-			`PUT /user/starred/${url.replace("https://github.com/", "")}`
-		);
+		await octokit.request(`PUT /user/starred/${properUrl}`);
 
-		console.log(
-			`Starred repository: ${url.replace("https://github.com/", "")}`
-		);
+		console.log(`Starred repository: ${properUrl}`);
 	} catch (_error) {
-		console.log(`Could not star repository: ${url}`);
+		console.log(`Could not star repository: ${properUrl}`);
 	}
 	// end: starred
 };
