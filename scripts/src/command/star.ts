@@ -14,20 +14,6 @@ const __dirname = dirname(__filename);
  * package.json files
  */
 const starUsed = async () => {
-	const repositories: {
-		// rome-ignore lint:
-		[key: string]: any;
-	} = JSON.parse(
-		(
-			await fs.promises.readFile(
-				resolve(
-					`${__dirname}/../../node_modules/all-the-package-repos/data/packages.json`
-				),
-				"utf-8"
-			)
-		).toString()
-	);
-
 	const dependencies = new Set<string>();
 
 	const packages = await FastGlob(["**/package.json", "!**/node_modules"], {
@@ -59,7 +45,11 @@ const starUsed = async () => {
 	}
 
 	for (const dependency of dependencies) {
-		star(repositories[dependency]);
+		const packageJson = await (
+			await fetch(`https://registry.npmjs.org/${dependency}`)
+		).json();
+
+		star(packageJson.repository.url);
 	}
 };
 export default starUsed;
