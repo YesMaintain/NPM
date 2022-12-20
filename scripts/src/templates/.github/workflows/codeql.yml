@@ -13,9 +13,10 @@ on:
         branches: [main]
     pull_request:
         branches: [main]
+    workflow_call:
 
 jobs:
-    CodeQL-Build:
+    codeql:
         runs-on: ubuntu-latest
 
         steps:
