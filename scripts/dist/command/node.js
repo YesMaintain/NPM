@@ -10,7 +10,7 @@ import*as n from"fs";import{dirname as y}from"path";import k from"../lib/git-dir
             - run: pnpm run build
               working-directory: .${t}
 
-            - uses: actions/upload-artifact@v3.1.1
+            - uses: actions/upload-artifact@v3.1.2
               with:
                   name: .${t.replaceAll("/","-")}-node-\${{ matrix.node-version }}-dist
                   path: .${t}/dist
