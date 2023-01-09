@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { cwd } from "process";
 import { z } from "zod";
 
-const env = dotenv.config();
+dotenv.config();
 
 export default z
 	.object({
@@ -10,4 +10,4 @@ export default z
 		BASE_DIR: z.string().default(cwd()),
 		GITHUB_AUTH_TOKEN: z.string().default(""),
 	})
-	.parse(env.error ? {} : process.env);
+	.parse(process.env);
