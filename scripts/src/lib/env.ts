@@ -10,4 +10,4 @@ export default z
 		BASE_DIR: z.string().default(cwd()),
 		GITHUB_AUTH_TOKEN: z.string().default(""),
 	})
-	.parse(env.error ? {} : env.parsed);
+	.parse(env.error ? {} : process.env);
