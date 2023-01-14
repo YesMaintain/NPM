@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"@octokit/core": "4.1.0",
-		"commander": "9.5.0",
+		"commander": "10.0.0",
 		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
 		"etag": "1.8.1",
@@ -33,7 +33,7 @@
 	"devDependencies": {
 		"@lightrix/config": "0.0.7",
 		"@lightrix/scripts": "0.1.2",
-		"@octokit/types": "8.1.0",
+		"@octokit/types": "8.1.1",
 		"@types/etag": "1.8.1",
 		"@types/node": "18.11.18"
 	},
