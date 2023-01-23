@@ -22,7 +22,7 @@
 		"build": "lightrix build src/**/*.ts"
 	},
 	"dependencies": {
-		"@octokit/core": "4.1.0",
+		"@octokit/core": "4.2.0",
 		"commander": "10.0.0",
 		"deepmerge-ts": "4.2.2",
 		"dotenv": "16.0.3",
