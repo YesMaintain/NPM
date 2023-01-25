@@ -2,7 +2,6 @@
 
 -   Cleanup
 
-
 ## 0.0.8
 
 -   Bug fix
