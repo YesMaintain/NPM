@@ -1,1 +1,1 @@
-import o from"dotenv";import{cwd as e}from"process";import{z as r}from"zod";const t=o.config();var n=r.object({GITHUB_USER:r.string().default(""),BASE_DIR:r.string().default(e()),GITHUB_AUTH_TOKEN:r.string().default("")}).parse(t.error?{}:t.parsed);export{n as default};
+import r from"dotenv";import{cwd as o}from"process";import{z as t}from"zod";r.config();var d=t.object({GITHUB_USER:t.string().default(""),BASE_DIR:t.string().default(o()),GITHUB_AUTH_TOKEN:t.string().default("")}).parse(process.env);export{d as default};
