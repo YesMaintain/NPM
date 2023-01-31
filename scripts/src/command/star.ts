@@ -1,13 +1,8 @@
 import FastGlob from "fast-glob";
 import * as fs from "fs";
-import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
 
 import env from "../lib/env.js";
 import star from "../lib/star-repository.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 /**
  * It finds all the package.json files in the project, and then stars all the dependencies in those
