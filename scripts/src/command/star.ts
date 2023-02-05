@@ -44,7 +44,7 @@ const starUsed = async () => {
 			await fetch(`https://registry.npmjs.org/${dependency}`)
 		).json();
 
-		if (!packageJson.repository || !packageJson.repository.url) {
+		if (!packageJson.repository?.url) {
 			continue;
 		}
 

@@ -54,7 +54,7 @@ maintenance dispatch
 maintenance dispatch repository-name repository-name-2
 ```
 
-Enable all the features that GitHub offers for all the repositories that you
+Enable / disable all the features that GitHub offers for all the repositories that you
 have access to:
 
 ```sh
