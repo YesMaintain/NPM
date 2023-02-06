@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@octokit/core": "4.2.0",
 		"commander": "10.0.0",
-		"deepmerge-ts": "4.2.2",
+		"deepmerge-ts": "4.3.0",
 		"dotenv": "16.0.3",
 		"etag": "1.8.1",
 		"fast-glob": "3.2.12",
