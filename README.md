@@ -5,7 +5,7 @@
 ```env
 GITHUB_USER=your_github_username
 BASE_DIR="your_development_folder"
-GITHUB_AUTH_TOKEN="your_github_authentication_token"
+GH_AUTH_TOKEN="your_github_authentication_token"
 ```
 
 ## Installation

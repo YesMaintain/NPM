@@ -8,6 +8,6 @@ export default z
 	.object({
 		GITHUB_USER: z.string().default(""),
 		BASE_DIR: z.string().default(cwd()),
-		GITHUB_AUTH_TOKEN: z.string().default(""),
+		GH_AUTH_TOKEN: z.string().default(""),
 	})
 	.parse(process.env);
