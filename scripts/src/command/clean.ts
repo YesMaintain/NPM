@@ -38,7 +38,7 @@ const clean = async (repositories: string[] = []) => {
 	}
 
 	// start: repos
-	let pass;
+	let pass: boolean;
 
 	for (const repo of repos) {
 		for (const repository of repositories) {

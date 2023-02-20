@@ -7,8 +7,6 @@ import type { containers } from "./workflow.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-/* Creating a set of objects that contain the path, name, and workflow for each file that needs to be
-created. */
 const files: containers = new Set([
 	{
 		path: "/workflows/",
@@ -26,4 +24,5 @@ const files: containers = new Set([
 			]),
 	},
 ]);
+
 export default files;

@@ -15,4 +15,5 @@ const packages = async () => {
 		].sort()
 	);
 };
+
 export default packages;

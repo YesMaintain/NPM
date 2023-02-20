@@ -39,7 +39,7 @@ const dispatch = async (repositories: string[] | Set<string> = []) => {
 	}
 
 	// start: repos
-	let pass;
+	let pass: boolean;
 
 	for (const repo of repos) {
 		/* Checking if the repository is in the list of repositories. */

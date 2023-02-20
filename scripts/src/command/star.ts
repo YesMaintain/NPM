@@ -51,4 +51,5 @@ const starUsed = async () => {
 		star(packageJson.repository.url);
 	}
 };
+
 export default starUsed;

@@ -128,7 +128,7 @@ const writeWorkflows = async (files: containers) => {
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/dependabot.yml`
+						`Could not create workflow for: ${githubDir}/workflows/node.yml`
 					);
 				}
 			} else {

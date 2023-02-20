@@ -10,13 +10,13 @@ const __dirname = dirname(__filename);
 const files: containers = new Set([
 	{
 		path: "/workflows/",
-		name: "rust.yml",
+		name: "pull.yml",
 		workflow: async () =>
 			new Set([
 				(
 					await fs.promises.readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/rust.yml`
+							`${__dirname}/../../src/templates/.github/workflows/pull.yml`
 						),
 						"utf-8"
 					)
