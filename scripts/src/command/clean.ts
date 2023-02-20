@@ -38,7 +38,7 @@ const clean = async (repositories: string[] = []) => {
 	}
 
 	// start: repos
-	let pass: boolean;
+	let pass = null;
 
 	for (const repo of repos) {
 		for (const repository of repositories) {
@@ -49,7 +49,7 @@ const clean = async (repositories: string[] = []) => {
 			}
 		}
 
-		if (typeof pass === "undefined" || pass) {
+		if (pass === null || pass) {
 			// start: actions/caches
 			for (const cache of (
 				await request(

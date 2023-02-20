@@ -55,7 +55,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 	// end: orgs
 
 	// start: repos
-	let pass: boolean;
+	let pass = null;
 
 	for (const repo of repos) {
 		for (const repository of repositories) {
@@ -66,7 +66,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 			}
 		}
 
-		if (typeof pass === "undefined" || pass) {
+		if (pass === null || pass) {
 			// start: vulnerability-alerts
 			await request(
 				`PUT /repos/${repo.owner}/${repo.name}/vulnerability-alerts`
