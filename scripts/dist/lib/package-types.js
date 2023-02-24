@@ -1,1 +1,0 @@
-const e=async()=>{const s=new Map;return s.set("package.json","npm"),s.set("Cargo.toml","cargo"),s.set("composer.json","composer"),s.set("packages.config","nuget"),s.set("*.csproj","nuget"),s};var t=e;export{t as default};
