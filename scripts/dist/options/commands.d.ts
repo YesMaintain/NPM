@@ -9,6 +9,6 @@ declare const commands: Set<{
         description?: string;
         defaultValue?: unknown;
     }>;
-    action: (...args: any[]) => Promise<void>;
+    action: (...args: unknown[]) => Promise<void>;
 }>;
 export default commands;

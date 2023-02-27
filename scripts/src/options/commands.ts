@@ -10,8 +10,7 @@ const commands: Set<{
 		description?: string;
 		defaultValue?: unknown;
 	}>;
-	// rome-ignore lint:
-	action: (...args: any[]) => Promise<void>;
+	action: (...args: unknown[]) => Promise<void>;
 }> = new Set([
 	{
 		name: "clean",
