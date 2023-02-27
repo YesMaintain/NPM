@@ -46,7 +46,7 @@ const writeWorkflows = async (files: containers) => {
                       ~/.cargo/registry/cache/
                       ~/.cargo/git/db/
                       target/
-                  key: \${{ runner.os }}-cargo-\${{ hash('.${packageDirectory}/Cargo.toml') }}
+                  key: \${{ runner.os }}-cargo-\${{ hashFiles('.${packageDirectory}/Cargo.toml') }}
             - uses: actions-rs/cargo@v1.0.3
               with:
                 command: build

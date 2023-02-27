@@ -7,7 +7,7 @@ import*as a from"fs";import{basename as p,dirname as w}from"path";import g from"
                       ~/.cargo/registry/cache/
                       ~/.cargo/git/db/
                       target/
-                  key: \${{ runner.os }}-cargo-\${{ hash('.${c}/Cargo.toml') }}
+                  key: \${{ runner.os }}-cargo-\${{ hashFiles('.${c}/Cargo.toml') }}
             - uses: actions-rs/cargo@v1.0.3
               with:
                 command: build
