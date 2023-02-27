@@ -43,12 +43,6 @@ const commands: Set<{
 		action: (await import("../command/dependabot.js")).default,
 	},
 	{
-		name: "pull",
-		type: "workflow",
-		description: "Put wei/pull everywhere.",
-		action: (await import("../command/pull.js")).default,
-	},
-	{
 		name: "edit",
 		arguments: new Set([
 			{
