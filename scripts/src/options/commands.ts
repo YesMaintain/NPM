@@ -8,9 +8,11 @@ const commands: Set<{
 	arguments?: Set<{
 		name: string;
 		description?: string;
-		defaultValue?: unknown;
+		// rome-ignore lint/suspicious/noExplicitAny:
+		defaultValue?: any;
 	}>;
-	action: (...args: unknown[]) => Promise<void>;
+	// rome-ignore lint/suspicious/noExplicitAny:
+	action: (...args: any[]) => Promise<void>;
 }> = new Set([
 	{
 		name: "clean",

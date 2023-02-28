@@ -7,8 +7,8 @@ declare const commands: Set<{
     arguments?: Set<{
         name: string;
         description?: string;
-        defaultValue?: unknown;
+        defaultValue?: any;
     }>;
-    action: (...args: unknown[]) => Promise<void>;
+    action: (...args: any[]) => Promise<void>;
 }>;
 export default commands;

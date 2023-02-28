@@ -1,15 +1,15 @@
 {
 	"name": "@yesmaintenance/scripts",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"type": "module",
 	"repository": {
 		"directory": "scripts",
 		"type": "git",
-		"url": "https://github.com/yesmaintenance/npm.git"
+		"url": "https://github.com/YesMaintenance/npm.git"
 	},
-	"homepage": "https://github.com/yesmaintenance/npm#readme",
+	"homepage": "https://github.com/YesMaintenance/npm#readme",
 	"bugs": {
-		"url": "https://github.com/yesmaintenance/npm/issues"
+		"url": "https://github.com/YesMaintenance/npm/issues"
 	},
 	"license": "MIT",
 	"private": false,
