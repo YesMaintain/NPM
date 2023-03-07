@@ -1,4 +1,5 @@
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
+
 import { cwd } from "process";
 import { z } from "zod";
 
