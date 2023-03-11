@@ -67,6 +67,12 @@ const commands: Set<{
 		action: (await import("../command/rust.js")).default,
 	},
 	{
+		name: "funding",
+		type: "workflow",
+		description: "Put FUNDING.yml into GitHub Actions.",
+		action: (await import("../command/funding.js")).default,
+	},
+	{
 		name: "workflows",
 		description: "Trigger all workflow tasks.",
 		action: async () => {
