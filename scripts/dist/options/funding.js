@@ -1,0 +1,1 @@
+import*as t from"fs";import{dirname as e,resolve as o}from"path";import{fileURLToPath as r}from"url";const i=r(import.meta.url),m=e(i),n=new Set([{path:"/",name:"funding.yml",workflow:async()=>new Set([(await t.promises.readFile(o(`${m}/../../src/templates/.github/FUNDING.yml`),"utf-8")).toString()])}]);var f=n;export{f as default};
