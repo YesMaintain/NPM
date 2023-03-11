@@ -1,3 +1,7 @@
+## 0.0.12
+
+-   Adds FUNDING.yml
+
 ## 0.0.11
 
 -   Cleanup

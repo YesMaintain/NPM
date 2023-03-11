@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 const files: containers = new Set([
 	{
 		path: "/",
-		name: "funding.yml",
+		name: "FUNDING.yml",
 		workflow: async () =>
 			new Set([
 				(
