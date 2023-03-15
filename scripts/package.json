@@ -17,6 +17,14 @@
 		"maintenance": "./dist/index.js"
 	},
 	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
 	"types": "./dist/index.d.ts",
 	"scripts": {
 		"build": "lightrix build src/**/*.ts"
