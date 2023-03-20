@@ -69,7 +69,7 @@ const commands: Set<{
 	{
 		name: "funding",
 		type: "workflow",
-		description: "Put FUNDING.yml into GitHub Actions.",
+		description: "Put FUNDING.yml into GitHub folder.",
 		action: (await import("../command/funding.js")).default,
 	},
 	{
