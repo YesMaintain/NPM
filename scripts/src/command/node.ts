@@ -118,7 +118,7 @@ const writeWorkflows = async (files: containers) => {
 				}
 			}
 
-			// rome-ignore lint/nursery/noPrecisionLoss:
+
 			if (workflowBase.size > 1) {
 				try {
 					await fs.promises.mkdir(`${githubDir}${path}`, {
