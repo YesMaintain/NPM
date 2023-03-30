@@ -10,35 +10,41 @@ GH_AUTH_TOKEN="your_github_authentication_token"
 
 ## Installation
 
+Using NPM
+
 ```sh
-# Using NPM
 npm install -g @yesmaintenance/scripts
 ```
 
+Using Yarn
+
 ```sh
-# Using Yarn
 yarn global add @yesmaintenance/scripts
 ```
 
+Using PNPM
+
 ```sh
-# Using PNPM
 pnpm install -g @yesmaintenance/scripts
 ```
 
 or direct usage:
 
+Using NPM
+
 ```sh
-# Using NPM
 npx @yesmaintenance/scripts
 ```
 
+Using Yarn
+
 ```sh
-# Using Yarn
 yarn @yesmaintenance/scripts
 ```
 
+Using PNPM
+
 ```sh
-# Using PNPM
 pnpx @yesmaintenance/scripts
 ```
 
@@ -63,8 +69,9 @@ Dispatch all workflows for all repositories for a given user:
 maintenance dispatch
 ```
 
+or specific repositories by name:
+
 ```sh
-# or specific repositories by name
 maintenance dispatch repository-name repository-name-2
 ```
 
