@@ -1,5 +1,4 @@
 import FastGlob from "fast-glob";
-
 import env from "./env.js";
 
 /**

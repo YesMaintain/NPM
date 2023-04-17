@@ -1,6 +1,6 @@
 import * as fs from "fs";
+import { constants } from "fs/promises";
 import { dirname } from "path";
-
 import gitDirectories from "../lib/git-directories.js";
 import packageTypes from "../lib/package-types.js";
 import packages from "../lib/packages.js";
@@ -87,7 +87,7 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await fs.promises.access(
 						`${githubDir}${path}${name}`,
-						fs.constants.F_OK
+						constants.F_OK
 					);
 
 					try {

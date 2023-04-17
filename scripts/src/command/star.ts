@@ -1,6 +1,5 @@
 import FastGlob from "fast-glob";
 import * as fs from "fs";
-
 import env from "../lib/env.js";
 import star from "../lib/star-repository.js";
 

@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
-
 import type { containers } from "./workflow.js";
 
 const __filename = fileURLToPath(import.meta.url);

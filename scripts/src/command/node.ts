@@ -1,11 +1,11 @@
 import * as fs from "fs";
 import { dirname } from "path";
-
 import gitDirectories from "../lib/git-directories.js";
 import packageTypes from "../lib/package-types.js";
 import packages from "../lib/packages.js";
 import node from "../options/node.js";
 import type { containers } from "../options/workflow.js";
+import { constants } from "fs/promises";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
@@ -142,7 +142,7 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await fs.promises.access(
 						`${githubDir}${path}${name}`,
-						fs.constants.F_OK
+						constants.F_OK
 					);
 
 					try {

@@ -1,5 +1,4 @@
 import { Command } from "commander";
-
 import commands from "./options/commands.js";
 
 const program = new Command();
