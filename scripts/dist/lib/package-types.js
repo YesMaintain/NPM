@@ -1,1 +1,1 @@
-var e=async()=>{const s=new Map;return s.set("package.json","npm"),s.set("Cargo.toml","cargo"),s.set("composer.json","composer"),s.set("packages.config","nuget"),s.set("*.csproj","nuget"),s};export{e as default};
+var n=async(s=!1)=>{const e=new Map;return e.set("package.json","npm"),e.set("Cargo.toml","cargo"),e.set("composer.json","composer"),e.set("packages.config","nuget"),e.set("*.csproj","nuget"),s&&e.forEach((t,o)=>{t!==s&&e.delete(o)}),e};export{n as default};

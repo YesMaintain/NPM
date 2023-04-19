@@ -2,12 +2,12 @@ import FastGlob from "fast-glob";
 import env from "./env.js";
 import packageTypes from "./package-types.js";
 
-export default async () =>
+export default async (filter: string = "") =>
 	new Set<string>(
 		[
 			...(await FastGlob(
 				[
-					...[...(await packageTypes()).keys()].map(
+					...[...(await packageTypes(filter)).keys()].map(
 						(_package) => `**/${_package}`
 					),
 					"!**/node_modules",

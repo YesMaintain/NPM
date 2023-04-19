@@ -1,2 +1,2 @@
-declare const _default: () => Promise<Map<string, string>>;
+declare const _default: (filter?: string | false) => Promise<Map<string, string>>;
 export default _default;

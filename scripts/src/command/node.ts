@@ -16,7 +16,7 @@ import type { containers } from "../options/workflow.js";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages()
+			await packages("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();

@@ -1,20 +1,18 @@
 import { access, constants, mkdir, rm, writeFile } from "fs/promises";
 import gitDirectories from "../lib/git-directories.js";
 import packages from "../lib/packages.js";
-import node from "../options/node.js";
+import npm from "../options/npm.js";
 import type { containers } from "../options/workflow.js";
 
 /**
- * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
- * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
- * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
- * workflow file
- * @param {containers} files - containers
+ * This function writes workflows to GitHub directories based on specified files and packages.
+ * @param {containers} files - The `files` parameter is an array of objects containing information
+ * about the files to be written. Each object has the following properties:
  */
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, _packageFiles] of await gitDirectories(
-			await packages()
+			await packages("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
@@ -56,5 +54,5 @@ const writeWorkflows = async (files: containers) => {
 };
 
 export default async () => {
-	await writeWorkflows(node);
+	await writeWorkflows(npm);
 };
