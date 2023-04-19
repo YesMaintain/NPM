@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { readFile } from "fs/promises";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import type { containers } from "./workflow.js";
@@ -13,7 +13,7 @@ export default new Set([
 		workflow: async () =>
 			new Set([
 				(
-					await fs.promises.readFile(
+					await readFile(
 						resolve(
 							`${__dirname}/../../src/templates/.github/workflows/rust.yml`
 						),

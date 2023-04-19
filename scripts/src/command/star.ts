@@ -1,7 +1,7 @@
 import FastGlob from "fast-glob";
-import * as fs from "fs";
 import env from "../lib/env.js";
 import star from "../lib/star-repository.js";
+import { readFile } from "fs/promises";
 
 export default async () => {
 	const dependencies = new Set<string>();
@@ -13,7 +13,7 @@ export default async () => {
 
 	for (const packageFile of packages) {
 		const packageJson = JSON.parse(
-			(await fs.promises.readFile(packageFile, "utf-8")).toString()
+			(await readFile(packageFile, "utf-8")).toString()
 		);
 
 		for (const key in packageJson) {

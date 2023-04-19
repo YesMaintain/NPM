@@ -1,7 +1,7 @@
-import * as fs from "fs";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import type { containers } from "./workflow.js";
+import { readFile } from "fs/promises";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,7 +13,7 @@ export default new Set([
 		workflow: async () =>
 			new Set([
 				(
-					await fs.promises.readFile(
+					await readFile(
 						resolve(
 							`${__dirname}/../../src/templates/.github/workflows/node.yml`
 						),

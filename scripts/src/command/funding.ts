@@ -1,9 +1,8 @@
-import * as fs from "fs";
+import { access, constants, mkdir, rm, writeFile } from "fs/promises";
 import gitDirectories from "../lib/git-directories.js";
 import packages from "../lib/packages.js";
 import funding from "../options/funding.js";
 import type { containers } from "../options/workflow.js";
-import { constants } from "fs/promises";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
@@ -20,7 +19,7 @@ const writeWorkflows = async (files: containers) => {
 
 			if (workflowBase.size > 0) {
 				try {
-					await fs.promises.mkdir(`${githubDir}${path}`, {
+					await mkdir(`${githubDir}${path}`, {
 						recursive: true,
 					});
 				} catch {
@@ -28,7 +27,7 @@ const writeWorkflows = async (files: containers) => {
 				}
 
 				try {
-					await fs.promises.writeFile(
+					await writeFile(
 						`${githubDir}${path}${name}`,
 						`${[...workflowBase].join("")}`
 					);
@@ -39,13 +38,10 @@ const writeWorkflows = async (files: containers) => {
 				}
 			} else {
 				try {
-					await fs.promises.access(
-						`${githubDir}${path}${name}`,
-						constants.F_OK
-					);
+					await access(`${githubDir}${path}${name}`, constants.F_OK);
 
 					try {
-						await fs.promises.rm(`${githubDir}${path}${name}`);
+						await rm(`${githubDir}${path}${name}`);
 					} catch {
 						console.log(
 							`Could not remove ${path}${name} for: ${githubDir}`

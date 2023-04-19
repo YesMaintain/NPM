@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { access, constants } from "fs/promises";
 import { dirname } from "path";
 
 const walkUntilGit = async (
@@ -12,9 +12,12 @@ const walkUntilGit = async (
 		return originalPath;
 	}
 
-	return fs.existsSync(`${path}/.git`)
-		? path
-		: await walkUntilGit(path, originalPath);
+	try {
+		await access(`${path}/.git`, constants.R_OK | constants.W_OK);
+		return path;
+	} catch (error) {
+		return await walkUntilGit(path, originalPath);
+	}
 };
 
 export default walkUntilGit;
