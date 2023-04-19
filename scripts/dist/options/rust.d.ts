@@ -1,3 +1,6 @@
-import type { containers } from "./workflow.js";
-declare const files: containers;
-export default files;
+declare const _default: Set<{
+    path: string;
+    name: string;
+    workflow: () => Promise<Set<string>>;
+}>;
+export default _default;

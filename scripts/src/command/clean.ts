@@ -12,10 +12,7 @@ const repos: {
 	name: string;
 }[] = [];
 
-/**
- * It deletes all GitHub Actions logs and runs for all of your repositories
- */
-const clean = async (repositories: string[] = []) => {
+export default async (repositories: string[] = []) => {
 	for (const repo of (await request(`GET /users/${user}/repos`))?.data) {
 		repos.push({
 			owner: user,
@@ -96,5 +93,3 @@ const clean = async (repositories: string[] = []) => {
 	}
 	// end: repos
 };
-
-export default clean;

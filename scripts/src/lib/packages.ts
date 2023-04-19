@@ -2,10 +2,7 @@ import FastGlob from "fast-glob";
 import env from "./env.js";
 import packageTypes from "./package-types.js";
 
-/**
- * It returns a set of all the directories that contain a package.json file
- */
-const packages = async () =>
+export default async () =>
 	new Set<string>(
 		[
 			...(await FastGlob(
@@ -75,5 +72,3 @@ const packages = async () =>
 			)),
 		].sort()
 	);
-
-export default packages;

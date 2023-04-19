@@ -1,8 +1,4 @@
-/**
- * It returns a map of file names to package managers
- * @returns A map of package managers and their configuration files.
- */
-const packageTypes = async () => {
+export default async () => {
 	const results = new Map<string, string>();
 
 	results.set("package.json", "npm");
@@ -13,5 +9,3 @@ const packageTypes = async () => {
 
 	return results;
 };
-
-export default packageTypes;

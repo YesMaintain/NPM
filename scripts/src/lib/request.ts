@@ -8,12 +8,11 @@ const octokit = new Octokit({
 	auth: env.GH_AUTH_TOKEN,
 });
 
-const request = async (
+export default async (
 	where: string,
-	// rome-ignore lint:
 	_with: {} = {},
 	type: string = "octokit"
-	// rome-ignore lint:
+	// rome-ignore lint/suspicious/noExplicitAny:
 ): Promise<OctokitResponse<any, number> | any> => {
 	try {
 		console.log(`Successfully ${where}`);
@@ -34,5 +33,3 @@ const request = async (
 		console.log(`Could not ${where}`);
 	}
 };
-
-export default request;

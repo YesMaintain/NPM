@@ -6,7 +6,7 @@ import type { containers } from "./workflow.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const files: containers = new Set([
+export default new Set([
 	{
 		path: "/",
 		name: "FUNDING.yml",
@@ -22,6 +22,4 @@ const files: containers = new Set([
 				).toString(),
 			]),
 	},
-]);
-
-export default files;
+]) satisfies containers;

@@ -1,11 +1,7 @@
 import env from "../lib/env.js";
 import request from "../lib/request.js";
 
-/**
- * It gets all the repositories of the user and dispatches all the workflows of the repositories
- * @param {string[] | Set<string>} repositories - string[] | Set<string> = []
- */
-const dispatch = async (repositories: string[] | Set<string> = []) => {
+export default async (repositories: string[] | Set<string> = []) => {
 	const user = env.GITHUB_USER;
 
 	const orgs: {
@@ -71,5 +67,3 @@ const dispatch = async (repositories: string[] | Set<string> = []) => {
 	}
 	// end: repos
 };
-
-export default dispatch;

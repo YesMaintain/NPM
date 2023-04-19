@@ -3,11 +3,7 @@ import * as fs from "fs";
 import env from "../lib/env.js";
 import star from "../lib/star-repository.js";
 
-/**
- * It finds all the package.json files in the project, and then stars all the dependencies in those
- * package.json files
- */
-const starUsed = async () => {
+export default async () => {
 	const dependencies = new Set<string>();
 
 	const packages = await FastGlob(["**/package.json", "!**/node_modules"], {
@@ -50,5 +46,3 @@ const starUsed = async () => {
 		star(packageJson.repository.url);
 	}
 };
-
-export default starUsed;

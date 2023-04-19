@@ -1,11 +1,6 @@
 import walkUntilGit from "./walk-until-git.js";
 
-/**
- * It takes a set of globs, and returns a map of git directories to the globs that were found in them
- * @param globs - Set<string>
- * @returns A map of git directories to a set of globs.
- */
-const gitDirectories = async (globs: Set<string>) => {
+export default async (globs: Set<string>) => {
 	const results = new Map();
 
 	for (const glob of globs) {
@@ -20,5 +15,3 @@ const gitDirectories = async (globs: Set<string>) => {
 
 	return results;
 };
-
-export default gitDirectories;
