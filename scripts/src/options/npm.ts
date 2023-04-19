@@ -9,13 +9,13 @@ const __dirname = dirname(__filename);
 export default new Set([
 	{
 		path: "/workflows/",
-		name: "node.yml",
+		name: "npm.yml",
 		workflow: async () =>
 			new Set([
 				(
 					await readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/node.yml`
+							`${__dirname}/../../src/templates/.github/workflows/npm.yml`
 						),
 						"utf-8"
 					)
