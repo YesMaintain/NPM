@@ -39,6 +39,7 @@
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
+		"provenance": true,
 		"access": "public"
 	}
 }
