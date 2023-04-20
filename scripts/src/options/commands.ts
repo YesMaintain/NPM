@@ -61,12 +61,6 @@ const commands: Set<{
 		action: (await import("../command/node.js")).default,
 	},
 	{
-		name: "npm",
-		type: "workflow",
-		description: "Put NPM into GitHub Actions.",
-		action: (await import("../command/npm.js")).default,
-	},
-	{
 		name: "rust",
 		type: "workflow",
 		description: "Put rust into GitHub Actions.",
