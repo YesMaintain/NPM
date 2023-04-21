@@ -19,7 +19,7 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"build": "lightrix build src/*.ts src/*/*.ts"
+		"build": "lightrix build 'src/**/*.ts'"
 	},
 	"dependencies": {
 		"@octokit/core": "4.2.0",
