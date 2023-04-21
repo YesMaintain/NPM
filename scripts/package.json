@@ -33,7 +33,7 @@
 	"devDependencies": {
 		"@lightrix/config": "0.0.9",
 		"@lightrix/scripts": "1.0.0",
-		"@octokit/types": "9.1.0",
+		"@octokit/types": "9.1.1",
 		"@types/etag": "1.8.1",
 		"@types/node": "18.15.13",
 		"@types/pacote": "11.1.5"
