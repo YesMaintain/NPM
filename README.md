@@ -89,6 +89,13 @@ repository that has a `package.json` file.
 maintenance node
 ```
 
+Create a `npm.yml` file in the `.github/workflows` directory for each repository
+that has a `package.json` file.
+
+```sh
+maintenance npm
+```
+
 Create a `rust.yml` file in the `.github/workflows` directory for each
 repository that has a `Cargo.toml` file.
 
