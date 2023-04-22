@@ -1,3 +1,7 @@
+## 1.0.0
+
+-   Version with provenance
+
 ## 0.0.13
 
 -   Cleanup

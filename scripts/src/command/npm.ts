@@ -1,25 +1,87 @@
-import { access, constants, mkdir, rm, writeFile } from "fs/promises";
+import { access, constants, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { dirname } from "path";
 import gitDirectories from "../lib/git-directories.js";
+import packageTypes from "../lib/package-types.js";
 import packages from "../lib/packages.js";
 import npm from "../options/npm.js";
 import type { containers } from "../options/workflow.js";
 
 /**
- * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
- * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
- * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
- * workflow file
- * @param {containers} files - containers
+ * This function writes workflows for npm packages based on their package.json files.
+ * @param {containers} files - The `files` parameter is an array of objects containing information
+ * about the files to be processed. Each object has the following properties:
  */
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
-		for (const [directory, _packageFiles] of await gitDirectories(
+		for (const [directory, packageFiles] of await gitDirectories(
 			await packages("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
-			if (workflowBase.size > 0) {
+			if (path === "/workflows/" && name === "npm.yml") {
+				for (const _package of packageFiles) {
+					const packageDirectory = dirname(_package).replace(
+						directory,
+						""
+					);
+					const packageFile = (
+						await readFile(_package, "utf-8")
+					).toString();
+
+					const environment = (await packageTypes()).get(
+						_package.split("/").pop()
+					);
+
+					if (
+						typeof environment !== "undefined" &&
+						environment === "npm"
+					) {
+						try {
+							const packageJson = JSON.parse(packageFile);
+
+							for (const key in packageJson) {
+								if (
+									Object.prototype.hasOwnProperty.call(
+										packageJson,
+										key
+									)
+								) {
+									const values = packageJson[key];
+									if (key === "scripts") {
+										for (const scripts in values) {
+											if (
+												Object.prototype.hasOwnProperty.call(
+													values,
+													scripts
+												)
+											) {
+												if (scripts === "prepare") {
+													workflowBase.add(`
+            - name: Publish .${packageDirectory}
+              continue-on-error: true
+              working-directory: .${packageDirectory}
+              run: |
+                  npm install --legacy-peer-deps
+                  npm publish --legacy-peer-deps --provenance
+              env:
+                  NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
+`);
+												}
+											}
+										}
+									}
+								}
+							}
+						} catch (error) {
+							console.log(_package);
+							console.log(error);
+						}
+					}
+				}
+			}
+
+			if (workflowBase.size > 1) {
 				try {
 					await mkdir(`${githubDir}${path}`, {
 						recursive: true,

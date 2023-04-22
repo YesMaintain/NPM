@@ -1,6 +1,6 @@
 {
 	"name": "@yesmaintenance/scripts",
-	"version": "0.0.13",
+	"version": "1.0.0",
 	"type": "module",
 	"repository": {
 		"directory": "scripts",
@@ -19,7 +19,7 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"build": "lightrix build 'src/**/*.ts'"
+		"prepare": "lightrix build 'src/**/*.ts'"
 	},
 	"dependencies": {
 		"@octokit/core": "4.2.0",
@@ -31,11 +31,11 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
-		"@lightrix/config": "0.0.9",
-		"@lightrix/scripts": "1.0.0",
-		"@octokit/types": "9.1.0",
+		"@lightrix/config": "0.0.10",
+		"@lightrix/scripts": "1.0.1",
+		"@octokit/types": "9.1.1",
 		"@types/etag": "1.8.1",
-		"@types/node": "18.15.12",
+		"@types/node": "18.15.13",
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
