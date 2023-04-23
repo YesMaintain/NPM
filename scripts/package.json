@@ -19,9 +19,11 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"prepare": "lightrix build 'src/**/*.ts'"
+		"prepublishOnly": "lightrix build 'src/**/*.ts'"
 	},
 	"dependencies": {
+		"@lightrix/config": "0.0.11",
+		"@lightrix/scripts": "1.0.2",
 		"@octokit/core": "4.2.0",
 		"commander": "10.0.1",
 		"deepmerge-ts": "5.1.0",
@@ -31,9 +33,7 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
-		"@lightrix/config": "0.0.10",
-		"@lightrix/scripts": "1.0.1",
-		"@octokit/types": "9.1.1",
+		"@octokit/types": "9.1.2",
 		"@types/etag": "1.8.1",
 		"@types/node": "18.15.13",
 		"@types/pacote": "11.1.5"

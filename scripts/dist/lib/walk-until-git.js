@@ -1,1 +1,0 @@
-import{access as s,constants as a}from"fs/promises";import{dirname as c}from"path";const o=async(r,i)=>{const t=c(r),n=i||t;if(t===r)return n;try{return await s(`${t}/.git`,a.R_OK|a.W_OK),t}catch{return await o(t,n)}};var f=o;export{f as default};
