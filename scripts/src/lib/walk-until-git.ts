@@ -1,4 +1,5 @@
-import { access, constants } from "fs/promises";
+import { constants } from "fs";
+import { access } from "fs/promises";
 import { dirname } from "path";
 
 const walkUntilGit = async (

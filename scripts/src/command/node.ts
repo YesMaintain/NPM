@@ -1,4 +1,5 @@
-import { access, constants, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { constants } from "fs";
+import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../lib/git-directories.js";
 import packageTypes from "../lib/package-types.js";
