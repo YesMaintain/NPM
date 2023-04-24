@@ -99,6 +99,23 @@ const writeWorkflows = async (files: containers) => {
 `);
 												}
 
+												if (
+													scripts === "prepublishOnly"
+												) {
+													workflowBase.add(`
+            - run: pnpm run prepublishOnly
+              working-directory: .${packageDirectory}
+
+            - uses: actions/upload-artifact@v3.1.2
+              with:
+                  name: .${packageDirectory.replaceAll(
+						"/",
+						"-"
+					)}-node-\${{ matrix.node-version }}-dist
+                  path: .${packageDirectory}/dist
+`);
+												}
+
 												if (scripts === "test") {
 													workflowBase.add(`
             - run: pnpm run test
