@@ -1,4 +1,5 @@
-import { access, constants, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { constants } from "fs";
+import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../lib/git-directories.js";
 import packageTypes from "../lib/package-types.js";
@@ -86,6 +87,23 @@ const writeWorkflows = async (files: containers) => {
 												if (scripts === "build") {
 													workflowBase.add(`
             - run: pnpm run build
+              working-directory: .${packageDirectory}
+
+            - uses: actions/upload-artifact@v3.1.2
+              with:
+                  name: .${packageDirectory.replaceAll(
+						"/",
+						"-"
+					)}-node-\${{ matrix.node-version }}-dist
+                  path: .${packageDirectory}/dist
+`);
+												}
+
+												if (
+													scripts === "prepublishOnly"
+												) {
+													workflowBase.add(`
+            - run: pnpm run prepublishOnly
               working-directory: .${packageDirectory}
 
             - uses: actions/upload-artifact@v3.1.2

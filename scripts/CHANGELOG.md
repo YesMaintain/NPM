@@ -1,3 +1,15 @@
+## 1.0.3
+
+-   Cleanup
+
+## 1.0.2
+
+-   Cleanup
+
+## 1.0.1
+
+-   Bug fix
+
 ## 1.0.0
 
 -   Version with provenance
