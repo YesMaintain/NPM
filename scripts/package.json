@@ -33,7 +33,7 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
-		"@octokit/types": "9.1.4",
+		"@octokit/types": "9.2.0",
 		"@types/etag": "1.8.1",
 		"@types/node": "18.16.2",
 		"@types/pacote": "11.1.5"
