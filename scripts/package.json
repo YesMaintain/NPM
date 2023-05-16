@@ -35,7 +35,7 @@
 	"devDependencies": {
 		"@octokit/types": "9.2.2",
 		"@types/etag": "1.8.1",
-		"@types/node": "20.1.4",
+		"@types/node": "20.1.5",
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
