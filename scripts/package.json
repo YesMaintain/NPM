@@ -22,8 +22,6 @@
 		"prepublishOnly": "lightrix build 'src/**/*.ts'"
 	},
 	"dependencies": {
-		"@lightrix/config": "0.0.11",
-		"@lightrix/scripts": "1.0.3",
 		"@octokit/core": "4.2.1",
 		"commander": "10.0.1",
 		"deepmerge-ts": "5.1.0",
@@ -33,6 +31,8 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
+		"@lightrix/config": "0.0.11",
+		"@lightrix/scripts": "1.0.3",
 		"@octokit/types": "9.2.3",
 		"@types/etag": "1.8.1",
 		"@types/node": "20.2.3",
