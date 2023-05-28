@@ -32,10 +32,10 @@
 	},
 	"devDependencies": {
 		"@lightrix/config": "0.0.11",
-		"@lightrix/scripts": "1.0.3",
+		"@lightrix/scripts": "1.0.4",
 		"@octokit/types": "9.2.3",
 		"@types/etag": "1.8.1",
-		"@types/node": "20.2.4",
+		"@types/node": "20.2.5",
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
