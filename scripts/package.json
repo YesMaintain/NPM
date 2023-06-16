@@ -22,10 +22,10 @@
 		"prepublishOnly": "lightrix build 'src/**/*.ts'"
 	},
 	"dependencies": {
-		"@octokit/core": "4.2.1",
+		"@octokit/core": "4.2.4",
 		"commander": "11.0.0",
 		"deepmerge-ts": "5.1.0",
-		"dotenv": "16.2.0",
+		"dotenv": "16.3.0",
 		"etag": "1.8.1",
 		"fast-glob": "3.2.12",
 		"zod": "3.21.4"
