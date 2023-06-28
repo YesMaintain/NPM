@@ -24,7 +24,7 @@ jobs:
               uses: actions/checkout@v3.5.3
 
             - name: Initialize CodeQL
-              uses: github/codeql-action/init@v2.3.6
+              uses: github/codeql-action/init@v2.20.1
               with:
                   languages: go, javascript, csharp, python, cpp, java
 
@@ -34,4 +34,4 @@ jobs:
               working-directory: src
 
             - name: Perform CodeQL Analysis
-              uses: github/codeql-action/analyze@v2.3.6
+              uses: github/codeql-action/analyze@v2.20.1
