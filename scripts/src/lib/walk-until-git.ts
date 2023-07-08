@@ -1,6 +1,6 @@
-import { constants } from "fs";
 import { access } from "fs/promises";
 import { dirname } from "path";
+import { constants } from "fs";
 
 const walkUntilGit = async (
 	search: string,

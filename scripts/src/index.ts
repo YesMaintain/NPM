@@ -1,5 +1,5 @@
-import { Command } from "commander";
 import commands from "./options/commands.js";
+import { Command } from "commander";
 
 const program = new Command();
 
