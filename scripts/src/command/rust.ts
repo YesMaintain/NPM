@@ -17,26 +17,20 @@ import { constants } from "fs";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages("cargo")
+			await packages("cargo"),
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
 			if (path === "/workflows/" && name === "rust.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
-						directory,
-						""
-					);
+					const packageDirectory = dirname(_package).replace(directory, "");
 
 					const environment = (await packageTypes()).get(
-						_package.split("/").pop()
+						_package.split("/").pop(),
 					);
 
-					if (
-						typeof environment !== "undefined" &&
-						environment === "cargo"
-					) {
+					if (typeof environment !== "undefined" && environment === "cargo") {
 						workflowBase.add(`
             - uses: actions/cache@v3.3.1
               with:
@@ -51,7 +45,7 @@ const writeWorkflows = async (files: containers) => {
               with:
                 command: build
                 args: --release --all-features --manifest-path .${packageDirectory}/${basename(
-							_package
+							_package,
 						)}
 `);
 					}
@@ -70,11 +64,11 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await writeFile(
 						`${githubDir}${path}${name}`,
-						`${[...workflowBase].join("")}`
+						`${[...workflowBase].join("")}`,
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/rust.yml`
+						`Could not create workflow for: ${githubDir}/workflows/rust.yml`,
 					);
 				}
 			} else {
@@ -84,9 +78,7 @@ const writeWorkflows = async (files: containers) => {
 					try {
 						await rm(`${githubDir}${path}${name}`);
 					} catch {
-						console.log(
-							`Could not remove ${path}${name} for: ${githubDir}`
-						);
+						console.log(`Could not remove ${path}${name} for: ${githubDir}`);
 					}
 				} catch {}
 			}

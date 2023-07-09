@@ -8,5 +8,5 @@ export default async () =>
 				absolute: true,
 				cwd: env.BASE_DIR,
 			})),
-		].sort()
+		].sort(),
 	);

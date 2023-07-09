@@ -25,8 +25,7 @@ export default async (repositories: string[] = []) => {
 			name: org.login,
 		});
 
-		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
-			?.data) {
+		for (const repo of (await request(`GET /orgs/${org.login}/repos`))?.data) {
 			repos.push({
 				owner: org.login,
 				name: repo.name,
@@ -49,13 +48,10 @@ export default async (repositories: string[] = []) => {
 		if (pass === null || pass) {
 			// start: actions/caches
 			for (const cache of (
-				await request(
-					`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
-					{
-						owner: repo.owner,
-						repo: repo.name,
-					}
-				)
+				await request(`GET /repos/${repo.owner}/${repo.name}/actions/caches`, {
+					owner: repo.owner,
+					repo: repo.name,
+				})
 			)?.data?.actions_caches) {
 				await request(
 					`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
@@ -63,29 +59,26 @@ export default async (repositories: string[] = []) => {
 						owner: repo.owner,
 						repo: repo.name,
 						cache_id: cache.id,
-					}
+					},
 				);
 			}
 			// end: actions/caches
 
 			// start: actions/runs
 			for (const run of (
-				await request(
-					`GET /repos/${repo.owner}/${repo.name}/actions/runs`,
-					{
-						owner: repo.owner,
-						repo: repo.name,
-					}
-				)
+				await request(`GET /repos/${repo.owner}/${repo.name}/actions/runs`, {
+					owner: repo.owner,
+					repo: repo.name,
+				})
 			)?.data?.workflow_runs) {
 				await request(
 					`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}`,
-					{ owner: repo.owner, repo: repo.name, run_id: run.id }
+					{ owner: repo.owner, repo: repo.name, run_id: run.id },
 				);
 
 				await request(
 					`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}/logs`,
-					{ owner: repo.owner, repo: repo.name, run_id: run.id }
+					{ owner: repo.owner, repo: repo.name, run_id: run.id },
 				);
 			}
 			// end: actions/runs

@@ -11,7 +11,7 @@ const octokit = new Octokit({
 export default async (
 	where: string,
 	_with: {} = {},
-	type: string = "octokit"
+	type: string = "octokit",
 	// rome-ignore lint/suspicious/noExplicitAny:
 ): Promise<OctokitResponse<any, number> | any> => {
 	try {
@@ -25,7 +25,7 @@ export default async (
 						headers: {
 							"If-None-Match": etag(where),
 						},
-					})
+					}),
 				);
 			}
 		}

@@ -25,8 +25,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 			name: org.login,
 		});
 
-		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
-			.data) {
+		for (const repo of (await request(`GET /orgs/${org.login}/repos`)).data) {
 			repos.push({
 				owner: org.login,
 				name: repo.name,
@@ -69,13 +68,13 @@ export default async (repositories: string[] | Set<string> = []) => {
 		if (pass === null || pass) {
 			// start: vulnerability-alerts
 			await request(
-				`PUT /repos/${repo.owner}/${repo.name}/vulnerability-alerts`
+				`PUT /repos/${repo.owner}/${repo.name}/vulnerability-alerts`,
 			);
 			// end: vulnerability-alerts
 
 			// start: automated-security-fixes
 			await request(
-				`PUT /repos/${repo.owner}/${repo.name}/automated-security-fixes`
+				`PUT /repos/${repo.owner}/${repo.name}/automated-security-fixes`,
 			);
 			// end: automated-security-fixes
 
@@ -102,7 +101,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 				{
 					enabled: true,
 					allowed_actions: "all",
-				}
+				},
 			);
 			// end: actions/permissions
 
@@ -112,7 +111,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 				{
 					default_workflow_permissions: "write",
 					can_approve_pull_request_reviews: true,
-				}
+				},
 			);
 			// end: actions/permissions/workflow
 
@@ -125,7 +124,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 				`PUT /repos/${repo.owner}/${repo.name}/actions/permissions/access`,
 				{
 					access_level: "organization",
-				}
+				},
 			);
 			// end: actions/permissions/access
 		}

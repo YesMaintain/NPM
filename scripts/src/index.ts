@@ -9,9 +9,7 @@ commands?.forEach((command) => {
 	const commandProgram = program
 		.command(command.name)
 		.description(
-			typeof command.description !== "undefined"
-				? command.description
-				: ""
+			typeof command.description !== "undefined" ? command.description : "",
 		)
 		.action(command.action);
 

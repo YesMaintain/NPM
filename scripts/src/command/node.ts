@@ -17,29 +17,21 @@ import { constants } from "fs";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages("npm")
+			await packages("npm"),
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
 			if (path === "/workflows/" && name === "node.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
-						directory,
-						""
-					);
-					const packageFile = (
-						await readFile(_package, "utf-8")
-					).toString();
+					const packageDirectory = dirname(_package).replace(directory, "");
+					const packageFile = (await readFile(_package, "utf-8")).toString();
 
 					const environment = (await packageTypes()).get(
-						_package.split("/").pop()
+						_package.split("/").pop(),
 					);
 
-					if (
-						typeof environment !== "undefined" &&
-						environment === "npm"
-					) {
+					if (typeof environment !== "undefined" && environment === "npm") {
 						try {
 							const packageJson = JSON.parse(packageFile);
 
@@ -53,9 +45,7 @@ const writeWorkflows = async (files: containers) => {
 								"peerDependencies",
 								"peerDependenciesMeta",
 							].sort()) {
-								if (
-									typeof packageJson[bundle] !== "undefined"
-								) {
+								if (typeof packageJson[bundle] !== "undefined") {
 									workflowBase.add(`
             - uses: actions/setup-node@v3.6.0
               with:
@@ -69,20 +59,12 @@ const writeWorkflows = async (files: containers) => {
 							}
 
 							for (const key in packageJson) {
-								if (
-									Object.prototype.hasOwnProperty.call(
-										packageJson,
-										key
-									)
-								) {
+								if (Object.prototype.hasOwnProperty.call(packageJson, key)) {
 									const values = packageJson[key];
 									if (key === "scripts") {
 										for (const scripts in values) {
 											if (
-												Object.prototype.hasOwnProperty.call(
-													values,
-													scripts
-												)
+												Object.prototype.hasOwnProperty.call(values, scripts)
 											) {
 												if (scripts === "build") {
 													workflowBase.add(`
@@ -91,27 +73,19 @@ const writeWorkflows = async (files: containers) => {
 
             - uses: actions/upload-artifact@v3.1.2
               with:
-                  name: .${packageDirectory.replaceAll(
-						"/",
-						"-"
-					)}-node-\${{ matrix.node-version }}-dist
+                  name: .${packageDirectory.replaceAll("/", "-")}-node-\${{ matrix.node-version }}-dist
                   path: .${packageDirectory}/dist
 `);
 												}
 
-												if (
-													scripts === "prepublishOnly"
-												) {
+												if (scripts === "prepublishOnly") {
 													workflowBase.add(`
             - run: pnpm run prepublishOnly
               working-directory: .${packageDirectory}
 
             - uses: actions/upload-artifact@v3.1.2
               with:
-                  name: .${packageDirectory.replaceAll(
-						"/",
-						"-"
-					)}-node-\${{ matrix.node-version }}-dist
+                  name: .${packageDirectory.replaceAll("/", "-")}-node-\${{ matrix.node-version }}-dist
                   path: .${packageDirectory}/dist
 `);
 												}
@@ -147,11 +121,11 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await writeFile(
 						`${githubDir}${path}${name}`,
-						`${[...workflowBase].join("")}`
+						`${[...workflowBase].join("")}`,
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/node.yml`
+						`Could not create workflow for: ${githubDir}/workflows/node.yml`,
 					);
 				}
 			} else {
@@ -161,9 +135,7 @@ const writeWorkflows = async (files: containers) => {
 					try {
 						await rm(`${githubDir}${path}${name}`);
 					} catch {
-						console.log(
-							`Could not remove ${path}${name} for: ${githubDir}`
-						);
+						console.log(`Could not remove ${path}${name} for: ${githubDir}`);
 					}
 				} catch {}
 			}
