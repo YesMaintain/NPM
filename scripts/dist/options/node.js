@@ -1,1 +1,0 @@
-import{dirname as o,resolve as e}from"path";import{readFile as t}from"fs/promises";import{fileURLToPath as r}from"url";const i=r(import.meta.url),m=o(i);var f=new Set([{path:"/workflows/",name:"node.yml",workflow:async()=>new Set([(await t(e(`${m}/../../src/templates/.github/workflows/node.yml`),"utf-8")).toString()])}]);export{f as default};
