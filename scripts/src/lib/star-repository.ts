@@ -5,7 +5,7 @@ const octokit = new Octokit({
 	auth: env.GH_AUTH_TOKEN,
 });
 
-export default async (url: string = "") => {
+export default async (url = "") => {
 	if (typeof url !== "string") {
 		return;
 	}
