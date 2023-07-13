@@ -35,7 +35,7 @@
 		"@lightrix/scripts": "1.0.6",
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
-		"@types/node": "20.4.1",
+		"@types/node": "20.4.2",
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
