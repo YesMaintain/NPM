@@ -1,23 +1,23 @@
 {
 	"name": "@yesmaintenance/scripts",
 	"version": "1.0.3",
-	"type": "module",
-	"repository": {
-		"directory": "scripts",
-		"type": "git",
-		"url": "https://github.com/YesMaintenance/npm.git"
-	},
+	"private": false,
 	"homepage": "https://github.com/YesMaintenance/npm#readme",
 	"bugs": {
 		"url": "https://github.com/YesMaintenance/npm/issues"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/YesMaintenance/npm.git",
+		"directory": "scripts"
+	},
 	"license": "MIT",
-	"private": false,
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"bin": {
 		"maintenance": "./dist/bin.js"
 	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"scripts": {
 		"prepublishOnly": "lightrix build 'src/**/*.ts'"
 	},
