@@ -13,7 +13,7 @@ export default async () => {
 
 	for (const packageFile of packages) {
 		const packageJson = JSON.parse(
-			(await readFile(packageFile, "utf-8")).toString(),
+			(await readFile(packageFile, "utf-8")).toString()
 		);
 
 		for (const key in packageJson) {
@@ -21,7 +21,10 @@ export default async () => {
 				if (key === "dependencies" || key === "devDependencies") {
 					for (const dependency in packageJson[key]) {
 						if (
-							Object.prototype.hasOwnProperty.call(packageJson[key], dependency)
+							Object.prototype.hasOwnProperty.call(
+								packageJson[key],
+								dependency
+							)
 						) {
 							dependencies.add(dependency);
 						}

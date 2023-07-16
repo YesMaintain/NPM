@@ -4,7 +4,7 @@ import { constants } from "fs";
 
 const walkUntilGit = async (
 	search: string,
-	startedFrom?: string,
+	startedFrom?: string
 ): Promise<string> => {
 	const path = dirname(search);
 	const originalPath = startedFrom ? startedFrom : path;

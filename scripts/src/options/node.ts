@@ -15,9 +15,9 @@ export default new Set([
 				(
 					await readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/node.yml`,
+							`${__dirname}/../../src/templates/.github/workflows/node.yml`
 						),
-						"utf-8",
+						"utf-8"
 					)
 				).toString(),
 			]),

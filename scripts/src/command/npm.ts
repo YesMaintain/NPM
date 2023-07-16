@@ -15,33 +15,51 @@ import { constants } from "fs";
 const writeWorkflows = async (files: containers) => {
 	for (const { path, name, workflow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages("npm"),
+			await packages("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await workflow();
 
 			if (path === "/workflows/" && name === "npm.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(directory, "");
-					const packageFile = (await readFile(_package, "utf-8")).toString();
+					const packageDirectory = dirname(_package).replace(
+						directory,
+						""
+					);
+					const packageFile = (
+						await readFile(_package, "utf-8")
+					).toString();
 
 					const environment = (await packageTypes()).get(
-						_package.split("/").pop(),
+						_package.split("/").pop()
 					);
 
-					if (typeof environment !== "undefined" && environment === "npm") {
+					if (
+						typeof environment !== "undefined" &&
+						environment === "npm"
+					) {
 						try {
 							const packageJson = JSON.parse(packageFile);
 
 							for (const key in packageJson) {
-								if (Object.prototype.hasOwnProperty.call(packageJson, key)) {
+								if (
+									Object.prototype.hasOwnProperty.call(
+										packageJson,
+										key
+									)
+								) {
 									const values = packageJson[key];
 									if (key === "scripts") {
 										for (const scripts in values) {
 											if (
-												Object.prototype.hasOwnProperty.call(values, scripts)
+												Object.prototype.hasOwnProperty.call(
+													values,
+													scripts
+												)
 											) {
-												if (scripts === "prepublishOnly") {
+												if (
+													scripts === "prepublishOnly"
+												) {
 													workflowBase.add(`
             - name: Publish .${packageDirectory}
               continue-on-error: true
@@ -78,11 +96,11 @@ const writeWorkflows = async (files: containers) => {
 				try {
 					await writeFile(
 						`${githubDir}${path}${name}`,
-						`${[...workflowBase].join("")}`,
+						`${[...workflowBase].join("")}`
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/npm.yml`,
+						`Could not create workflow for: ${githubDir}/workflows/npm.yml`
 					);
 				}
 			} else {
@@ -92,7 +110,9 @@ const writeWorkflows = async (files: containers) => {
 					try {
 						await rm(`${githubDir}${path}${name}`);
 					} catch {
-						console.log(`Could not remove ${path}${name} for: ${githubDir}`);
+						console.log(
+							`Could not remove ${path}${name} for: ${githubDir}`
+						);
 					}
 				} catch {}
 			}

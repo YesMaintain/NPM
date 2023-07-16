@@ -8,7 +8,7 @@ export default async (filter: string = "") =>
 			...(await FastGlob(
 				[
 					...[...(await packageTypes(filter)).keys()].map(
-						(_package) => `**/${_package}`,
+						(_package) => `**/${_package}`
 					),
 					"!**/node_modules",
 					"!**/target",
@@ -68,7 +68,7 @@ export default async (filter: string = "") =>
 				{
 					absolute: true,
 					cwd: env.BASE_DIR,
-				},
+				}
 			)),
-		].sort(),
+		].sort()
 	);

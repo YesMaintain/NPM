@@ -14,8 +14,10 @@ export default new Set([
 			new Set([
 				(
 					await readFile(
-						resolve(`${__dirname}/../../src/templates/.github/dependabot.yml`),
-						"utf-8",
+						resolve(
+							`${__dirname}/../../src/templates/.github/dependabot.yml`
+						),
+						"utf-8"
 					)
 				).toString(),
 			]),
@@ -28,9 +30,9 @@ export default new Set([
 				(
 					await readFile(
 						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/dependabot.yml`,
+							`${__dirname}/../../src/templates/.github/workflows/dependabot.yml`
 						),
-						"utf-8",
+						"utf-8"
 					)
 				).toString(),
 			]),

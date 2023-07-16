@@ -31,7 +31,8 @@ const commands: Set<{
 		arguments: new Set([
 			{
 				name: "[repositories...]",
-				description: "Repositories on which to trigger dispatch events.",
+				description:
+					"Repositories on which to trigger dispatch events.",
 			},
 		]),
 		action: (await import("../command/dispatch.js")).default,
