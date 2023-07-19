@@ -57,7 +57,7 @@ const writeWorkflows = async (files: containers) => {
 									typeof packageJson[bundle] !== "undefined"
 								) {
 									workflowBase.add(`
-            - uses: actions/setup-node@v3.6.0
+            - uses: actions/setup-node@v3.7.0
               with:
                   node-version: \${{ matrix.node-version }}
                   cache: "pnpm"
