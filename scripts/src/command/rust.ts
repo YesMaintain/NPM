@@ -1,11 +1,11 @@
+import { constants } from "fs";
 import { access, mkdir, rm, writeFile } from "fs/promises";
-import type { containers } from "../options/workflow.js";
+import { basename, dirname } from "path";
 import gitDirectories from "../lib/git-directories.js";
 import packageTypes from "../lib/package-types.js";
 import packages from "../lib/packages.js";
-import { basename, dirname } from "path";
 import rust from "../options/rust.js";
-import { constants } from "fs";
+import type { containers } from "../options/workflow.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,

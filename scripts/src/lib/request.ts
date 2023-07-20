@@ -1,8 +1,8 @@
+import { Octokit } from "@octokit/core";
 import type { OctokitResponse } from "@octokit/types";
 import { deepmerge } from "deepmerge-ts";
-import { Octokit } from "@octokit/core";
-import env from "../lib/env.js";
 import etag from "etag";
+import env from "../lib/env.js";
 
 const octokit = new Octokit({
 	auth: env.GH_AUTH_TOKEN,
