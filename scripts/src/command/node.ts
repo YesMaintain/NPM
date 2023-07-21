@@ -41,7 +41,7 @@ const writeWorkflows = async (files: containers) => {
 						environment === "npm"
 					) {
 						try {
-							const packageJson = JSON.parse(packageFile);
+							const packageJSON = JSON.parse(packageFile);
 
 							for (const bundle of [
 								"bundledDependencies",
@@ -54,7 +54,7 @@ const writeWorkflows = async (files: containers) => {
 								"peerDependenciesMeta",
 							].sort()) {
 								if (
-									typeof packageJson[bundle] !== "undefined"
+									typeof packageJSON[bundle] !== "undefined"
 								) {
 									workflowBase.add(`
             - uses: actions/setup-node@v3.7.0
@@ -68,14 +68,14 @@ const writeWorkflows = async (files: containers) => {
 								}
 							}
 
-							for (const key in packageJson) {
+							for (const key in packageJSON) {
 								if (
 									Object.prototype.hasOwnProperty.call(
-										packageJson,
+										packageJSON,
 										key
 									)
 								) {
-									const values = packageJson[key];
+									const values = packageJSON[key];
 									if (key === "scripts") {
 										for (const scripts in values) {
 											if (

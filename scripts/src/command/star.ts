@@ -12,17 +12,17 @@ export default async () => {
 	});
 
 	for (const packageFile of packages) {
-		const packageJson = JSON.parse(
+		const packageJSON = JSON.parse(
 			(await readFile(packageFile, "utf-8")).toString()
 		);
 
-		for (const key in packageJson) {
-			if (Object.prototype.hasOwnProperty.call(packageJson, key)) {
+		for (const key in packageJSON) {
+			if (Object.prototype.hasOwnProperty.call(packageJSON, key)) {
 				if (key === "dependencies" || key === "devDependencies") {
-					for (const dependency in packageJson[key]) {
+					for (const dependency in packageJSON[key]) {
 						if (
 							Object.prototype.hasOwnProperty.call(
-								packageJson[key],
+								packageJSON[key],
 								dependency
 							)
 						) {
@@ -35,14 +35,14 @@ export default async () => {
 	}
 
 	for (const dependency of dependencies) {
-		const packageJson = await (
+		const packageJSON = await (
 			await fetch(`https://registry.npmjs.org/${dependency}`)
 		).json();
 
-		if (!packageJson.repository?.url) {
+		if (!packageJSON.repository?.url) {
 			continue;
 		}
 
-		star(packageJson.repository.url);
+		star(packageJSON.repository.url);
 	}
 };
