@@ -39,16 +39,16 @@ const writeWorkflows = async (files: containers) => {
 						environment === "npm"
 					) {
 						try {
-							const packageJson = JSON.parse(packageFile);
+							const packageJSON = JSON.parse(packageFile);
 
-							for (const key in packageJson) {
+							for (const key in packageJSON) {
 								if (
 									Object.prototype.hasOwnProperty.call(
-										packageJson,
+										packageJSON,
 										key
 									)
 								) {
-									const values = packageJson[key];
+									const values = packageJSON[key];
 									if (key === "scripts") {
 										for (const scripts in values) {
 											if (
