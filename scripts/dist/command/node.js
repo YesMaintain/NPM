@@ -25,4 +25,4 @@ import{constants as $}from"fs";import{access as y,mkdir as g,readFile as k,rm as
 `),c==="test"&&n.add(`
             - run: pnpm run test
               working-directory: .${e}
-`))}}catch(r){console.log(s),console.log(r)}}if(n.size>1){try{await g(`${t}${o}`,{recursive:!0})}catch{console.log(`Could not create: ${t}${o}`)}try{await v(`${t}${o}${i}`,`${[...n].join("")}`)}catch{console.log(`Could not create workflow for: ${t}/workflows/node.yml`)}}else try{await y(`${t}${o}${i}`,$.F_OK);try{await h(`${t}${o}${i}`)}catch{console.log(`Could not remove ${o}${i} for: ${t}`)}}catch{}}};var B=async()=>{await j(F)};export{B as default};
+`))}}catch(r){console.log(s),console.log(r)}}if(n.size>1){try{await g(`${t}${o}`,{recursive:!0})}catch{console.log(`Could not create: ${t}${o}`)}try{await v(`${t}${o}${i}`,`${[...n].join("")}`)}catch{console.log(`Could not create workflow for: ${t}/workflows/node.yml`)}}else try{await y(`${t}${o}${i}`,$.F_OK);try{await h(`${t}${o}${i}`)}catch{console.log(`Could not remove ${o}${i} for: ${t}`)}}catch{}}};var z=async()=>{await j(F)};export{z as default};
