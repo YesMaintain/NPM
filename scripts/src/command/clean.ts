@@ -47,8 +47,7 @@ export default async (repositories: string[] = []) => {
 		}
 
 		if (pass === null || pass) {
-			// start: actions/caches
-			for (const cache of (
+			const caches = (
 				await request(
 					`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
 					{
@@ -56,7 +55,10 @@ export default async (repositories: string[] = []) => {
 						repo: repo.name,
 					}
 				)
-			)?.data?.actions_caches) {
+			)?.data?.actions_caches;
+
+			// start: actions/caches
+			for (const cache of caches) {
 				await request(
 					`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
 					{
