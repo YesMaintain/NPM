@@ -11,9 +11,9 @@ const octokit = new Octokit({
 export default async (
 	where: string,
 	_with: {} = {},
-	type: string = "octokit"
+	type = "octokit"
 	// rome-ignore lint/suspicious/noExplicitAny:
-): Promise<OctokitResponse<any, number> | any> => {
+): Promise<OctokitResponse<any, number> | void> => {
 	try {
 		console.log(`Successfully ${where}`);
 
@@ -30,6 +30,7 @@ export default async (
 			}
 		}
 	} catch (_e) {
+		console.log(_e);
 		console.log(`Could not ${where}`);
 	}
 };
