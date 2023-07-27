@@ -50,11 +50,9 @@ jobs:
             STRIPE_CLI_TELEMETRY_OPTOUT: 1
 
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3.5.3
+            - uses: actions/checkout@v3.5.3
 
-            - name: Initialize CodeQL
-              uses: github/codeql-action/init@v2.20.1
+            - uses: github/codeql-action/init@v2.20.1
               with:
                   languages: go, javascript, csharp, python, cpp, java
 
