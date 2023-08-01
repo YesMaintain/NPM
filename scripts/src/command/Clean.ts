@@ -1,7 +1,7 @@
-import env from "../lib/env.js";
-import request from "../lib/request.js";
+import ENV from "../lib/Env.js";
+import Request from "../lib/Request.js";
 
-const user = env.GITHUB_USER;
+const user = ENV.GITHUB_USER;
 
 const orgs: {
 	name: string;
@@ -13,7 +13,7 @@ const repos: {
 }[] = [];
 
 export default async (repositories: string[] = []) => {
-	const get = await request(`GET /users/${user}/repos`);
+	const get = await Request(`GET /users/${user}/repos`);
 
 	if (get) {
 		for (const repo of get.data) {
@@ -24,7 +24,7 @@ export default async (repositories: string[] = []) => {
 		}
 	}
 
-	const getOrg = await request(`GET /users/${user}/orgs`);
+	const getOrg = await Request(`GET /users/${user}/orgs`);
 
 	if (getOrg) {
 		for (const org of getOrg.data) {
@@ -32,7 +32,7 @@ export default async (repositories: string[] = []) => {
 				name: org.login,
 			});
 
-			const reposOrg = await request(`GET /orgs/${org.login}/repos`);
+			const reposOrg = await Request(`GET /orgs/${org.login}/repos`);
 
 			if (reposOrg) {
 				for (const repo of reposOrg.data) {
@@ -58,7 +58,7 @@ export default async (repositories: string[] = []) => {
 		}
 
 		if (pass === null || pass) {
-			const runs = await request(
+			const runs = await Request(
 				`GET /repos/${repo.owner}/${repo.name}/actions/runs`,
 				{
 					owner: repo.owner,
@@ -69,12 +69,12 @@ export default async (repositories: string[] = []) => {
 			if (runs) {
 				// start: actions/runs
 				for (const run of runs?.data?.workflow_runs) {
-					await request(
+					await Request(
 						`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}`,
 						{ owner: repo.owner, repo: repo.name, run_id: run.id }
 					);
 
-					await request(
+					await Request(
 						`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}/logs`,
 						{ owner: repo.owner, repo: repo.name, run_id: run.id }
 					);
@@ -82,7 +82,7 @@ export default async (repositories: string[] = []) => {
 				// end: actions/runs
 			}
 
-			const caches = await request(
+			const caches = await Request(
 				`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
 				{
 					owner: repo.owner,
@@ -93,7 +93,7 @@ export default async (repositories: string[] = []) => {
 			if (caches) {
 				// start: actions/caches
 				for (const cache of caches?.data?.actions_caches) {
-					await request(
+					await Request(
 						`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
 						{
 							owner: repo.owner,

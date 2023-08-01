@@ -1,8 +1,8 @@
-import env from "../lib/env.js";
-import request from "../lib/request.js";
+import ENV from "../lib/Env.js";
+import Request from "../lib/Request.js";
 
 export default async (repositories: string[] | Set<string> = []) => {
-	const user = env.GITHUB_USER;
+	const user = ENV.GITHUB_USER;
 
 	const orgs: {
 		name: string;
@@ -13,19 +13,19 @@ export default async (repositories: string[] | Set<string> = []) => {
 		name: string;
 	}[] = [];
 
-	for (const repo of (await request(`GET /users/${user}/repos`))?.data) {
+	for (const repo of (await Request(`GET /users/${user}/repos`))?.data) {
 		repos.push({
 			owner: user,
 			name: repo.name,
 		});
 	}
 
-	for (const org of (await request(`GET /users/${user}/orgs`))?.data) {
+	for (const org of (await Request(`GET /users/${user}/orgs`))?.data) {
 		orgs.push({
 			name: org.login,
 		});
 
-		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
+		for (const repo of (await Request(`GET /orgs/${org.login}/repos`))
 			?.data) {
 			repos.push({
 				owner: org.login,
@@ -50,12 +50,12 @@ export default async (repositories: string[] | Set<string> = []) => {
 		if (typeof pass === "undefined" || pass) {
 			// start: actions/workflows
 			for (const workflow of (
-				await request(
+				await Request(
 					`GET /repos/${repo.owner}/${repo.name}/actions/workflows`,
 					{ owner: repo.owner, repo: repo.name }
 				)
 			)?.data?.workflows) {
-				await request(
+				await Request(
 					`POST /repos/${repo.owner}/${repo.name}/actions/workflows/${workflow.id}/dispatches`,
 					{
 						ref: "main",

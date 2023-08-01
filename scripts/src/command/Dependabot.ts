@@ -1,11 +1,11 @@
 import { constants } from "fs";
 import { access, mkdir, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
-import gitDirectories from "../lib/git-directories.js";
+import gitDirectories from "../lib/GitDirectories.js";
 import packageTypes from "../lib/PackageTypes.js";
-import packages from "../lib/packages.js";
-import dependabot from "../options/dependabot.js";
-import type { containers } from "../options/workflow.js";
+import packages from "../lib/Packages.js";
+import dependabot from "../options/Dependabot.js";
+import type { containers } from "../options/Workflow.js";
 
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current
