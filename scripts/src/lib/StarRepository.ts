@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/core";
-import env from "../lib/env.js";
+import env from "../lib/Env.js";
 
 const octokit = new Octokit({
 	auth: env.GH_AUTH_TOKEN,

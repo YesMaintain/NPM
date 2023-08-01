@@ -1,4 +1,4 @@
-import walkUntilGit from "./walk-until-git.js";
+import walkUntilGit from "./WalkUntilGit.js";
 
 export default async (globs: Set<string>) => {
 	const results = new Map();

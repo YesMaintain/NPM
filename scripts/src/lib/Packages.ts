@@ -1,8 +1,8 @@
 import FastGlob from "fast-glob";
-import env from "./env.js";
-import packageTypes from "./package-types.js";
+import env from "./Env.js";
+import packageTypes from "./PackageTypes.js";
 
-export default async (filter: string = "") =>
+export default async (filter = "") =>
 	new Set<string>(
 		[
 			...(await FastGlob(

@@ -2,7 +2,7 @@ import { constants } from "fs";
 import { access, mkdir, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../lib/git-directories.js";
-import packageTypes from "../lib/package-types.js";
+import packageTypes from "../lib/PackageTypes.js";
 import packages from "../lib/packages.js";
 import dependabot from "../options/dependabot.js";
 import type { containers } from "../options/workflow.js";

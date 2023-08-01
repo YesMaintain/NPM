@@ -1,8 +1,8 @@
-import env from "../lib/env.js";
-import request from "../lib/request.js";
+import ENV from "../lib/Env.js";
+import Request from "../lib/Request.js";
 
 export default async (repositories: string[] | Set<string> = []) => {
-	const user = env.GITHUB_USER;
+	const user = ENV.GITHUB_USER;
 
 	const orgs: {
 		name: string;
@@ -13,19 +13,19 @@ export default async (repositories: string[] | Set<string> = []) => {
 		name: string;
 	}[] = [];
 
-	for (const repo of (await request(`GET /users/${user}/repos`))?.data) {
+	for (const repo of (await Request(`GET /users/${user}/repos`))?.data) {
 		repos.push({
 			owner: user,
 			name: repo.name,
 		});
 	}
 
-	for (const org of (await request(`GET /users/${user}/orgs`))?.data) {
+	for (const org of (await Request(`GET /users/${user}/orgs`))?.data) {
 		orgs.push({
 			name: org.login,
 		});
 
-		for (const repo of (await request(`GET /orgs/${org.login}/repos`))
+		for (const repo of (await Request(`GET /orgs/${org.login}/repos`))
 			.data) {
 			repos.push({
 				owner: org.login,
@@ -37,7 +37,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 	// start: orgs
 	for (const org of orgs) {
 		// start: actions/permissions
-		await request(`PUT /orgs/${org.name}/actions/permissions`, {
+		await Request(`PUT /orgs/${org.name}/actions/permissions`, {
 			org: org.name,
 			enabled_repositories: "all",
 			allowed_actions: "all",
@@ -45,7 +45,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 		// end: actions/permissions
 
 		// actions/permissions/workflow
-		await request(`PUT /orgs/${org.name}/actions/permissions/workflow`, {
+		await Request(`PUT /orgs/${org.name}/actions/permissions/workflow`, {
 			org: org.name,
 			default_workflow_permissions: "write",
 			can_approve_pull_request_reviews: true,
@@ -68,19 +68,19 @@ export default async (repositories: string[] | Set<string> = []) => {
 
 		if (pass === null || pass) {
 			// start: vulnerability-alerts
-			await request(
+			await Request(
 				`PUT /repos/${repo.owner}/${repo.name}/vulnerability-alerts`
 			);
 			// end: vulnerability-alerts
 
 			// start: automated-security-fixes
-			await request(
+			await Request(
 				`PUT /repos/${repo.owner}/${repo.name}/automated-security-fixes`
 			);
 			// end: automated-security-fixes
 
 			// start: patch
-			await request(`PATCH /repos/${repo.owner}/${repo.name}`, {
+			await Request(`PATCH /repos/${repo.owner}/${repo.name}`, {
 				has_issues: true,
 				has_projects: false,
 				has_wiki: false,
@@ -97,7 +97,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 			// end: patch
 
 			// start: actions/permissions
-			await request(
+			await Request(
 				`PUT /repos/${repo.owner}/${repo.name}/actions/permissions`,
 				{
 					enabled: true,
@@ -107,7 +107,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 			// end: actions/permissions
 
 			// start: actions/permissions/workflow
-			await request(
+			await Request(
 				`PUT /repos/${repo.owner}/${repo.name}/actions/permissions/workflow`,
 				{
 					default_workflow_permissions: "write",
@@ -117,11 +117,11 @@ export default async (repositories: string[] | Set<string> = []) => {
 			// end: actions/permissions/workflow
 
 			// start: starred
-			await request(`PUT /user/starred/${repo.owner}/${repo.name}`);
+			await Request(`PUT /user/starred/${repo.owner}/${repo.name}`);
 			// end: starred
 
 			// start: actions/permissions/access
-			await request(
+			await Request(
 				`PUT /repos/${repo.owner}/${repo.name}/actions/permissions/access`,
 				{
 					access_level: "organization",
