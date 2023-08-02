@@ -3,7 +3,7 @@ import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../lib/GitDirectories.js";
 import packageTypes from "../lib/PackageTypes.js";
-import packages from "../lib/packages.js";
+import packages from "../lib/Packages.js";
 import node from "../options/NODE.js";
 import type { containers } from "../options/Workflow.js";
 
