@@ -1,93 +1,90 @@
-import type { CommandOptions } from "commander";
+import type { CommandOptions as Options } from "commander";
 
-const commands: Set<{
-	name: string;
-	opts?: CommandOptions;
-	type?: "workflow";
-	description?: string;
-	arguments?: Set<{
-		name: string;
-		description?: string;
+const Commands: Set<{
+	Name: string;
+	Opts?: Options;
+	Type?: "Flow";
+	Description?: string;
+	Arguments?: Set<{
+		Name: string;
+		Description?: string;
 		// rome-ignore lint/suspicious/noExplicitAny:
-		defaultValue?: any;
+		Value?: any;
 	}>;
 	// rome-ignore lint/suspicious/noExplicitAny:
-	action: (...args: any[]) => Promise<void>;
+	Action: (...args: any[]) => Promise<void>;
 }> = new Set([
 	{
-		name: "clean",
-		description: "Clean GitHub repositories",
-		arguments: new Set([
+		Name: "clean",
+		Description: "Clean GitHub repositories",
+		Arguments: new Set([
 			{
-				name: "[repositories...]",
-				description: "Repositories to clean.",
+				Name: "[repositories...]",
+				Description: "Repositories to clean.",
 			},
 		]),
-		action: (await import("../command/Clean.js")).default,
+		Action: (await import("../command/Clean.js")).default,
 	},
 	{
-		name: "dispatch",
-		description: "Trigger dispatch events.",
-		arguments: new Set([
+		Name: "dispatch",
+		Description: "Trigger dispatch events.",
+		Arguments: new Set([
 			{
-				name: "[repositories...]",
-				description:
+				Name: "[repositories...]",
+				Description:
 					"Repositories on which to trigger dispatch events.",
 			},
 		]),
-		action: (await import("../command/Dispatch.js")).default,
+		Action: (await import("../command/Dispatch.js")).default,
 	},
 	{
-		name: "dependabot",
-		type: "workflow",
-		description: "Put Dependabot everywhere.",
-		action: (await import("../command/Dependabot.js")).default,
+		Name: "dependabot",
+		Type: "Flow",
+		Description: "Put Dependabot everywhere.",
+		Action: (await import("../command/Dependabot.js")).default,
 	},
 	{
-		name: "edit",
-		arguments: new Set([
+		Name: "edit",
+		Arguments: new Set([
 			{
-				name: "[repositories...]",
-				description: "Repositories to edit.",
+				Name: "[repositories...]",
+				Description: "Repositories to edit.",
 			},
 		]),
-		description: "Edit features for all repositories.",
-		action: (await import("../command/Edit.js")).default,
+		Description: "Edit features for all repositories.",
+		Action: (await import("../command/Edit.js")).default,
 	},
 	{
-		name: "node",
-		type: "workflow",
-		description: "Put node into GitHub Actions.",
-		action: (await import("../command/Node.js")).default,
+		Name: "node",
+		Type: "Flow",
+		Description: "Put node into GitHub Actions.",
+		Action: (await import("../command/NODE.js")).default,
 	},
 	{
-		name: "npm",
-		type: "workflow",
-		description: "Put NPM into GitHub Actions.",
-		action: (await import("../command/NPM.js")).default,
+		Name: "npm",
+		Type: "Flow",
+		Description: "Put NPM into GitHub Actions.",
+		Action: (await import("../command/NPM.js")).default,
 	},
 	{
-		name: "rust",
-		type: "workflow",
-		description: "Put rust into GitHub Actions.",
-		action: (await import("../command/Rust.js")).default,
+		Name: "rust",
+		Type: "Flow",
+		Description: "Put rust into GitHub Actions.",
+		Action: (await import("../command/Rust.js")).default,
 	},
 	{
-		name: "workflows",
-		description: "Trigger all workflow tasks.",
-		action: async () => {
-			commands.forEach((command) => {
-				if (command.type === "workflow") {
-					command.action();
-				}
-			});
-		},
+		Name: "workflows",
+		Description: "Trigger all workflow tasks.",
+		Action: async () =>
+			Commands.forEach((Command) =>
+				Command.Type === "Flow" ? Command.Action() : {}
+			),
 	},
 	{
-		name: "star",
-		description: "Star all my used repositories.",
-		action: (await import("../command/Star.js")).default,
+		Name: "star",
+		Description: "Star all my used repositories.",
+		Action: (await import("../command/Star.js")).default,
 	},
 ]);
 
-export default commands;
+export default Commands;

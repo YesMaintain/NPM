@@ -1,25 +1,25 @@
-import { readFile } from "fs/promises";
-import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
-import type { containers } from "./Workflow.js";
+import { readFile as File } from "fs/promises";
+import { dirname as Dir, resolve as Resolve } from "path";
+import { fileURLToPath as URL } from "url";
+import type { Containers } from "./Workflow.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const NameFile = URL(import.meta.url);
+const NameDir = Dir(NameFile);
 
 export default new Set([
 	{
-		path: "/workflows/",
-		name: "npm.yml",
-		workflow: async () =>
+		Path: "/workflows/",
+		Name: "npm.yml",
+		Flow: async () =>
 			new Set([
 				(
-					await readFile(
-						resolve(
-							`${__dirname}/../../src/templates/.github/workflows/npm.yml`
+					await File(
+						Resolve(
+							`${NameDir}/../../src/templates/.github/workflows/npm.yml`
 						),
 						"utf-8"
 					)
 				).toString(),
 			]),
 	},
-]) satisfies containers;
+]) satisfies Containers;

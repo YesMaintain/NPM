@@ -1,44 +1,50 @@
-import ENV from "../lib/Env.js";
+import Environment from "../lib/Environment.js";
 import Request from "../lib/Request.js";
 
-const user = ENV.GITHUB_USER;
+const User = Environment.GITHUB_USER;
 
-const orgs: {
-	name: string;
-}[] = [];
+const All: {
+	Organizations: {
+		Name: string;
+	}[];
+	Repositories: {
+		Owner: string;
+		Name: string;
+	}[];
+} = {
+	Organizations: [],
+	Repositories: [],
+};
 
-const repos: {
-	owner: string;
-	name: string;
-}[] = [];
+export default async (Repositories: string[] = []) => {
+	const Get = await Request(`GET /users/${User}/repos`);
 
-export default async (repositories: string[] = []) => {
-	const get = await Request(`GET /users/${user}/repos`);
-
-	if (get) {
-		for (const repo of get.data) {
-			repos.push({
-				owner: user,
-				name: repo.name,
+	if (Get) {
+		for (const Repository of Get.data) {
+			All.Repositories.push({
+				Owner: User,
+				Name: Repository.name,
 			});
 		}
 	}
 
-	const getOrg = await Request(`GET /users/${user}/orgs`);
+	const Organizations = await Request(`GET /users/${User}/orgs`);
 
-	if (getOrg) {
-		for (const org of getOrg.data) {
-			orgs.push({
-				name: org.login,
+	if (Organizations) {
+		for (const Organization of Organizations.data) {
+			All.Organizations.push({
+				Name: Organization.login,
 			});
 
-			const reposOrg = await Request(`GET /orgs/${org.login}/repos`);
+			const Repositories = await Request(
+				`GET /orgs/${Organization.login}/repos`
+			);
 
-			if (reposOrg) {
-				for (const repo of reposOrg.data) {
-					repos.push({
-						owner: org.login,
-						name: repo.name,
+			if (Repositories) {
+				for (const repo of Repositories.data) {
+					All.Repositories.push({
+						Owner: Organization.login,
+						Name: repo.name,
 					});
 				}
 			}
@@ -46,59 +52,67 @@ export default async (repositories: string[] = []) => {
 	}
 
 	// start: repos
-	let pass = null;
+	let Pass = null;
 
-	for (const repo of repos) {
-		for (const repository of repositories) {
-			if (repo.name === repository) {
-				pass = true;
+	for (const Repository of All.Repositories) {
+		for (const _Repository of Repositories) {
+			if (Repository.Name === _Repository) {
+				Pass = true;
 			} else {
-				pass = false;
+				Pass = false;
 			}
 		}
 
-		if (pass === null || pass) {
-			const runs = await Request(
-				`GET /repos/${repo.owner}/${repo.name}/actions/runs`,
+		if (Pass === null || Pass) {
+			const Runs = await Request(
+				`GET /repos/${Repository.Owner}/${Repository.Name}/actions/runs`,
 				{
-					owner: repo.owner,
-					repo: repo.name,
+					owner: Repository.Owner,
+					repo: Repository.Name,
 				}
 			);
 
-			if (runs) {
+			if (Runs?.data?.workflow_runs) {
 				// start: actions/runs
-				for (const run of runs?.data?.workflow_runs) {
+				for (const run of Runs.data.workflow_runs) {
 					await Request(
-						`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}`,
-						{ owner: repo.owner, repo: repo.name, run_id: run.id }
+						`DELETE /repos/${Repository.Owner}/${Repository.Name}/actions/runs/${run.id}`,
+						{
+							owner: Repository.Owner,
+							repo: Repository.Name,
+							run_id: run.id,
+						}
 					);
 
 					await Request(
-						`DELETE /repos/${repo.owner}/${repo.name}/actions/runs/${run.id}/logs`,
-						{ owner: repo.owner, repo: repo.name, run_id: run.id }
+						`DELETE /repos/${Repository.Owner}/${Repository.Name}/actions/runs/${run.id}/logs`,
+						{
+							owner: Repository.Owner,
+							repo: Repository.Name,
+							run_id: run.id,
+						}
 					);
 				}
 				// end: actions/runs
 			}
 
-			const caches = await Request(
-				`GET /repos/${repo.owner}/${repo.name}/actions/caches`,
+			const Caches = await Request(
+				`GET /repos/${Repository.Owner}/${Repository.Name}/actions/caches`,
 				{
-					owner: repo.owner,
-					repo: repo.name,
+					owner: Repository.Owner,
+					repo: Repository.Name,
 				}
 			);
 
-			if (caches) {
+			if (Caches?.data?.actions_caches) {
 				// start: actions/caches
-				for (const cache of caches?.data?.actions_caches) {
+				for (const Cache of Caches.data.actions_caches) {
 					await Request(
-						`DELETE /repos/${repo.owner}/${repo.name}/actions/caches/${cache.id}`,
+						`DELETE /repos/${Repository.Owner}/${Repository.Name}/actions/caches/${Cache.id}`,
 						{
-							owner: repo.owner,
-							repo: repo.name,
-							cache_id: cache.id,
+							owner: Repository.Owner,
+							repo: Repository.Name,
+							cache_id: Cache.id,
 						}
 					);
 				}

@@ -1,43 +1,43 @@
-import { constants } from "fs";
-import { access, mkdir, rm, writeFile } from "fs/promises";
-import { dirname } from "path";
-import gitDirectories from "../lib/GitDirectories.js";
-import packageTypes from "../lib/PackageTypes.js";
-import packages from "../lib/Packages.js";
-import dependabot from "../options/Dependabot.js";
-import type { containers } from "../options/Workflow.js";
+import { constants as Constant } from "fs";
+import {
+	access as Access,
+	mkdir as Make,
+	rm as Remove,
+	writeFile as File,
+} from "fs/promises";
+import { dirname as Dir } from "path";
+import DirsGit from "../lib/DirsGit.js";
+import Types from "../lib/Types.js";
+import Packages from "../lib/Packages.js";
+import Dependabot from "../options/Dependabot.js";
+import type { Containers } from "../options/Workflow.js";
 
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current
  * working directory
- * @param {containers} files - This is an array of objects that contain the path, name, and workflow
+ * @param {Containers} Files - This is an array of objects that contain the path, name, and workflow
  * function.
  */
-const writeWorkflows = async (files: containers) => {
-	for (const { path, name, workflow } of files) {
-		for (const [directory, packageFiles] of await gitDirectories(
-			await packages()
-		)) {
-			const githubDir = `${directory}/.github`;
-			const workflowBase = await workflow();
+const Flows = async (Files: Containers) => {
+	for (const { Path, Name, Flow } of Files) {
+		for (const [_Dir, FilesPackage] of await DirsGit(await Packages())) {
+			const DirGitHub = `${_Dir}/.github`;
+			const Base = await Flow();
 
-			if (path === "/") {
-				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
-						directory,
-						""
+			if (Path === "/") {
+				for (const Package of FilesPackage) {
+					const DirPackage = Dir(Package).replace(_Dir, "");
+
+					const Environment = (await Types()).get(
+						Package.split("/").pop()
 					);
 
-					const environment = (await packageTypes()).get(
-						_package.split("/").pop()
-					);
-
-					workflowBase.add(`
+					Base.add(`
     - package-ecosystem: "${
-		typeof environment !== "undefined"
-			? environment
+		typeof Environment !== "undefined"
+			? Environment
 			: (() => {
-					switch (_package.split(".").pop()) {
+					switch (Package.split(".").pop()) {
 						case "csproj":
 							return "nuget";
 						default:
@@ -45,13 +45,13 @@ const writeWorkflows = async (files: containers) => {
 					}
 			  })()
 	}"
-      directory: "${packageDirectory ? packageDirectory : "/"}"
+      directory: "${DirPackage ? DirPackage : "/"}"
       schedule:
           interval: "daily"
       versioning-strategy: ${
-			typeof environment !== "undefined"
+			typeof Environment !== "undefined"
 				? (() => {
-						switch (environment) {
+						switch (Environment) {
 							case "cargo":
 								return "lockfile-only";
 							default:
@@ -64,34 +64,34 @@ const writeWorkflows = async (files: containers) => {
 				}
 			}
 
-			if (workflowBase.size > 0) {
+			if (Base.size > 0) {
 				try {
-					await mkdir(`${githubDir}${path}`, {
+					await Make(`${DirGitHub}${Path}`, {
 						recursive: true,
 					});
 				} catch {
-					console.log(`Could not create: ${githubDir}${path}`);
+					console.log(`Could not create: ${DirGitHub}${Path}`);
 				}
 
 				try {
-					await writeFile(
-						`${githubDir}${path}${name}`,
-						`${[...workflowBase].join("")}`
+					await File(
+						`${DirGitHub}${Path}${Name}`,
+						`${[...Base].join("")}`
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/dependabot.yml`
+						`Could not create workflow for: ${DirGitHub}/dependabot.yml`
 					);
 				}
 			} else {
 				try {
-					await access(`${githubDir}${path}${name}`, constants.F_OK);
+					await Access(`${DirGitHub}${Path}${Name}`, Constant.F_OK);
 
 					try {
-						await rm(`${githubDir}${path}${name}`);
+						await Remove(`${DirGitHub}${Path}${Name}`);
 					} catch {
 						console.log(
-							`Could not remove ${path}${name} for: ${githubDir}`
+							`Could not remove ${Path}${Name} for: ${DirGitHub}`
 						);
 					}
 				} catch {}
@@ -100,6 +100,4 @@ const writeWorkflows = async (files: containers) => {
 	}
 };
 
-export default async () => {
-	await writeWorkflows(dependabot);
-};
+export default async () => await Flows(Dependabot);

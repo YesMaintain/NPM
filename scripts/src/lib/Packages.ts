@@ -1,14 +1,14 @@
-import FastGlob from "fast-glob";
-import env from "./Env.js";
-import packageTypes from "./PackageTypes.js";
+import Glob from "fast-glob";
+import Environment from "./Environment.js";
+import Types from "./Types.js";
 
 export default async (filter = "") =>
 	new Set<string>(
 		[
-			...(await FastGlob(
+			...(await Glob(
 				[
-					...[...(await packageTypes(filter)).keys()].map(
-						(_package) => `**/${_package}`
+					...[...(await Types(filter)).keys()].map(
+						(Package) => `**/${Package}`
 					),
 					"!**/node_modules",
 					"!**/target",
@@ -67,7 +67,7 @@ export default async (filter = "") =>
 				],
 				{
 					absolute: true,
-					cwd: env.BASE_DIR,
+					cwd: Environment.BASE_DIR,
 				}
 			)),
 		].sort()

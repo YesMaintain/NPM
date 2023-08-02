@@ -1,35 +1,40 @@
-import { constants } from "fs";
-import { access, mkdir, rm, writeFile } from "fs/promises";
+import { constants as Constant } from "fs";
+import {
+	access as Access,
+	mkdir as Make,
+	rm as Remove,
+	writeFile as File,
+} from "fs/promises";
 import { basename, dirname } from "path";
-import gitDirectories from "../lib/GitDirectories.js";
-import packageTypes from "../lib/PackageTypes.js";
-import packages from "../lib/Packages.js";
-import rust from "../options/Rust.js";
-import type { containers } from "../options/Workflow.js";
+import gitDirectories from "../lib/DirsGit.js";
+import Types from "../lib/Types.js";
+import Packages from "../lib/Packages.js";
+import Rust from "../options/Rust.js";
+import type { Containers } from "../options/Workflow.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {containers} files - containers
+ * @param {Containers} files - containers
  */
-const writeWorkflows = async (files: containers) => {
-	for (const { path, name, workflow } of files) {
+const Flows = async (files: Containers) => {
+	for (const { Path, Name, Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages("cargo")
+			await Packages("cargo")
 		)) {
 			const githubDir = `${directory}/.github`;
-			const workflowBase = await workflow();
+			const workflowBase = await Flow();
 
-			if (path === "/workflows/" && name === "rust.yml") {
+			if (Path === "/workflows/" && Name === "rust.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
 						""
 					);
 
-					const environment = (await packageTypes()).get(
+					const environment = (await Types()).get(
 						_package.split("/").pop()
 					);
 
@@ -51,8 +56,8 @@ const writeWorkflows = async (files: containers) => {
               with:
                 command: build
                 args: --release --all-features --manifest-path .${packageDirectory}/${basename(
-					_package
-				)}
+							_package
+						)}
 `);
 					}
 				}
@@ -60,16 +65,16 @@ const writeWorkflows = async (files: containers) => {
 
 			if (workflowBase.size > 1) {
 				try {
-					await mkdir(`${githubDir}${path}`, {
+					await Make(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {
-					console.log(`Could not create: ${githubDir}${path}`);
+					console.log(`Could not create: ${githubDir}${Path}`);
 				}
 
 				try {
-					await writeFile(
-						`${githubDir}${path}${name}`,
+					await File(
+						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);
 				} catch {
@@ -79,13 +84,13 @@ const writeWorkflows = async (files: containers) => {
 				}
 			} else {
 				try {
-					await access(`${githubDir}${path}${name}`, constants.F_OK);
+					await Access(`${githubDir}${Path}${Name}`, Constant.F_OK);
 
 					try {
-						await rm(`${githubDir}${path}${name}`);
+						await Remove(`${githubDir}${Path}${Name}`);
 					} catch {
 						console.log(
-							`Could not remove ${path}${name} for: ${githubDir}`
+							`Could not remove ${Path}${Name} for: ${githubDir}`
 						);
 					}
 				} catch {}
@@ -95,5 +100,5 @@ const writeWorkflows = async (files: containers) => {
 };
 
 export default async () => {
-	await writeWorkflows(rust);
+	await Flows(Rust);
 };

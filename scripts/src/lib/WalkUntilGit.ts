@@ -1,24 +1,21 @@
-import { constants } from "fs";
-import { access } from "fs/promises";
-import { dirname } from "path";
+import { constants as Constant } from "fs";
+import { access as Access } from "fs/promises";
+import { dirname as Dir } from "path";
 
-const walkUntilGit = async (
-	search: string,
-	startedFrom?: string
-): Promise<string> => {
-	const path = dirname(search);
-	const originalPath = startedFrom ? startedFrom : path;
+const WalkUntilGit = async (Search: string, From?: string): Promise<string> => {
+	const path = Dir(Search);
+	const originalPath = From ? From : path;
 
-	if (path === search) {
+	if (path === Search) {
 		return originalPath;
 	}
 
 	try {
-		await access(`${path}/.git`, constants.R_OK | constants.W_OK);
+		await Access(`${path}/.git`, Constant.R_OK | Constant.W_OK);
 		return path;
 	} catch (error) {
-		return await walkUntilGit(path, originalPath);
+		return await WalkUntilGit(path, originalPath);
 	}
 };
 
-export default walkUntilGit;
+export default WalkUntilGit;

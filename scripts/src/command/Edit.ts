@@ -1,55 +1,61 @@
-import ENV from "../lib/Env.js";
+import Environment from "../lib/Environment.js";
 import Request from "../lib/Request.js";
 
 export default async (repositories: string[] | Set<string> = []) => {
-	const user = ENV.GITHUB_USER;
+	const User = Environment.GITHUB_USER;
 
-	const orgs: {
+	const Organizations: {
 		name: string;
 	}[] = [];
 
-	const repos: {
+	const Repos: {
 		owner: string;
 		name: string;
 	}[] = [];
 
-	for (const repo of (await Request(`GET /users/${user}/repos`))?.data) {
-		repos.push({
-			owner: user,
-			name: repo.name,
+	for (const Repository of (await Request(`GET /users/${User}/repos`))
+		?.data) {
+		Repos.push({
+			owner: User,
+			name: Repository.name,
 		});
 	}
 
-	for (const org of (await Request(`GET /users/${user}/orgs`))?.data) {
-		orgs.push({
-			name: org.login,
+	for (const Organization of (await Request(`GET /users/${User}/orgs`))
+		?.data) {
+		Organizations.push({
+			name: Organization.login,
 		});
 
-		for (const repo of (await Request(`GET /orgs/${org.login}/repos`))
-			.data) {
-			repos.push({
-				owner: org.login,
-				name: repo.name,
+		for (const Repository of (
+			await Request(`GET /orgs/${Organization.login}/repos`)
+		)?.data) {
+			Repos.push({
+				owner: Organization.login,
+				name: Repository.name,
 			});
 		}
 	}
 
 	// start: orgs
-	for (const org of orgs) {
+	for (const Organization of Organizations) {
 		// start: actions/permissions
-		await Request(`PUT /orgs/${org.name}/actions/permissions`, {
-			org: org.name,
+		await Request(`PUT /orgs/${Organization.name}/actions/permissions`, {
+			org: Organization.name,
 			enabled_repositories: "all",
 			allowed_actions: "all",
 		});
 		// end: actions/permissions
 
 		// actions/permissions/workflow
-		await Request(`PUT /orgs/${org.name}/actions/permissions/workflow`, {
-			org: org.name,
-			default_workflow_permissions: "write",
-			can_approve_pull_request_reviews: true,
-		});
+		await Request(
+			`PUT /orgs/${Organization.name}/actions/permissions/workflow`,
+			{
+				org: Organization.name,
+				default_workflow_permissions: "write",
+				can_approve_pull_request_reviews: true,
+			}
+		);
 		// end: actions/permissions/workflow
 	}
 	// end: orgs
@@ -57,7 +63,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 	// start: repos
 	let pass = null;
 
-	for (const repo of repos) {
+	for (const repo of Repos) {
 		for (const repository of repositories) {
 			if (repo.name === repository) {
 				pass = true;

@@ -1,32 +1,30 @@
-import FastGlob from "fast-glob";
-import { readFile } from "fs/promises";
-import star from "../lib/StarRepository.js";
-import env from "../lib/env.js";
+import Glob from "fast-glob";
+import { readFile as File } from "fs/promises";
+import Star from "../lib/Star.js";
+import Environment from "../lib/Environment.js";
 
 export default async () => {
-	const dependencies = new Set<string>();
+	const Dependencies = new Set<string>();
 
-	const packages = await FastGlob(["**/package.json", "!**/node_modules"], {
+	for (const Package of await Glob(["**/package.json", "!**/node_modules"], {
 		absolute: true,
-		cwd: env.BASE_DIR,
-	});
-
-	for (const packageFile of packages) {
-		const packageJSON = JSON.parse(
-			(await readFile(packageFile, "utf-8")).toString()
+		cwd: Environment.BASE_DIR,
+	})) {
+		const JSONPackage = JSON.parse(
+			(await File(Package, "utf-8")).toString()
 		);
 
-		for (const key in packageJSON) {
-			if (Object.prototype.hasOwnProperty.call(packageJSON, key)) {
-				if (key === "dependencies" || key === "devDependencies") {
-					for (const dependency in packageJSON[key]) {
+		for (const Key in JSONPackage) {
+			if (Object.prototype.hasOwnProperty.call(JSONPackage, Key)) {
+				if (Key === "dependencies" || Key === "devDependencies") {
+					for (const dependency in JSONPackage[Key]) {
 						if (
 							Object.prototype.hasOwnProperty.call(
-								packageJSON[key],
+								JSONPackage[Key],
 								dependency
 							)
 						) {
-							dependencies.add(dependency);
+							Dependencies.add(dependency);
 						}
 					}
 				}
@@ -34,15 +32,13 @@ export default async () => {
 		}
 	}
 
-	for (const dependency of dependencies) {
-		const packageJSON = await (
-			await fetch(`https://registry.npmjs.org/${dependency}`)
-		).json();
-
-		if (!packageJSON.repository?.url) {
-			continue;
-		}
-
-		star(packageJSON.repository.url);
+	for (const Dependency of Dependencies) {
+		Star(
+			(
+				await (
+					await fetch(`https://registry.npmjs.org/${Dependency}`)
+				).json()
+			).repository.url
+		);
 	}
 };

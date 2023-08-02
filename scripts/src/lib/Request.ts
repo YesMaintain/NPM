@@ -1,36 +1,36 @@
 import { Octokit } from "@octokit/core";
 import type { OctokitResponse } from "@octokit/types";
-import { deepmerge } from "deepmerge-ts";
-import etag from "etag";
-import env from "../lib/Env.js";
+import { deepmerge as Merge } from "deepmerge-ts";
+import Tag from "etag";
+import Environment from "../lib/Environment.js";
 
-const octokit = new Octokit({
-	auth: env.GH_AUTH_TOKEN,
+const OCTOKIT = new Octokit({
+	auth: Environment.GH_AUTH_TOKEN,
 });
 
 export default async (
-	where: string,
-	_with: {} = {},
-	type = "octokit"
+	Where: string,
+	With: {} = {},
+	Type = "octokit"
 	// rome-ignore lint/suspicious/noExplicitAny:
 ): Promise<OctokitResponse<any, number> | void> => {
 	try {
-		console.log(`Successfully ${where}`);
+		console.log(`Successfully ${Where}`);
 
-		switch (type) {
+		switch (Type) {
 			case "octokit": {
-				return await octokit.request(
-					where,
-					deepmerge(_with, {
+				return await OCTOKIT.request(
+					Where,
+					Merge(With, {
 						headers: {
-							"If-None-Match": etag(where),
+							"If-None-Match": Tag(Where),
 						},
 					})
 				);
 			}
 		}
-	} catch (_e) {
-		console.log(_e);
-		console.log(`Could not ${where}`);
+	} catch (_Error) {
+		console.log(_Error);
+		console.log(`Could not ${Where}`);
 	}
 };

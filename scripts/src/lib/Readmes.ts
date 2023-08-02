@@ -1,12 +1,12 @@
-import FastGlob from "fast-glob";
-import env from "./Env.js";
+import Glob from "fast-glob";
+import Environment from "./Environment.js";
 
 export default async () =>
 	new Set<string>(
 		[
-			...(await FastGlob(["**/README.md"], {
+			...(await Glob(["**/README.md"], {
 				absolute: true,
-				cwd: env.BASE_DIR,
+				cwd: Environment.BASE_DIR,
 			})),
 		].sort()
 	);

@@ -1,28 +1,28 @@
-import { constants } from "fs";
+import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
-import gitDirectories from "../lib/GitDirectories.js";
-import packageTypes from "../lib/PackageTypes.js";
+import gitDirectories from "../lib/DirsGit.js";
+import packageTypes from "../lib/Types.js";
 import packages from "../lib/Packages.js";
 import node from "../options/NODE.js";
-import type { containers } from "../options/Workflow.js";
+import type { Containers } from "../options/Workflow.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {containers} files - containers
+ * @param {Containers} files - containers
  */
-const writeWorkflows = async (files: containers) => {
-	for (const { path, name, workflow } of files) {
+const writeWorkflows = async (files: Containers) => {
+	for (const { Path, Name, Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
-			const workflowBase = await workflow();
+			const workflowBase = await Flow();
 
-			if (path === "/workflows/" && name === "node.yml") {
+			if (Path === "/workflows/" && Name === "node.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
@@ -137,16 +137,16 @@ const writeWorkflows = async (files: containers) => {
 
 			if (workflowBase.size > 1) {
 				try {
-					await mkdir(`${githubDir}${path}`, {
+					await mkdir(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {
-					console.log(`Could not create: ${githubDir}${path}`);
+					console.log(`Could not create: ${githubDir}${Path}`);
 				}
 
 				try {
 					await writeFile(
-						`${githubDir}${path}${name}`,
+						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);
 				} catch {
@@ -156,13 +156,13 @@ const writeWorkflows = async (files: containers) => {
 				}
 			} else {
 				try {
-					await access(`${githubDir}${path}${name}`, constants.F_OK);
+					await access(`${githubDir}${Path}${Name}`, Constant.F_OK);
 
 					try {
-						await rm(`${githubDir}${path}${name}`);
+						await rm(`${githubDir}${Path}${Name}`);
 					} catch {
 						console.log(
-							`Could not remove ${path}${name} for: ${githubDir}`
+							`Could not remove ${Path}${Name} for: ${githubDir}`
 						);
 					}
 				} catch {}

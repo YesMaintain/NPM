@@ -1,22 +1,22 @@
 import { Command } from "commander";
-import commands from "./options/Commands.js";
+import Commands from "./options/Commands.js";
 
 const program = new Command();
 
 program.name("maintenance").description("Maintenance tools");
 
-commands?.forEach((command) => {
+Commands?.forEach((command) => {
 	const commandProgram = program
-		.command(command.name)
+		.command(command.Name)
 		.description(
-			typeof command.description !== "undefined"
-				? command.description
+			typeof command.Description !== "undefined"
+				? command.Description
 				: ""
 		)
-		.action(command.action);
+		.action(command.Action);
 
-	command.arguments?.forEach((argument) => {
-		commandProgram.argument(argument.name, argument.description);
+	command.Arguments?.forEach((argument) => {
+		commandProgram.argument(argument.Name, argument.Description);
 	});
 });
 
