@@ -15,7 +15,7 @@ export default new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../src/templates/.github/workflows/rust.yml`
+							`${NameDir}/../../Src/templates/.github/workflows/rust.yml`
 						),
 						"utf-8"
 					)

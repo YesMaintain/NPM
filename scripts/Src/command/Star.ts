@@ -1,7 +1,7 @@
 import Glob from "fast-glob";
 import { readFile as File } from "fs/promises";
-import Star from "../lib/Star.js";
-import Environment from "../lib/Environment.js";
+import Star from "../Lib/Star.js";
+import Environment from "../Lib/Environment.js";
 
 export default async () => {
 	const Dependencies = new Set<string>();

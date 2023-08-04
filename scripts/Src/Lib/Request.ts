@@ -2,7 +2,7 @@ import { Octokit } from "@octokit/core";
 import type { OctokitResponse } from "@octokit/types";
 import { deepmerge as Merge } from "deepmerge-ts";
 import Tag from "etag";
-import Environment from "../lib/Environment.js";
+import Environment from "../Lib/Environment.js";
 
 const OCTOKIT = new Octokit({
 	auth: Environment.GH_AUTH_TOKEN,

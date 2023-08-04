@@ -15,7 +15,7 @@ export default new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../src/templates/.github/workflows/npm.yml`
+							`${NameDir}/../../Src/templates/.github/workflows/npm.yml`
 						),
 						"utf-8"
 					)

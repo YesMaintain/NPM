@@ -16,7 +16,7 @@ export default new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../src/templates/.github/dependabot.yml`
+							`${NameDir}/../../Src/templates/.github/dependabot.yml`
 						),
 						"utf-8"
 					)
@@ -31,7 +31,7 @@ export default new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../src/templates/.github/workflows/dependabot.yml`
+							`${NameDir}/../../Src/templates/.github/workflows/dependabot.yml`
 						),
 						"utf-8"
 					)
