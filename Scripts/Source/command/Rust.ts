@@ -51,6 +51,7 @@ const Flows = async (files: Containers) => {
                       ~/.cargo/registry/cache/
                       ~/.cargo/git/db/
                       target/
+                      Target/
                   key: \${{ runner.os }}-cargo-\${{ hashFiles('.${packageDirectory}/Cargo.toml') }}
             - uses: actions-rs/cargo@v1.0.3
               with:
