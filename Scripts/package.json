@@ -19,7 +19,7 @@
 		"maintenance": "./dist/bin.js"
 	},
 	"scripts": {
-		"prepublishOnly": "lightrix build 'src/**/*.ts'"
+		"prepublishOnly": "lightrix build 'Source/**/*.ts'"
 	},
 	"dependencies": {
 		"@octokit/core": "5.0.0",
