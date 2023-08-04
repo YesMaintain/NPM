@@ -1,5 +1,5 @@
 import { readFile as File } from "fs/promises";
-import { dirname as Dir, resolve } from "path";
+import { dirname as Dir, resolve as Resolve } from "path";
 import { fileURLToPath as Path } from "url";
 import type { Containers } from "./Workflow.js";
 
@@ -14,7 +14,7 @@ export default new Set([
 			new Set([
 				(
 					await File(
-						resolve(
+						Resolve(
 							`${NameDir}/../../Src/templates/.github/workflows/node.yml`
 						),
 						"utf-8"

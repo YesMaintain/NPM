@@ -20,7 +20,7 @@ export default async (URL = "") => {
 		await OCTOKIT.request(`PUT /user/starred/${_URL}`);
 
 		console.log(`Starred repository: ${_URL}`);
-	} catch (_error) {
+	} catch (_Error) {
 		console.log(`Could not star repository: ${_URL}`);
 	}
 	// end: starred

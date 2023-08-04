@@ -76,14 +76,14 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: "pnpm"
-                  cache-dependency-path: ./scripts/pnpm-lock.yaml
+                  cache-dependency-path: ./Scripts/pnpm-lock.yaml
             - run: pnpm install
-              working-directory: ./scripts
+              working-directory: ./Scripts
 
             - run: pnpm run prepublishOnly
-              working-directory: ./scripts
+              working-directory: ./Scripts
 
             - uses: actions/upload-artifact@v3.1.2
               with:
                   name: .-scripts-node-${{ matrix.node-version }}-dist
-                  path: ./scripts/dist
+                  path: ./Scripts/dist
