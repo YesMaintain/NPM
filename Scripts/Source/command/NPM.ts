@@ -1,9 +1,9 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
-import gitDirectories from "../Lib/Dirs.js";
-import packageTypes from "../Lib/Types.js";
-import packages from "../Lib/Packages.js";
+import gitDirectories from "../Library/Dirs.js";
+import packageTypes from "../Library/Types.js";
+import packages from "../Library/Packages.js";
 import npm from "../options/NPM.js";
 import type { Containers } from "../options/Workflow.js";
 

@@ -85,5 +85,5 @@ jobs:
 
             - uses: actions/upload-artifact@v3.1.2
               with:
-                  name: .-scripts-node-${{ matrix.node-version }}-dist
-                  path: ./Scripts/dist
+                  name: .-scripts-node-${{ matrix.node-version }}-Target
+                  path: ./Scripts/Target

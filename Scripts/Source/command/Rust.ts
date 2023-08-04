@@ -6,9 +6,9 @@ import {
 	writeFile as File,
 } from "fs/promises";
 import { basename, dirname } from "path";
-import gitDirectories from "../Lib/Dirs.js";
-import Types from "../Lib/Types.js";
-import Packages from "../Lib/Packages.js";
+import gitDirectories from "../Library/Dirs.js";
+import Types from "../Library/Types.js";
+import Packages from "../Library/Packages.js";
 import Rust from "../options/Rust.js";
 import type { Containers } from "../options/Workflow.js";
 

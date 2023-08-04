@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/core";
-import Environment from "../Lib/Environment.js";
+import Environment from "../Library/Environment.js";
 
 const OCTOKIT = new Octokit({
 	auth: Environment.GH_AUTH_TOKEN,

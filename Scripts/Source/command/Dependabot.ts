@@ -6,9 +6,9 @@ import {
 	writeFile as File,
 } from "fs/promises";
 import { dirname as Dir } from "path";
-import DirsGit from "../Lib/Dirs.js";
-import Types from "../Lib/Types.js";
-import Packages from "../Lib/Packages.js";
+import DirsGit from "../Library/Dirs.js";
+import Types from "../Library/Types.js";
+import Packages from "../Library/Packages.js";
 import Dependabot from "../options/Dependabot.js";
 import type { Containers } from "../options/Workflow.js";
 

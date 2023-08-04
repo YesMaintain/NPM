@@ -1,5 +1,5 @@
-import Environment from "../Lib/Environment.js";
-import Request from "../Lib/Request.js";
+import Environment from "../Library/Environment.js";
+import Request from "../Library/Request.js";
 
 export default async (repositories: string[] | Set<string> = []) => {
 	const user = Environment.GITHUB_USER;
