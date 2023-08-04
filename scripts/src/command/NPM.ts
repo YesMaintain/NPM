@@ -1,7 +1,7 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
-import gitDirectories from "../lib/DirsGit.js";
+import gitDirectories from "../lib/Dirs.js";
 import packageTypes from "../lib/Types.js";
 import packages from "../lib/Packages.js";
 import npm from "../options/NPM.js";

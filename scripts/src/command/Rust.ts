@@ -6,7 +6,7 @@ import {
 	writeFile as File,
 } from "fs/promises";
 import { basename, dirname } from "path";
-import gitDirectories from "../lib/DirsGit.js";
+import gitDirectories from "../lib/Dirs.js";
 import Types from "../lib/Types.js";
 import Packages from "../lib/Packages.js";
 import Rust from "../options/Rust.js";

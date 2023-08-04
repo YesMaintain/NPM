@@ -1,9 +1,9 @@
 import { readFile as File } from "fs/promises";
 import { dirname as Dir, resolve as Resolve } from "path";
-import { fileURLToPath as URL } from "url";
+import { fileURLToPath as Path } from "url";
 import type { Containers } from "./Workflow.js";
 
-const NameFile = URL(import.meta.url);
+const NameFile = Path(import.meta.url);
 const NameDir = Dir(NameFile);
 
 export default new Set([
