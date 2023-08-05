@@ -31,7 +31,7 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
-		"@lightrix/configuration": "0.0.11",
+		"@lightrix/configuration": "0.0.1",
 		"@lightrix/script": "1.0.7",
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
