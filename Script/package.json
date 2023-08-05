@@ -1,6 +1,6 @@
 {
-	"name": "@yesmaintenance/scripts",
-	"version": "1.0.5",
+	"name": "@yesmaintenance/script",
+	"version": "0.0.1",
 	"private": false,
 	"homepage": "https://github.com/YesMaintenance/npm#readme",
 	"bugs": {
@@ -9,7 +9,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/YesMaintenance/npm.git",
-		"directory": "scripts"
+		"directory": "Script"
 	},
 	"license": "MIT",
 	"type": "module",
@@ -31,8 +31,8 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
-		"@lightrix/config": "0.0.11",
-		"@lightrix/scripts": "1.0.7",
+		"@lightrix/configuration": "0.0.11",
+		"@lightrix/script": "1.0.7",
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
 		"@types/node": "20.4.7",
