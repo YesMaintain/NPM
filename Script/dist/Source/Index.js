@@ -1,1 +1,0 @@
-import{Command as r}from"commander";import t from"./Option/Commands.js";const o=new r;o.name("maintenance").description("Maintenance tools"),t?.forEach(n=>{const i=o.command(n.Name).description(typeof n.Description<"u"?n.Description:"").action(n.Action);n.Arguments?.forEach(e=>{i.argument(e.Name,e.Description)})}),o.parse();
