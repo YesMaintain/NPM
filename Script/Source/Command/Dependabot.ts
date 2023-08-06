@@ -9,8 +9,8 @@ import { dirname as Dir } from "path";
 import DirsGit from "../Library/Dirs.js";
 import Types from "../Library/Types.js";
 import Packages from "../Library/Packages.js";
-import Dependabot from "../options/Dependabot.js";
-import type { Containers } from "../options/Workflow.js";
+import Dependabot from "../Option/Dependabot.js";
+import type { Containers } from "../Option/Workflow.js";
 
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current

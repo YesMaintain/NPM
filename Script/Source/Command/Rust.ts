@@ -9,8 +9,8 @@ import { basename, dirname } from "path";
 import gitDirectories from "../Library/Dirs.js";
 import Types from "../Library/Types.js";
 import Packages from "../Library/Packages.js";
-import Rust from "../options/Rust.js";
-import type { Containers } from "../options/Workflow.js";
+import Rust from "../Option/Rust.js";
+import type { Containers } from "../Option/Workflow.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,

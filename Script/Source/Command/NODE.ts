@@ -4,8 +4,8 @@ import { dirname } from "path";
 import gitDirectories from "../Library/Dirs.js";
 import packageTypes from "../Library/Types.js";
 import packages from "../Library/Packages.js";
-import node from "../options/NODE.js";
-import type { Containers } from "../options/Workflow.js";
+import node from "../Option/NODE.js";
+import type { Containers } from "../Option/Workflow.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,

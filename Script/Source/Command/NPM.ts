@@ -4,8 +4,8 @@ import { dirname } from "path";
 import gitDirectories from "../Library/Dirs.js";
 import packageTypes from "../Library/Types.js";
 import packages from "../Library/Packages.js";
-import npm from "../options/NPM.js";
-import type { Containers } from "../options/Workflow.js";
+import npm from "../Option/NPM.js";
+import type { Containers } from "../Option/Workflow.js";
 
 /**
  * This function writes workflows for npm packages based on their package.json files.
