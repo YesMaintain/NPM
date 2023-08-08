@@ -1,6 +1,6 @@
 {
 	"name": "@yesmaintenance/script",
-	"version": "0.0.1",
+	"version": "2.0.0",
 	"private": false,
 	"homepage": "https://github.com/YesMaintenance/npm#readme",
 	"bugs": {
@@ -35,7 +35,7 @@
 		"@lightrix/script": "0.0.1",
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
-		"@types/node": "20.4.7",
+		"@types/node": "20.4.8",
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
