@@ -11,7 +11,6 @@
 		"url": "git+https://github.com/YesMaintenance/npm.git",
 		"directory": "Script"
 	},
-	"license": "MIT",
 	"type": "module",
 	"main": "./Target/Index.js",
 	"types": "./Target/Index.d.ts",
@@ -31,8 +30,6 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
-		"@lightrix/configuration": "0.0.1",
-		"@lightrix/script": "0.0.1",
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
 		"@types/node": "20.4.9",
