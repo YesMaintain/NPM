@@ -15,7 +15,7 @@
 	"main": "./Target/Index.js",
 	"types": "./Target/Index.d.ts",
 	"bin": {
-		"maintenance": "Target/bin.js"
+		"Maintenance": "Target/Bin.js"
 	},
 	"scripts": {
 		"prepublishOnly": "Lightrix build 'Source/**/*.ts'"
