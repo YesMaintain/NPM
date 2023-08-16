@@ -11,6 +11,7 @@
 		"url": "git+https://github.com/YesMaintenance/npm.git",
 		"directory": "Script"
 	},
+	"license": "MIT",
 	"type": "module",
 	"main": "./Target/Index.js",
 	"types": "./Target/Index.d.ts",
