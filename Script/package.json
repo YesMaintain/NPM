@@ -27,12 +27,12 @@
 		"dotenv": "16.3.1",
 		"etag": "1.8.1",
 		"fast-glob": "3.3.1",
-		"zod": "3.21.4"
+		"zod": "3.22.1"
 	},
 	"devDependencies": {
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
-		"@types/node": "20.4.9",
+		"@types/node": "20.5.0",
 		"@types/pacote": "11.1.5"
 	},
 	"publishConfig": {
