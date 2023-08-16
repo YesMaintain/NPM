@@ -25,13 +25,13 @@ export default new Set([
 	},
 	{
 		Path: "/workflows/",
-		Name: "dependabot.yml",
+		Name: "Dependabot.yml",
 		Flow: async () =>
 			new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../Source/templates/.github/workflows/dependabot.yml`
+							`${NameDir}/../../Source/templates/.github/workflows/Dependabot.yml`
 						),
 						"utf-8"
 					)
