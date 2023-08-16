@@ -118,5 +118,3 @@ Maintenance star
 
 [yes]: https://github.com/yesmaintenance
 [@yesmaintenance/scripts]: https://npmjs.org/@yesmaintenance/scripts
-
-[![Lightrix logo](https://raw.githubusercontent.com/Lightrix/NPM/main/.github/Image/favicon.png "Built with Lightrix/NPM")](https://github.com/Lightrix/NPM)
