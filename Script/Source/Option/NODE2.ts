@@ -1,7 +1,7 @@
 import { readFile as File } from "fs/promises";
 import { dirname as Dir, resolve as Resolve } from "path";
 import { fileURLToPath as Path } from "url";
-import type { Containers } from "./Workflow.js";
+import type { Containers } from "./Workflow.ts";
 
 const NameFile = Path(import.meta.url);
 const NameDir = Dir(NameFile);
@@ -9,13 +9,13 @@ const NameDir = Dir(NameFile);
 export default new Set([
 	{
 		Path: "/workflows/",
-		Name: "node.yml",
+		Name: "Node.yml",
 		Flow: async () =>
 			new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../Source/templates/.github/workflows/node.yml`
+							`${NameDir}/../../Source/templates/.github/workflows/Node.yml`
 						),
 						"utf-8"
 					)

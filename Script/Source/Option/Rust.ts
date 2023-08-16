@@ -9,13 +9,13 @@ const NameDir = Dir(NameFile);
 export default new Set([
 	{
 		Path: "/workflows/",
-		Name: "rust.yml",
+		Name: "Rust.yml",
 		Flow: async () =>
 			new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../Source/templates/.github/workflows/rust.yml`
+							`${NameDir}/../../Source/templates/.github/workflows/Rust.yml`
 						),
 						"utf-8"
 					)

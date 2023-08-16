@@ -20,7 +20,7 @@ const writeWorkflows = async (files: Containers) => {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await Flow();
 
-			if (Path === "/workflows/" && Name === "npm.yml") {
+			if (Path === "/workflows/" && Name === "NPM.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
@@ -100,7 +100,7 @@ const writeWorkflows = async (files: Containers) => {
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/npm.yml`
+						`Could not create workflow for: ${githubDir}/workflows/NPM.yml`
 					);
 				}
 			} else {

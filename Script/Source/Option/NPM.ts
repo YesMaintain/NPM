@@ -9,13 +9,13 @@ const NameDir = Dir(NameFile);
 export default new Set([
 	{
 		Path: "/workflows/",
-		Name: "npm.yml",
+		Name: "NPM.yml",
 		Flow: async () =>
 			new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../Source/templates/.github/workflows/npm.yml`
+							`${NameDir}/../../Source/templates/.github/workflows/NPM.yml`
 						),
 						"utf-8"
 					)

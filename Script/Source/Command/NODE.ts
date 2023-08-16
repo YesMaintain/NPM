@@ -4,7 +4,7 @@ import { dirname } from "path";
 import gitDirectories from "../Library/Dirs.js";
 import packages from "../Library/Packages.js";
 import packageTypes from "../Library/Types.js";
-import node from "../Option/NODE.js";
+import node from "../Option/NODE2.ts";
 import type { Containers } from "../Option/Workflow.js";
 
 /**
@@ -22,7 +22,7 @@ const writeWorkflows = async (files: Containers) => {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await Flow();
 
-			if (Path === "/workflows/" && Name === "node.yml") {
+			if (Path === "/workflows/" && Name === "Node.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
@@ -151,7 +151,7 @@ const writeWorkflows = async (files: Containers) => {
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/node.yml`
+						`Could not create workflow for: ${githubDir}/workflows/Node.yml`
 					);
 				}
 			} else {

@@ -1,9 +1,9 @@
 import { constants as Constant } from "fs";
 import {
-	access as Access,
-	writeFile as File,
-	mkdir as Make,
-	rm as Remove,
+    access as Access,
+    writeFile as File,
+    mkdir as Make,
+    rm as Remove,
 } from "fs/promises";
 import { basename, dirname } from "path";
 import gitDirectories from "../Library/Dirs.js";
@@ -27,7 +27,7 @@ const Flows = async (files: Containers) => {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await Flow();
 
-			if (Path === "/workflows/" && Name === "rust.yml") {
+			if (Path === "/workflows/" && Name === "Rust.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = dirname(_package).replace(
 						directory,
@@ -80,7 +80,7 @@ const Flows = async (files: Containers) => {
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/rust.yml`
+						`Could not create workflow for: ${githubDir}/workflows/Rust.yml`
 					);
 				}
 			} else {

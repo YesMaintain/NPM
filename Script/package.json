@@ -18,7 +18,7 @@
 		"Maintenance": "Target/Bin.js"
 	},
 	"scripts": {
-		"prepublishOnly": "Lightrix build 'Source/**/*.ts'"
+		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'"
 	},
 	"dependencies": {
 		"@octokit/core": "5.0.0",
@@ -33,7 +33,8 @@
 		"@octokit/types": "11.1.0",
 		"@types/etag": "1.8.1",
 		"@types/node": "20.5.0",
-		"@types/pacote": "11.1.5"
+		"@types/pacote": "11.1.5",
+		"typescript-esbuild": "0.1.13"
 	},
 	"publishConfig": {
 		"access": "public"

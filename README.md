@@ -82,21 +82,21 @@ that you have access to:
 Maintenance edit
 ```
 
-Create a `node.yml` file in the `.github/workflows` directory for each
+Create a `Node.yml` file in the `.github/workflows` directory for each
 repository that has a `package.json` file.
 
 ```sh
 Maintenance node
 ```
 
-Create a `npm.yml` file in the `.github/workflows` directory for each repository
+Create a `NPM.yml` file in the `.github/workflows` directory for each repository
 that has a `package.json` file.
 
 ```sh
 Maintenance npm
 ```
 
-Create a `rust.yml` file in the `.github/workflows` directory for each
+Create a `Rust.yml` file in the `.github/workflows` directory for each
 repository that has a `Cargo.toml` file.
 
 ```sh
