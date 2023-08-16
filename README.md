@@ -13,19 +13,19 @@ GH_AUTH_TOKEN="your_github_authentication_token"
 Using NPM
 
 ```sh
-npm install -g @yesmaintenance/scripts
+npm install -g @yesmaintenance/script
 ```
 
 Using Yarn
 
 ```sh
-yarn global add @yesmaintenance/scripts
+yarn global add @yesmaintenance/script
 ```
 
 Using PNPM
 
 ```sh
-pnpm install -g @yesmaintenance/scripts
+pnpm install -g @yesmaintenance/script
 ```
 
 or direct usage:
@@ -33,19 +33,19 @@ or direct usage:
 Using NPM
 
 ```sh
-npx @yesmaintenance/scripts
+npx @yesmaintenance/script
 ```
 
 Using Yarn
 
 ```sh
-yarn @yesmaintenance/scripts
+yarn @yesmaintenance/script
 ```
 
 Using PNPM
 
 ```sh
-pnpx @yesmaintenance/scripts
+pnpx @yesmaintenance/script
 ```
 
 ## Then simply run each of the commands:
@@ -117,4 +117,4 @@ Maintenance star
 ```
 
 [yes]: https://github.com/yesmaintenance
-[@yesmaintenance/scripts]: https://npmjs.org/@yesmaintenance/scripts
+[@yesmaintenance/script]: https://npmjs.org/@yesmaintenance/script

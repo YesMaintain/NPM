@@ -1,0 +1,1 @@
+import{readFile as e}from"fs/promises";import{dirname as o,resolve as t}from"path";import{fileURLToPath as r}from"url";const a=r(import.meta.url),i=o(a);var f=new Set([{Path:"/workflows/",Name:"NPM.yml",Flow:async()=>new Set([(await e(t(`${i}/../../Source/templates/.github/workflows/NPM.yml`),"utf-8")).toString()])}]);export{f as default};
