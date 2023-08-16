@@ -1,10 +1,10 @@
 import Glob from "fast-glob";
-import Environment from "./Environment.js";
+import Environment from "./Environment.ts";
 
 export default async () =>
 	new Set<string>(
 		[
-			...(await Glob(["**/README.md"], {
+			...(await Glob(["**/.git"], {
 				absolute: true,
 				cwd: Environment.BASE_DIR,
 			})),

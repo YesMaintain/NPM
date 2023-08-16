@@ -23,7 +23,7 @@ const Commands: Set<{
 				Description: "Repositories to clean.",
 			},
 		]),
-		Action: (await import("../command/Clean.js")).default,
+		Action: (await import("../Command/Clean.js")).default,
 	},
 	{
 		Name: "dispatch",
@@ -35,13 +35,13 @@ const Commands: Set<{
 					"Repositories on which to trigger dispatch events.",
 			},
 		]),
-		Action: (await import("../command/Dispatch.js")).default,
+		Action: (await import("../Command/Dispatch.js")).default,
 	},
 	{
 		Name: "dependabot",
 		Type: "Flow",
 		Description: "Put Dependabot everywhere.",
-		Action: (await import("../command/Dependabot.js")).default,
+		Action: (await import("../Command/Dependabot.js")).default,
 	},
 	{
 		Name: "edit",
@@ -52,25 +52,25 @@ const Commands: Set<{
 			},
 		]),
 		Description: "Edit features for all repositories.",
-		Action: (await import("../command/Edit.js")).default,
+		Action: (await import("../Command/Edit.js")).default,
 	},
 	{
 		Name: "node",
 		Type: "Flow",
 		Description: "Put node into GitHub Actions.",
-		Action: (await import("../command/NODE.js")).default,
+		Action: (await import("../Command/NODE.js")).default,
 	},
 	{
 		Name: "npm",
 		Type: "Flow",
 		Description: "Put NPM into GitHub Actions.",
-		Action: (await import("../command/NPM.js")).default,
+		Action: (await import("../Command/NPM.js")).default,
 	},
 	{
 		Name: "rust",
 		Type: "Flow",
 		Description: "Put rust into GitHub Actions.",
-		Action: (await import("../command/Rust.js")).default,
+		Action: (await import("../Command/Rust.js")).default,
 	},
 	{
 		Name: "workflows",
@@ -83,7 +83,7 @@ const Commands: Set<{
 	{
 		Name: "star",
 		Description: "Star all my used repositories.",
-		Action: (await import("../command/Star.js")).default,
+		Action: (await import("../Command/Star.js")).default,
 	},
 ]);
 

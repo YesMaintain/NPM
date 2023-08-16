@@ -6,9 +6,9 @@ import {
 	rm as Remove,
 } from "fs/promises";
 import { dirname as Dir } from "path";
-import DirsGit from "../Library/Dirs.js";
-import Packages from "../Library/Packages.js";
-import Types from "../Library/Types.js";
+import DirsGit from "../Library/Directory.ts";
+import Packages from "../Library/Package.ts";
+import Types from "../Library/Type.ts";
 import Dependabot from "../Option/Dependabot.js";
 import type { Containers } from "../Option/Workflow.js";
 

@@ -1,6 +1,6 @@
 import Glob from "fast-glob";
-import Environment from "./Environment.js";
-import Types from "./Types.js";
+import Environment from "./Environment.ts";
+import Types from "./Type.ts";
 
 export default async (filter = "") =>
 	new Set<string>(
