@@ -4,7 +4,7 @@ import { dirname } from "path";
 import gitDirectories from "../Library/Dirs.js";
 import packages from "../Library/Packages.js";
 import packageTypes from "../Library/Types.js";
-import node from "../Option/NODE2.ts";
+import node from "../Option/Node.ts";
 import type { Containers } from "../Option/Workflow.js";
 
 /**
