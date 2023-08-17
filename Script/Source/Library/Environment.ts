@@ -8,6 +8,6 @@ export default z
 	.object({
 		User: z.string().default(""),
 		Base: z.string().default(cwd()),
-		GitHub: z.string().default(""),
+		Token: z.string().default(""),
 	})
 	.parse(process.env);

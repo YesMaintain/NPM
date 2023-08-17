@@ -2,7 +2,7 @@ import { Octokit } from "@octokit/core";
 import Environment from "../Library/Environment.js";
 
 const OCTOKIT = new Octokit({
-	auth: Environment.GitHub,
+	auth: Environment.Token,
 });
 
 export default async (URL = "") => {
