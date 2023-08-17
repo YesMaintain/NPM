@@ -1,6 +1,6 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
-import { dirname } from "path";
+import { dirname as Dir } from "path";
 import gitDirectories from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
@@ -24,7 +24,7 @@ const Workflow = async (files: Files) => {
 
 			if (Path === "/workflows/" && Name === "Node.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
+					const packageDirectory = Dir(_package).replace(
 						directory,
 						""
 					);
