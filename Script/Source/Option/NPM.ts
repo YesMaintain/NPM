@@ -14,7 +14,7 @@ export default new Set([
 						Resolve(
 							`${Dir(
 								Path(import.meta.url)
-							)}/../../Source/templates/.github/workflows/NPM.yml`
+							)}/../../Source/Template/.github/workflows/NPM.yml`
 						),
 						"utf-8"
 					)

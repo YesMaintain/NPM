@@ -14,7 +14,7 @@ export default new Set([
 						Resolve(
 							`${Dir(
 								Path(import.meta.url)
-							)}/../../Source/templates/.github/workflows/Node.yml`
+							)}/../../Source/Template/.github/workflows/Node.yml`
 						),
 						"utf-8"
 					)

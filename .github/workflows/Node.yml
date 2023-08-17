@@ -1,13 +1,13 @@
-name: CodeQL
+name: Node
 
 concurrency:
-    group: CodeQL-${{ github.workflow }}-${{ github.ref }}
+    group: Node-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 permissions:
-    actions: read
-    contents: write
     security-events: write
+    contents: write
+    pull-requests: write
 
 on:
     workflow_dispatch:
@@ -18,7 +18,7 @@ on:
     workflow_call:
 
 jobs:
-    CodeQL:
+    Pre-Publish:
         runs-on: ubuntu-latest
 
         env:
@@ -51,21 +51,12 @@ jobs:
             STNOUPGRADE: 1
             STRIPE_CLI_TELEMETRY_OPTOUT: 1
 
-        timeout-minutes: 360
-
         strategy:
-            fail-fast: false
-
             matrix:
-                language: ["javascript"]
-                node-version: [18]
+                node-version: [16, 18, 19]
 
         steps:
             - uses: actions/checkout@v3.5.3
-
-            - uses: github/codeql-action/init@v2.21.4
-              with:
-                  languages: ${{ matrix.language }}
 
             - uses: pnpm/action-setup@v2.4.0
               with:
@@ -88,14 +79,15 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: "pnpm"
-                  cache-dependency-path: ./pnpm-lock.yaml
+                  cache-dependency-path: ./Script/pnpm-lock.yaml
 
             - run: pnpm install
-              working-directory: .
+              working-directory: ./Script
 
             - run: pnpm run prepublishOnly
               working-directory: .
 
-            - uses: github/codeql-action/analyze@v2.21.4
+            - uses: actions/upload-artifact@v3.1.2
               with:
-                  category: "/language:${{matrix.language}}"
+                  name: .-Script-Node-${{ matrix.node-version }}-Target
+                  path: ./Script/Target
