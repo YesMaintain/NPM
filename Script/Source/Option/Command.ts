@@ -58,7 +58,7 @@ const Commands: Set<{
 		Name: "node",
 		Type: "Flow",
 		Description: "Put node into GitHub Actions.",
-		Action: (await import("../Command/NODE.js")).default,
+		Action: (await import("../Command/NODE2.ts")).default,
 	},
 	{
 		Name: "npm",

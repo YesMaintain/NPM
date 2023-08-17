@@ -5,7 +5,7 @@ import gitDirectories from "../Library/Directory.ts";
 import packages from "../Library/Package.ts";
 import packageTypes from "../Library/Type.ts";
 import node from "../Option/Node.ts";
-import type { Containers } from "../Option/Workflow.js";
+import type { Containers } from "../Option/Workflow.ts";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
