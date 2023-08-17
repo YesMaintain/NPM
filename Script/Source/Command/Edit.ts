@@ -2,7 +2,7 @@ import Environment from "../Library/Environment.js";
 import Request from "../Library/Request.js";
 
 export default async (repositories: string[] | Set<string> = []) => {
-	const User = Environment.GITHUB_USER;
+	const User = Environment.User;
 
 	const Organizations: {
 		name: string;

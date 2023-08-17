@@ -70,7 +70,7 @@ export default async (filter = "") =>
 				],
 				{
 					absolute: true,
-					cwd: Environment.BASE_DIR,
+					cwd: Environment.Base,
 				}
 			)),
 		].sort()

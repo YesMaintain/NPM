@@ -1,7 +1,7 @@
 import Environment from "../Library/Environment.js";
 import Request from "../Library/Request.js";
 
-const User = Environment.GITHUB_USER;
+const User = Environment.User;
 
 const All: {
 	Organizations: {

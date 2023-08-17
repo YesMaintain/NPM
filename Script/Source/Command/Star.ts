@@ -8,7 +8,7 @@ export default async () => {
 
 	for (const Package of await Glob(["**/package.json", "!**/node_modules"], {
 		absolute: true,
-		cwd: Environment.BASE_DIR,
+		cwd: Environment.Base,
 	})) {
 		const JSONPackage = JSON.parse(
 			(await File(Package, "utf-8")).toString()

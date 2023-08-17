@@ -6,7 +6,7 @@ export default async () =>
 		[
 			...(await Glob(["**/README.md"], {
 				absolute: true,
-				cwd: Environment.BASE_DIR,
+				cwd: Environment.Base,
 			})),
 		].sort()
 	);

@@ -2,32 +2,32 @@ import Environment from "../Library/Environment.js";
 import Request from "../Library/Request.js";
 
 export default async (repositories: string[] | Set<string> = []) => {
-	const user = Environment.GITHUB_USER;
+	const User = Environment.User;
 
-	const orgs: {
+	const Organizations: {
 		name: string;
 	}[] = [];
 
-	const repos: {
+	const Repositories: {
 		owner: string;
 		name: string;
 	}[] = [];
 
-	for (const repo of (await Request(`GET /users/${user}/repos`))?.data) {
-		repos.push({
-			owner: user,
+	for (const repo of (await Request(`GET /users/${User}/repos`))?.data) {
+		Repositories.push({
+			owner: User,
 			name: repo.name,
 		});
 	}
 
-	for (const org of (await Request(`GET /users/${user}/orgs`))?.data) {
-		orgs.push({
+	for (const org of (await Request(`GET /users/${User}/orgs`))?.data) {
+		Organizations.push({
 			name: org.login,
 		});
 
 		for (const repo of (await Request(`GET /orgs/${org.login}/repos`))
 			?.data) {
-			repos.push({
+			Repositories.push({
 				owner: org.login,
 				name: repo.name,
 			});
@@ -37,7 +37,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 	// start: repos
 	let pass: boolean | undefined = undefined;
 
-	for (const repo of repos) {
+	for (const repo of Repositories) {
 		/* Checking if the repository is in the list of repositories. */
 		for (const repository of repositories) {
 			if (repo.name === repository) {

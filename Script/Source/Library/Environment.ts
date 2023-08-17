@@ -6,8 +6,8 @@ dotenv.config();
 
 export default z
 	.object({
-		GITHUB_USER: z.string().default(""),
-		BASE_DIR: z.string().default(cwd()),
-		GH_AUTH_TOKEN: z.string().default(""),
+		User: z.string().default(""),
+		Base: z.string().default(cwd()),
+		GitHub: z.string().default(""),
 	})
 	.parse(process.env);
