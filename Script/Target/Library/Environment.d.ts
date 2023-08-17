@@ -1,6 +1,6 @@
 declare const _default: {
-    GITHUB_USER: string;
-    BASE_DIR: string;
-    GH_AUTH_TOKEN: string;
+    User: string;
+    Base: string;
+    Token: string;
 };
 export default _default;
