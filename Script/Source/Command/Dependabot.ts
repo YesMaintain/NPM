@@ -10,18 +10,18 @@ import DirsGit from "../Library/Directory.ts";
 import Packages from "../Library/Package.ts";
 import Types from "../Library/Type.ts";
 import Dependabot from "../Option/Dependabot.js";
-import type { Containers } from "../Option/Workflow.js";
+import type { Workflow } from "../Option/Index.js";
 
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current
  * working directory
- * @param {Containers} Files - This is an array of objects that contain the path, name, and workflow
+ * @param {Workflow} Files - This is an array of objects that contain the path, name, and workflow
  * function.
  */
-const Workflow = async (Files: Containers) => {
-	for (const { Path, Name, Workflow: Flow } of Files) {
+const Workflow = async (Files: Workflow) => {
+	for (const { Path, Name, File: Flow } of Files) {
 		for (const [_Dir, FilesPackage] of await DirsGit(await Packages())) {
-			const DirGitHub = `${_Dir}/.github`;
+			const GitHub = `${_Dir}/.github`;
 			const Base = await Flow();
 
 			if (Path === "/") {
@@ -66,32 +66,32 @@ const Workflow = async (Files: Containers) => {
 
 			if (Base.size > 0) {
 				try {
-					await Make(`${DirGitHub}${Path}`, {
+					await Make(`${GitHub}${Path}`, {
 						recursive: true,
 					});
 				} catch {
-					console.log(`Could not create: ${DirGitHub}${Path}`);
+					console.log(`Could not create: ${GitHub}${Path}`);
 				}
 
 				try {
 					await File(
-						`${DirGitHub}${Path}${Name}`,
+						`${GitHub}${Path}${Name}`,
 						`${[...Base].join("")}`
 					);
 				} catch {
 					console.log(
-						`Could not create workflow for: ${DirGitHub}/dependabot.yml`
+						`Could not create workflow for: ${GitHub}/dependabot.yml`
 					);
 				}
 			} else {
 				try {
-					await Access(`${DirGitHub}${Path}${Name}`, Constant.F_OK);
+					await Access(`${GitHub}${Path}${Name}`, Constant.F_OK);
 
 					try {
-						await Remove(`${DirGitHub}${Path}${Name}`);
+						await Remove(`${GitHub}${Path}${Name}`);
 					} catch {
 						console.log(
-							`Could not remove ${Path}${Name} for: ${DirGitHub}`
+							`Could not remove ${Path}${Name} for: ${GitHub}`
 						);
 					}
 				} catch {}

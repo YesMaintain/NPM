@@ -2,13 +2,13 @@ import { readFile as File } from "fs/promises";
 import { dirname as Dir, resolve as Resolve } from "path";
 
 import { fileURLToPath as Path } from "url";
-import type { Containers } from "./Index.js";
+import type { Workflow } from "./Index.js";
 
 export default new Set([
 	{
 		Path: "/",
 		Name: "dependabot.yml",
-		Workflow: async () =>
+		File: async () =>
 			new Set([
 				(
 					await File(
@@ -25,7 +25,7 @@ export default new Set([
 	{
 		Path: "/workflows/",
 		Name: "Dependabot.yml",
-		Workflow: async () =>
+		File: async () =>
 			new Set([
 				(
 					await File(
@@ -39,4 +39,4 @@ export default new Set([
 				).toString(),
 			]),
 	},
-]) satisfies Containers;
+]) satisfies Workflow;

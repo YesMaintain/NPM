@@ -1,5 +1,5 @@
-export type Containers = Set<{
+export type Workflow = Set<{
 	Path: string;
 	Name: string;
-	Workflow: () => Promise<Set<string>>;
+	File: () => Promise<Set<string>>;
 }>;
