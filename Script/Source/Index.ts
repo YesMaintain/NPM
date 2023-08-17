@@ -5,18 +5,18 @@ const program = new Command();
 
 program.name("Maintenance").description("Maintenance tools");
 
-Commands?.forEach((command) => {
-	const commandProgram = program
-		.command(command.Name)
+Commands?.forEach((Command) => {
+	const Program = program
+		.command(Command.Name)
 		.description(
-			typeof command.Description !== "undefined"
-				? command.Description
+			typeof Command.Description !== "undefined"
+				? Command.Description
 				: ""
 		)
-		.action(command.Action);
+		.action(Command.Action);
 
-	command.Arguments?.forEach((argument) => {
-		commandProgram.argument(argument.Name, argument.Description);
+	Command.Arguments?.forEach((argument) => {
+		Program.argument(argument.Name, argument.Description);
 	});
 });
 
