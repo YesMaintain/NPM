@@ -10,17 +10,15 @@ export default async () => {
 		absolute: true,
 		cwd: Environment.Base,
 	})) {
-		const JSONPackage = JSON.parse(
-			(await File(Package, "utf-8")).toString()
-		);
+		const _JSON = JSON.parse((await File(Package, "utf-8")).toString());
 
-		for (const Key in JSONPackage) {
-			if (Object.prototype.hasOwnProperty.call(JSONPackage, Key)) {
+		for (const Key in _JSON) {
+			if (Object.prototype.hasOwnProperty.call(_JSON, Key)) {
 				if (Key === "dependencies" || Key === "devDependencies") {
-					for (const dependency in JSONPackage[Key]) {
+					for (const dependency in _JSON[Key]) {
 						if (
 							Object.prototype.hasOwnProperty.call(
-								JSONPackage[Key],
+								_JSON[Key],
 								dependency
 							)
 						) {

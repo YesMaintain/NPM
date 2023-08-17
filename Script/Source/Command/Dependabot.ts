@@ -18,7 +18,7 @@ import type { Containers } from "../Option/Workflow.js";
  * @param {Containers} Files - This is an array of objects that contain the path, name, and workflow
  * function.
  */
-const Flows = async (Files: Containers) => {
+const Workflow = async (Files: Containers) => {
 	for (const { Path, Name, Flow } of Files) {
 		for (const [_Dir, FilesPackage] of await DirsGit(await Packages())) {
 			const DirGitHub = `${_Dir}/.github`;
@@ -100,4 +100,4 @@ const Flows = async (Files: Containers) => {
 	}
 };
 
-export default async () => await Flows(Dependabot);
+export default async () => await Workflow(Dependabot);

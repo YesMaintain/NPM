@@ -14,7 +14,7 @@ import type { Containers } from "../Option/Workflow.ts";
  * workflow file
  * @param {Containers} files - containers
  */
-const writeWorkflows = async (files: Containers) => {
+const Workflow = async (files: Containers) => {
 	for (const { Path, Name, Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages("npm")
@@ -62,6 +62,7 @@ const writeWorkflows = async (files: Containers) => {
                   node-version: \${{ matrix.node-version }}
                   cache: "pnpm"
                   cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
+
             - run: pnpm install
               working-directory: .${packageDirectory}
 `);
@@ -87,14 +88,14 @@ const writeWorkflows = async (files: Containers) => {
 												if (scripts === "build") {
 													workflowBase.add(`
             - run: pnpm run build
-              working-directory: .${packageDirectory}
+              working-directory: .
 
             - uses: actions/upload-artifact@v3.1.2
               with:
                   name: .${packageDirectory.replaceAll(
 						"/",
 						"-"
-					)}-node-\${{ matrix.node-version }}-Target
+					)}-Node-\${{ matrix.node-version }}-Target
                   path: .${packageDirectory}/Target
 `);
 												}
@@ -104,14 +105,14 @@ const writeWorkflows = async (files: Containers) => {
 												) {
 													workflowBase.add(`
             - run: pnpm run prepublishOnly
-              working-directory: .${packageDirectory}
+              working-directory: .
 
             - uses: actions/upload-artifact@v3.1.2
               with:
                   name: .${packageDirectory.replaceAll(
 						"/",
 						"-"
-					)}-node-\${{ matrix.node-version }}-Target
+					)}-Node-\${{ matrix.node-version }}-Target
                   path: .${packageDirectory}/Target
 `);
 												}
@@ -127,9 +128,9 @@ const writeWorkflows = async (files: Containers) => {
 									}
 								}
 							}
-						} catch (error) {
+						} catch (_Error) {
 							console.log(_package);
-							console.log(error);
+							console.log(_Error);
 						}
 					}
 				}
@@ -172,5 +173,5 @@ const writeWorkflows = async (files: Containers) => {
 };
 
 export default async () => {
-	await writeWorkflows(node);
+	await Workflow(node);
 };

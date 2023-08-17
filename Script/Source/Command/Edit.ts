@@ -8,14 +8,14 @@ export default async (repositories: string[] | Set<string> = []) => {
 		name: string;
 	}[] = [];
 
-	const Repos: {
+	const Repositories: {
 		owner: string;
 		name: string;
 	}[] = [];
 
 	for (const Repository of (await Request(`GET /users/${User}/repos`))
 		?.data) {
-		Repos.push({
+		Repositories.push({
 			owner: User,
 			name: Repository.name,
 		});
@@ -30,7 +30,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 		for (const Repository of (
 			await Request(`GET /orgs/${Organization.login}/repos`)
 		)?.data) {
-			Repos.push({
+			Repositories.push({
 				owner: Organization.login,
 				name: Repository.name,
 			});
@@ -63,7 +63,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 	// start: repos
 	let pass = null;
 
-	for (const repo of Repos) {
+	for (const repo of Repositories) {
 		for (const repository of repositories) {
 			if (repo.name === repository) {
 				pass = true;

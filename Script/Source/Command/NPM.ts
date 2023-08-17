@@ -12,7 +12,7 @@ import type { Containers } from "../Option/Workflow.js";
  * @param {Containers} files - The `files` parameter is an array of objects containing information
  * about the files to be processed. Each object has the following properties:
  */
-const writeWorkflows = async (files: Containers) => {
+const Workflow = async (files: Containers) => {
 	for (const { Path, Name, Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages("npm")
@@ -76,9 +76,9 @@ const writeWorkflows = async (files: Containers) => {
 									}
 								}
 							}
-						} catch (error) {
+						} catch (_Error) {
 							console.log(_package);
-							console.log(error);
+							console.log(_Error);
 						}
 					}
 				}
@@ -121,5 +121,5 @@ const writeWorkflows = async (files: Containers) => {
 };
 
 export default async () => {
-	await writeWorkflows(npm);
+	await Workflow(npm);
 };

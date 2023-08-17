@@ -19,7 +19,7 @@ import type { Containers } from "../Option/Workflow.js";
  * workflow file
  * @param {Containers} files - containers
  */
-const Flows = async (files: Containers) => {
+const Workflow = async (files: Containers) => {
 	for (const { Path, Name, Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await Packages("cargo")
@@ -101,5 +101,5 @@ const Flows = async (files: Containers) => {
 };
 
 export default async () => {
-	await Flows(Rust);
+	await Workflow(Rust);
 };
