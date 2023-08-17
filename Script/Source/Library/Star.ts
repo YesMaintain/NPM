@@ -10,18 +10,18 @@ export default async (URL = "") => {
 		return;
 	}
 
-	const _URL = URL.replace("git://", "https://")
-		.replace("https://github.com/", "")
-		.replace("git+", "")
-		.replace(".git", "");
+	URL = URL?.replace("git://", "https://")
+		?.replace("https://github.com/", "")
+		?.replace("git+", "")
+		?.replace(".git", "");
 
 	// start: starred
 	try {
-		await OCTOKIT.request(`PUT /user/starred/${_URL}`);
+		await OCTOKIT.request(`PUT /user/starred/${URL}`);
 
-		console.log(`Starred repository: ${_URL}`);
+		console.log(`Starred repository: ${URL}`);
 	} catch (_Error) {
-		console.log(`Could not star repository: ${_URL}`);
+		console.log(`Could not star repository: ${URL}`);
 	}
 	// end: starred
 };
