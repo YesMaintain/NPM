@@ -1,13 +1,12 @@
 import { Command } from "commander";
 import Commands from "./Option/Command.ts";
 
-const program = new Command();
+const Program = new Command();
 
-program.name("Maintenance").description("Maintenance tools");
+Program.name("Maintenance").description("Maintenance tools");
 
 Commands?.forEach((Command) => {
-	const Program = program
-		.command(Command.Name)
+	const _Program = Program.command(Command.Name)
 		.description(
 			typeof Command.Description !== "undefined"
 				? Command.Description
@@ -16,8 +15,8 @@ Commands?.forEach((Command) => {
 		.action(Command.Action);
 
 	Command.Arguments?.forEach((argument) => {
-		Program.argument(argument.Name, argument.Description);
+		_Program.argument(argument.Name, argument.Description);
 	});
 });
 
-program.parse();
+Program.parse();
