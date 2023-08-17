@@ -1,7 +1,7 @@
 {
 	"name": "@yesmaintenance/script",
 	"version": "0.0.1",
-	"private": false,
+	"private": "false",
 	"homepage": "https://github.com/YesMaintenance/npm#readme",
 	"bugs": {
 		"url": "https://github.com/YesMaintenance/npm/issues"
@@ -12,6 +12,11 @@
 		"directory": "Script"
 	},
 	"license": "MIT",
+	"author": {
+		"name": "Nikola Hristov",
+		"email": "nikola@nikolahristov.tech",
+		"url": "https://nikolahristov.tech"
+	},
 	"type": "module",
 	"main": "./Target/Index.js",
 	"types": "./Target/Index.d.ts",
