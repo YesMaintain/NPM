@@ -6,9 +6,9 @@ import {
 	rm as Remove,
 } from "fs/promises";
 import { basename, dirname } from "path";
-import gitDirectories from "../Library/Directory.ts";
-import Packages from "../Library/Package.ts";
-import Types from "../Library/Type.ts";
+import gitDirectories from "../Library/Directory.js";
+import Packages from "../Library/Package.js";
+import Types from "../Library/Type.js";
 import Rust from "../Option/Rust.js";
 import type { Files } from "../Option/Index.js";
 

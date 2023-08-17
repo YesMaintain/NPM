@@ -15,7 +15,7 @@ const Commands: Set<{
 	Action: (...args: any[]) => Promise<void>;
 }> = new Set([
 	{
-		Name: "clean",
+		Name: "Clean",
 		Description: "Clean GitHub repositories",
 		Arguments: new Set([
 			{
@@ -26,7 +26,7 @@ const Commands: Set<{
 		Action: (await import("../Command/Clean.js")).default,
 	},
 	{
-		Name: "dispatch",
+		Name: "Dispatch",
 		Description: "Trigger dispatch events.",
 		Arguments: new Set([
 			{
@@ -38,13 +38,13 @@ const Commands: Set<{
 		Action: (await import("../Command/Dispatch.js")).default,
 	},
 	{
-		Name: "dependabot",
+		Name: "Dependabot",
 		Type: "Workflow",
 		Description: "Put Dependabot everywhere.",
 		Action: (await import("../Command/Dependabot.js")).default,
 	},
 	{
-		Name: "edit",
+		Name: "Edit",
 		Arguments: new Set([
 			{
 				Name: "[repositories...]",
@@ -55,25 +55,25 @@ const Commands: Set<{
 		Action: (await import("../Command/Edit.js")).default,
 	},
 	{
-		Name: "node",
+		Name: "Node",
 		Type: "Workflow",
 		Description: "Put node into GitHub Actions.",
-		Action: (await import("../Command/Node.ts")).default,
+		Action: (await import("../Command/Node.js")).default,
 	},
 	{
-		Name: "npm",
+		Name: "Npm",
 		Type: "Workflow",
 		Description: "Put NPM into GitHub Actions.",
 		Action: (await import("../Command/NPM.js")).default,
 	},
 	{
-		Name: "rust",
+		Name: "Rust",
 		Type: "Workflow",
 		Description: "Put rust into GitHub Actions.",
 		Action: (await import("../Command/Rust.js")).default,
 	},
 	{
-		Name: "workflows",
+		Name: "Workflows",
 		Description: "Trigger all workflow tasks.",
 		Action: async () =>
 			Commands.forEach((Command) =>
@@ -81,7 +81,7 @@ const Commands: Set<{
 			),
 	},
 	{
-		Name: "star",
+		Name: "Star",
 		Description: "Star all my used repositories.",
 		Action: (await import("../Command/Star.js")).default,
 	},

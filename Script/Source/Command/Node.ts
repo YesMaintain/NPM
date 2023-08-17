@@ -1,11 +1,11 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
-import gitDirectories from "../Library/Directory.ts";
-import Package from "../Library/Package.ts";
-import Type from "../Library/Type.ts";
-import Node from "../Option/Node.ts";
-import type { Files } from "../Option/Index.ts";
+import gitDirectories from "../Library/Directory.js";
+import Package from "../Library/Package.js";
+import Type from "../Library/Type.js";
+import Node from "../Option/Node.js";
+import type { Files } from "../Option/Index.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,

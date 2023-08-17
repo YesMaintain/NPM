@@ -1,11 +1,11 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
-import gitDirectories from "../Library/Directory.ts";
-import packages from "../Library/Package.ts";
-import packageTypes from "../Library/Type.ts";
+import gitDirectories from "../Library/Directory.js";
+import packages from "../Library/Package.js";
+import packageTypes from "../Library/Type.js";
 import npm from "../Option/NPM.js";
-import type { Files } from "../Option/Index.ts";
+import type { Files } from "../Option/Index.js";
 
 /**
  * This function writes workflows for npm packages based on their package.json files.

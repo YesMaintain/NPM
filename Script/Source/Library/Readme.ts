@@ -1,5 +1,5 @@
 import Glob from "fast-glob";
-import Environment from "./Environment.ts";
+import Environment from "./Environment.js";
 
 export default async () =>
 	new Set<string>(
