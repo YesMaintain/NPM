@@ -120,6 +120,4 @@ const Workflow = async (files: Containers) => {
 	}
 };
 
-export default async () => {
-	await Workflow(npm);
-};
+export default async () => await Workflow(npm);

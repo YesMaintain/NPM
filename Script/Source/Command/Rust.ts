@@ -100,6 +100,4 @@ const Workflow = async (files: Containers) => {
 	}
 };
 
-export default async () => {
-	await Workflow(Rust);
-};
+export default async () => await Workflow(Rust);
