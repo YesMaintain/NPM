@@ -2,7 +2,7 @@ import { readFile as File } from "fs/promises";
 import { dirname as Dir, resolve as Resolve } from "path";
 
 import { fileURLToPath as Path } from "url";
-import type { Workflow } from "./Index.js";
+import type { Files } from "./Index.js";
 
 export default new Set([
 	{
@@ -39,4 +39,4 @@ export default new Set([
 				).toString(),
 			]),
 	},
-]) satisfies Workflow;
+]) satisfies Files;

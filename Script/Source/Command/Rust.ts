@@ -1,31 +1,31 @@
 import { constants as Constant } from "fs";
 import {
-    access as Access,
-    writeFile as File,
-    mkdir as Make,
-    rm as Remove,
+	access as Access,
+	writeFile as _File,
+	mkdir as Make,
+	rm as Remove,
 } from "fs/promises";
 import { basename, dirname } from "path";
 import gitDirectories from "../Library/Directory.ts";
 import Packages from "../Library/Package.ts";
 import Types from "../Library/Type.ts";
 import Rust from "../Option/Rust.js";
-import type { Containers } from "../Option/Workflow.js";
+import type { Files } from "../Option/Index.js";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {Containers} files - containers
+ * @param {Files} Files - containers
  */
-const Workflow = async (files: Containers) => {
-	for (const { Path, Name, Workflow: Flow } of files) {
+const Workflow = async (Files: Files) => {
+	for (const { Path, Name, File } of Files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await Packages("cargo")
 		)) {
 			const githubDir = `${directory}/.github`;
-			const workflowBase = await Flow();
+			const workflowBase = await File();
 
 			if (Path === "/workflows/" && Name === "Rust.yml") {
 				for (const _package of packageFiles) {
@@ -74,7 +74,7 @@ const Workflow = async (files: Containers) => {
 				}
 
 				try {
-					await File(
+					await _File(
 						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);

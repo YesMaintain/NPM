@@ -5,20 +5,20 @@ import gitDirectories from "../Library/Directory.ts";
 import packages from "../Library/Package.ts";
 import packageTypes from "../Library/Type.ts";
 import npm from "../Option/NPM.js";
-import type { Containers } from "../Option/Workflow.js";
+import type { Files } from "../Option/Index.ts";
 
 /**
  * This function writes workflows for npm packages based on their package.json files.
- * @param {Containers} files - The `files` parameter is an array of objects containing information
+ * @param {Files} Files - The `files` parameter is an array of objects containing information
  * about the files to be processed. Each object has the following properties:
  */
-const Workflow = async (files: Containers) => {
-	for (const { Path, Name, Workflow: Flow } of files) {
+const Workflow = async (Files: Files) => {
+	for (const { Path, Name, File } of Files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
-			const workflowBase = await Flow();
+			const workflowBase = await File();
 
 			if (Path === "/workflows/" && Name === "NPM.yml") {
 				for (const _package of packageFiles) {

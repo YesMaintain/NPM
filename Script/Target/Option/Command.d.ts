@@ -2,7 +2,7 @@ import type { CommandOptions as Options } from "commander";
 declare const Commands: Set<{
     Name: string;
     Opts?: Options;
-    Type?: "Flow";
+    Type?: "Workflow";
     Description?: string;
     Arguments?: Set<{
         Name: string;

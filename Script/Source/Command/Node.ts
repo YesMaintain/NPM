@@ -2,25 +2,25 @@ import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../Library/Directory.ts";
-import packages from "../Library/Package.ts";
-import packageTypes from "../Library/Type.ts";
-import node from "../Option/Node.ts";
-import type { Containers } from "../Option/Workflow.ts";
+import Package from "../Library/Package.ts";
+import Type from "../Library/Type.ts";
+import Node from "../Option/Node.ts";
+import type { Files } from "../Option/Index.ts";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {Containers} files - containers
+ * @param {Files} files - containers
  */
-const Workflow = async (files: Containers) => {
-	for (const { Path, Name, Workflow: Flow } of files) {
+const Workflow = async (files: Files) => {
+	for (const { Path, Name, File } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages("npm")
+			await Package("npm")
 		)) {
 			const githubDir = `${directory}/.github`;
-			const workflowBase = await Flow();
+			const workflowBase = await File();
 
 			if (Path === "/workflows/" && Name === "Node.yml") {
 				for (const _package of packageFiles) {
@@ -32,7 +32,7 @@ const Workflow = async (files: Containers) => {
 						await readFile(_package, "utf-8")
 					).toString();
 
-					const environment = (await packageTypes()).get(
+					const environment = (await Type()).get(
 						_package.split("/").pop()
 					);
 
@@ -172,4 +172,4 @@ const Workflow = async (files: Containers) => {
 	}
 };
 
-export default async () => await Workflow(node);
+export default async () => await Workflow(Node);

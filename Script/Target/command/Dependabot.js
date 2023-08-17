@@ -4,4 +4,4 @@ import{constants as m}from"fs";import{access as p,writeFile as $,mkdir as d,rm a
       schedule:
           interval: "daily"
       versioning-strategy: ${typeof a<"u"?(()=>{switch(a){case"cargo":return"lockfile-only";default:return"increase"}})():"increase"}
-`)}if(r.size>0){try{await d(`${e}${o}`,{recursive:!0})}catch{console.log(`Could not create: ${e}${o}`)}try{await $(`${e}${o}${t}`,`${[...r].join("")}`)}catch{console.log(`Could not create workflow for: ${e}/dependabot.yml`)}}else try{await p(`${e}${o}${t}`,m.F_OK);try{await u(`${e}${o}${t}`)}catch{console.log(`Could not remove ${o}${t} for: ${e}`)}}catch{}}};var x=async()=>await v(h);export{x as default};
+`)}if(r.size>0){try{await d(`${e}${o}`,{recursive:!0})}catch{console.log(`Could not create: ${e}${o}`)}try{await $(`${e}${o}${t}`,`${[...r].join("")}`)}catch{console.log(`Could not create workflow for: ${e}/dependabot.yml`)}}else try{await p(`${e}${o}${t}`,m.F_OK);try{await u(`${e}${o}${t}`)}catch{console.log(`Could not remove ${o}${t} for: ${e}`)}}catch{}}};var _=async()=>await v(h);export{_ as default};

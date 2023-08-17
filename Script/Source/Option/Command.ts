@@ -3,7 +3,7 @@ import type { CommandOptions as Options } from "commander";
 const Commands: Set<{
 	Name: string;
 	Opts?: Options;
-	Type?: "Flow";
+	Type?: "Workflow";
 	Description?: string;
 	Arguments?: Set<{
 		Name: string;
@@ -39,7 +39,7 @@ const Commands: Set<{
 	},
 	{
 		Name: "dependabot",
-		Type: "Flow",
+		Type: "Workflow",
 		Description: "Put Dependabot everywhere.",
 		Action: (await import("../Command/Dependabot.js")).default,
 	},
@@ -56,19 +56,19 @@ const Commands: Set<{
 	},
 	{
 		Name: "node",
-		Type: "Flow",
+		Type: "Workflow",
 		Description: "Put node into GitHub Actions.",
 		Action: (await import("../Command/Node.ts")).default,
 	},
 	{
 		Name: "npm",
-		Type: "Flow",
+		Type: "Workflow",
 		Description: "Put NPM into GitHub Actions.",
 		Action: (await import("../Command/NPM.js")).default,
 	},
 	{
 		Name: "rust",
-		Type: "Flow",
+		Type: "Workflow",
 		Description: "Put rust into GitHub Actions.",
 		Action: (await import("../Command/Rust.js")).default,
 	},
@@ -77,7 +77,7 @@ const Commands: Set<{
 		Description: "Trigger all workflow tasks.",
 		Action: async () =>
 			Commands.forEach((Command) =>
-				Command.Type === "Flow" ? Command.Action() : {}
+				Command.Type === "Workflow" ? Command.Action() : {}
 			),
 	},
 	{

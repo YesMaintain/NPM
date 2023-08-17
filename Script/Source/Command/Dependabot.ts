@@ -1,7 +1,7 @@
 import { constants as Constant } from "fs";
 import {
 	access as Access,
-	writeFile as File,
+	writeFile as _File,
 	mkdir as Make,
 	rm as Remove,
 } from "fs/promises";
@@ -10,19 +10,19 @@ import DirsGit from "../Library/Directory.ts";
 import Packages from "../Library/Package.ts";
 import Types from "../Library/Type.ts";
 import Dependabot from "../Option/Dependabot.js";
-import type { Workflow } from "../Option/Index.js";
+import type { Files } from "../Option/Index.js";
 
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current
  * working directory
- * @param {Workflow} Files - This is an array of objects that contain the path, name, and workflow
+ * @param {Files} Files - This is an array of objects that contain the path, name, and workflow
  * function.
  */
-const Workflow = async (Files: Workflow) => {
-	for (const { Path, Name, File: Flow } of Files) {
+const Workflow = async (Files: Files) => {
+	for (const { Path, Name, File } of Files) {
 		for (const [_Dir, FilesPackage] of await DirsGit(await Packages())) {
 			const GitHub = `${_Dir}/.github`;
-			const Base = await Flow();
+			const Base = await File();
 
 			if (Path === "/") {
 				for (const Package of FilesPackage) {
@@ -74,7 +74,7 @@ const Workflow = async (Files: Workflow) => {
 				}
 
 				try {
-					await File(
+					await _File(
 						`${GitHub}${Path}${Name}`,
 						`${[...Base].join("")}`
 					);
