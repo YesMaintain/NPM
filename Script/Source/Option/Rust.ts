@@ -1,21 +1,20 @@
 import { readFile as File } from "fs/promises";
 import { dirname as Dir, resolve as Resolve } from "path";
 import { fileURLToPath as Path } from "url";
-import type { Containers } from "./Workflow.js";
-
-const NameFile = Path(import.meta.url);
-const NameDir = Dir(NameFile);
+import type { Containers } from "./Index.js";
 
 export default new Set([
 	{
 		Path: "/workflows/",
 		Name: "Rust.yml",
-		Flow: async () =>
+		Workflow: async () =>
 			new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../Source/templates/.github/workflows/Rust.yml`
+							`${Dir(
+								Path(import.meta.url)
+							)}/../../Source/templates/.github/workflows/Rust.yml`
 						),
 						"utf-8"
 					)

@@ -20,7 +20,7 @@ import type { Containers } from "../Option/Workflow.js";
  * @param {Containers} files - containers
  */
 const Workflow = async (files: Containers) => {
-	for (const { Path, Name, Flow } of files) {
+	for (const { Path, Name, Workflow: Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await Packages("cargo")
 		)) {

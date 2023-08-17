@@ -3,19 +3,18 @@ import { dirname as Dir, resolve as Resolve } from "path";
 import { fileURLToPath as Path } from "url";
 import type { Containers } from "./Workflow.ts";
 
-const NameFile = Path(import.meta.url);
-const NameDir = Dir(NameFile);
-
 export default new Set([
 	{
 		Path: "/workflows/",
 		Name: "Node.yml",
-		Flow: async () =>
+		Workflow: async () =>
 			new Set([
 				(
 					await File(
 						Resolve(
-							`${NameDir}/../../Source/templates/.github/workflows/Node.yml`
+							`${Dir(
+								Path(import.meta.url)
+							)}/../../Source/templates/.github/workflows/Node.yml`
 						),
 						"utf-8"
 					)

@@ -13,7 +13,7 @@ import type { Containers } from "../Option/Workflow.js";
  * about the files to be processed. Each object has the following properties:
  */
 const Workflow = async (files: Containers) => {
-	for (const { Path, Name, Flow } of files) {
+	for (const { Path, Name, Workflow: Flow } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
 			await packages("npm")
 		)) {

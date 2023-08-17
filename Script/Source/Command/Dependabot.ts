@@ -19,7 +19,7 @@ import type { Containers } from "../Option/Workflow.js";
  * function.
  */
 const Workflow = async (Files: Containers) => {
-	for (const { Path, Name, Flow } of Files) {
+	for (const { Path, Name, Workflow: Flow } of Files) {
 		for (const [_Dir, FilesPackage] of await DirsGit(await Packages())) {
 			const DirGitHub = `${_Dir}/.github`;
 			const Base = await Flow();
