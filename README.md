@@ -5,7 +5,7 @@
 ```env
 User="Username"
 Base="Folder"
-GitHub="Token"
+Token="AAAA"
 ```
 
 ## Installation
