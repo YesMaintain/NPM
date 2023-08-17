@@ -1,6 +1,2 @@
-declare const _default: Set<{
-    Path: string;
-    Name: string;
-    Flow: () => Promise<Set<string>>;
-}>;
+declare const _default: Containers;
 export default _default;

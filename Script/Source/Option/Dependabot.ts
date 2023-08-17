@@ -20,8 +20,6 @@ export default new Set([
 						"utf-8"
 					)
 				).toString(),
-
-				
 			]),
 	},
 	{
