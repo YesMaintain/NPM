@@ -44,7 +44,7 @@ export default {
 			assets: [
 				{
 					from: "./Source/Workflow/TypeScript.json",
-					to: "./Configuration/",
+					to: "./Workflow/",
 				},
 			],
 		}),
