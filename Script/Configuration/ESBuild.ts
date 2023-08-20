@@ -43,7 +43,7 @@ export default {
 			resolveFrom: "out",
 			assets: [
 				{
-					from: "./Source/Workflow/TypeScript.json",
+					from: "./Source/Workflow/*.yml",
 					to: "./Workflow/",
 				},
 			],

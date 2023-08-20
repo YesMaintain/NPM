@@ -2,6 +2,7 @@
 	"name": "@yesmaintain/script",
 	"version": "0.0.1",
 	"private": false,
+	"description": "🔧 Maintains GitHub repositories.",
 	"homepage": "https://github.com/YesMaintain/NPM#readme",
 	"bugs": {
 		"url": "https://github.com/YesMaintain/NPM/issues"
@@ -21,10 +22,10 @@
 	"main": "./Target/Index.js",
 	"types": "./Target/Index.d.ts",
 	"bin": {
-		"Maintenance": "Target/Bin.js"
+		"Maintain": "Target/Bin.js"
 	},
 	"scripts": {
-		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'"
+		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts' -es Configuration/ESBuild.ts"
 	},
 	"dependencies": {
 		"@octokit/core": "5.0.0",

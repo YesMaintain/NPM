@@ -3,7 +3,7 @@ import Commands from "./Option/Command.js";
 
 const Program = new Command();
 
-Program.name("Maintenance").description("Maintenance tools");
+Program.name("Maintain").description("Maintains GitHub repositories");
 
 Commands?.forEach((Command) => {
 	const _Program = Program.command(Command.Name)

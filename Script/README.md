@@ -47,67 +47,67 @@ pnpx @yesmaintain/script
 Delete all GitHub Actions runs and their logs for all of your repositories:
 
 ```sh
-Maintenance Clean
+Maintain Clean
 ```
 
 Create a `dependabot.yml` file in each of the .github directories for each of
 the packages in the monorepo:
 
 ```sh
-Maintenance Dependabot
+Maintain Dependabot
 ```
 
 Dispatch all workflows for all repositories for a given user:
 
 ```sh
-Maintenance Dispatch
+Maintain Dispatch
 ```
 
 or specific repositories by name:
 
 ```sh
-Maintenance Dispatch Repository1 Repository2
+Maintain Dispatch Repository1 Repository2
 ```
 
 Enable / disable all the features that GitHub offers for all the repositories
 that you have access to:
 
 ```sh
-Maintenance Edit
+Maintain Edit
 ```
 
 Create a `Node.yml` file in the `.github/workflows` directory for each
 repository that has a `package.json` file.
 
 ```sh
-Maintenance Node
+Maintain Node
 ```
 
 Create a `NPM.yml` file in the `.github/workflows` directory for each repository
 that has a `package.json` file.
 
 ```sh
-Maintenance NPM
+Maintain NPM
 ```
 
 Create a `Rust.yml` file in the `.github/workflows` directory for each
 repository that has a `Cargo.toml` file.
 
 ```sh
-Maintenance Rust
+Maintain Rust
 ```
 
 Run all workflow tasks.
 
 ```sh
-Maintenance Workflow
+Maintain Workflow
 ```
 
 Find all the `package.json` files in the project, and then star all the
 dependencies in that `package.json`.
 
 ```sh
-Maintenance Star
+Maintain Star
 ```
 
 **.env**
