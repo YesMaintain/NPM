@@ -1,7 +1,0 @@
-%HEADING%
-
-%BADGES%
-
-%CONTENT%
-
-%BUILTWITH%

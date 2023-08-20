@@ -61,7 +61,7 @@ const Commands: Set<{
 		Action: (await import("../Command/Node.js")).default,
 	},
 	{
-		Name: "Npm",
+		Name: "NPM",
 		Type: "Workflow",
 		Description: "Put NPM into GitHub Actions.",
 		Action: (await import("../Command/NPM.js")).default,
@@ -73,7 +73,7 @@ const Commands: Set<{
 		Action: (await import("../Command/Rust.js")).default,
 	},
 	{
-		Name: "Workflows",
+		Name: "Workflow",
 		Description: "Trigger all workflow tasks.",
 		Action: async () =>
 			Commands.forEach((Command) =>

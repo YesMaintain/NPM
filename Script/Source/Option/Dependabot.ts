@@ -15,7 +15,7 @@ export default new Set([
 						Resolve(
 							`${Dir(
 								Path(import.meta.url)
-							)}/../../Source/Template/.github/dependabot.yml`
+							)}/../../Target/Workflow/dependabot.yml`
 						),
 						"utf-8"
 					)
@@ -32,7 +32,7 @@ export default new Set([
 						Resolve(
 							`${Dir(
 								Path(import.meta.url)
-							)}/../../Source/Template/.github/workflows/Dependabot.yml`
+							)}/../../Target/Workflow/InnerDependabot.yml`
 						),
 						"utf-8"
 					)

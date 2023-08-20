@@ -13,19 +13,19 @@ Token="AAAA"
 Using NPM
 
 ```sh
-npm install -g @yesmaintenance/script
+npm install -g @yesmaintain/script
 ```
 
 Using Yarn
 
 ```sh
-yarn global add @yesmaintenance/script
+yarn global add @yesmaintain/script
 ```
 
 Using PNPM
 
 ```sh
-pnpm install -g @yesmaintenance/script
+pnpm install -g @yesmaintain/script
 ```
 
 or direct usage:
@@ -33,19 +33,19 @@ or direct usage:
 Using NPM
 
 ```sh
-npx @yesmaintenance/script
+npx @yesmaintain/script
 ```
 
 Using Yarn
 
 ```sh
-yarn @yesmaintenance/script
+yarn @yesmaintain/script
 ```
 
 Using PNPM
 
 ```sh
-pnpx @yesmaintenance/script
+pnpx @yesmaintain/script
 ```
 
 ## Then simply run each of the commands:
@@ -53,60 +53,60 @@ pnpx @yesmaintenance/script
 Delete all GitHub Actions runs and their logs for all of your repositories:
 
 ```sh
-Maintenance clean
+Maintenance Clean
 ```
 
 Create a `dependabot.yml` file in each of the .github directories for each of
 the packages in the monorepo:
 
 ```sh
-Maintenance dependabot
+Maintenance Dependabot
 ```
 
 Dispatch all workflows for all repositories for a given user:
 
 ```sh
-Maintenance dispatch
+Maintenance Dispatch
 ```
 
 or specific repositories by name:
 
 ```sh
-Maintenance dispatch repository-name repository-name-2
+Maintenance Dispatch Repository1 Repository2
 ```
 
 Enable / disable all the features that GitHub offers for all the repositories
 that you have access to:
 
 ```sh
-Maintenance edit
+Maintenance Edit
 ```
 
 Create a `Node.yml` file in the `.github/workflows` directory for each
 repository that has a `package.json` file.
 
 ```sh
-Maintenance node
+Maintenance Node
 ```
 
 Create a `NPM.yml` file in the `.github/workflows` directory for each repository
 that has a `package.json` file.
 
 ```sh
-Maintenance npm
+Maintenance NPM
 ```
 
 Create a `Rust.yml` file in the `.github/workflows` directory for each
 repository that has a `Cargo.toml` file.
 
 ```sh
-Maintenance rust
+Maintenance Rust
 ```
 
 Run all workflow tasks.
 
 ```sh
-Maintenance workflows
+Maintenance Workflow
 ```
 
 Find all the `package.json` files in the project, and then star all the
@@ -116,5 +116,5 @@ dependencies in that `package.json`.
 Maintenance star
 ```
 
-[yes]: https://github.com/yesmaintenance
-[@yesmaintenance/script]: https://npmjs.org/@yesmaintenance/script
+[yes]: https://github.com/YesMaintain
+[@yesmaintain/script]: https://npmjs.org/@yesmaintain/script

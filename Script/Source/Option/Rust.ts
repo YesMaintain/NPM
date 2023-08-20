@@ -14,7 +14,7 @@ export default new Set([
 						Resolve(
 							`${Dir(
 								Path(import.meta.url)
-							)}/../../Source/Template/.github/workflows/Rust.yml`
+							)}/../../Target/Workflow/Rust.yml`
 						),
 						"utf-8"
 					)
