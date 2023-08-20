@@ -1,12 +1,6 @@
-# [Yes] maintenance scripts
+# [YesMaintain] 🔧
 
-**.env**
-
-```env
-User="Username"
-Base="Folder"
-Token="AAAA"
-```
+Maintains GitHub repositories.
 
 ## Installation
 
@@ -48,7 +42,7 @@ Using PNPM
 pnpx @yesmaintain/script
 ```
 
-## Then simply run each of the commands:
+## CLI Usage:
 
 Delete all GitHub Actions runs and their logs for all of your repositories:
 
@@ -113,8 +107,16 @@ Find all the `package.json` files in the project, and then star all the
 dependencies in that `package.json`.
 
 ```sh
-Maintenance star
+Maintenance Star
 ```
 
-[yes]: https://github.com/YesMaintain
+**.env**
+
+```env
+User="Username"
+Base="Folder"
+Token="AAAA"
+```
+
+[YesMaintain]: https://github.com/YesMaintain
 [@yesmaintain/script]: https://npmjs.org/@yesmaintain/script
