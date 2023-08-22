@@ -1,4 +1,4 @@
-export default async (filter: string | false = false) => {
+export default async (Filter: string | false = false) => {
 	const results = new Map<string, string>();
 
 	results.set("package.json", "npm");
@@ -6,10 +6,11 @@ export default async (filter: string | false = false) => {
 	results.set("composer.json", "composer");
 	results.set("packages.config", "nuget");
 	results.set("*.csproj", "nuget");
+	results.set("wrangler.toml", "Cloudflare");
 
-	if (filter) {
+	if (Filter) {
 		results.forEach((value, key) => {
-			if (value !== filter) {
+			if (value !== Filter) {
 				results.delete(key);
 			}
 		});
