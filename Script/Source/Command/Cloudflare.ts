@@ -1,6 +1,7 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname as Dir } from "path";
+import toml from "toml";
 import gitDirectories from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
@@ -41,93 +42,13 @@ const Workflow = async (files: Files) => {
 						environment === "Cloudflare"
 					) {
 						try {
-// 							const packageJSON = JSON.parse(packageFile);
-
-// 							for (const bundle of [
-// 								"bundledDependencies",
-// 								"bundleDependencies",
-// 								"dependencies",
-// 								"devDependencies",
-// 								"extensionDependencies",
-// 								"optionalDependencies",
-// 								"peerDependencies",
-// 								"peerDependenciesMeta",
-// 							].sort()) {
-// 								if (
-// 									typeof packageJSON[bundle] !== "undefined"
-// 								) {
-// 									workflowBase.add(`
-//             - uses: actions/setup-node@v3.8.1
-//               with:
-//                   node-version: \${{ matrix.node-version }}
-//                   cache: "pnpm"
-//                   cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
-
-//             - run: pnpm install
-//               working-directory: .${packageDirectory}
-// `);
-// 								}
-// 							}
-
-// 							for (const key in packageJSON) {
-// 								if (
-// 									Object.prototype.hasOwnProperty.call(
-// 										packageJSON,
-// 										key
-// 									)
-// 								) {
-// 									const values = packageJSON[key];
-// 									if (key === "scripts") {
-// 										for (const scripts in values) {
-// 											if (
-// 												Object.prototype.hasOwnProperty.call(
-// 													values,
-// 													scripts
-// 												)
-// 											) {
-// 												if (scripts === "build") {
-// 													workflowBase.add(`
-//             - run: pnpm run build
-//               working-directory: .
-
-//             - uses: actions/upload-artifact@v3.1.2
-//               with:
-//                   name: .${packageDirectory.replaceAll(
-// 						"/",
-// 						"-"
-// 					)}-Node-\${{ matrix.node-version }}-Target
-//                   path: .${packageDirectory}/Target
-// `);
-// 												}
-
-// 												if (
-// 													scripts === "prepublishOnly"
-// 												) {
-// 													workflowBase.add(`
-//             - run: pnpm run prepublishOnly
-//               working-directory: .
-
-//             - uses: actions/upload-artifact@v3.1.2
-//               with:
-//                   name: .${packageDirectory.replaceAll(
-// 						"/",
-// 						"-"
-// 					)}-Node-\${{ matrix.node-version }}-Target
-//                   path: .${packageDirectory}/Target
-// `);
-// 												}
-
-// 												if (scripts === "test") {
-// 													workflowBase.add(`
-//             - run: pnpm run test
-//               working-directory: .${packageDirectory}
-// `);
-// 												}
-// 											}
-// 										}
-// 									}
-// 								}
-// 							}
+							workflowBase.add(`
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: \${{ secrets.CF_API_TOKEN }}
+                  accountId: \${{ secrets.CF_ACCOUNT_ID }}
+                  workingDirectory: "subfoldername"
+`)
 						} catch (_Error) {
 							console.log(_package);
 							console.log(_Error);
