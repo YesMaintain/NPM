@@ -57,8 +57,14 @@ const Commands: Set<{
 	{
 		Name: "Node",
 		Type: "Workflow",
-		Description: "Put node into GitHub Actions.",
+		Description: "Put Node into GitHub Actions.",
 		Action: (await import("../Command/Node.js")).default,
+	},
+	{
+		Name: "Cloudflare",
+		Type: "Workflow",
+		Description: "Put Cloudflare into GitHub Actions.",
+		Action: (await import("../Command/Cloudflare.js")).default,
 	},
 	{
 		Name: "NPM",

@@ -1,13 +1,14 @@
 import Glob from "fast-glob";
 import Environment from "./Environment.js";
 import Types from "./Type.js";
+import type { Filter } from "./Type.js";
 
-export default async (filter = "") =>
+export default async (Filter: Filter = false) =>
 	new Set<string>(
 		[
 			...(await Glob(
 				[
-					...[...(await Types(filter)).keys()].map(
+					...[...(await Types(Filter)).keys()].map(
 						(Package) => `**/${Package}`
 					),
 					"!**/node_modules",

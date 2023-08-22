@@ -1,15 +1,10 @@
 import { constants as Constant } from "fs";
-import {
-	access as Access,
-	writeFile as _File,
-	mkdir as Make,
-	rm as Remove,
-} from "fs/promises";
-import { basename, dirname } from "path";
+import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { dirname as Dir } from "path";
 import gitDirectories from "../Library/Directory.js";
-import Packages from "../Library/Package.js";
-import Types from "../Library/Type.js";
-import Rust from "../Option/Rust.js";
+import Package from "../Library/Package.js";
+import Type from "../Library/Type.js";
+import Cloudflare from "../Option/Cloudflare.js";
 import type { Files } from "../Option/Index.js";
 
 /**
@@ -17,24 +12,27 @@ import type { Files } from "../Option/Index.js";
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {Files} Files - containers
+ * @param {Files} files - containers
  */
-const Workflow = async (Files: Files) => {
-	for (const { Path, Name, File } of Files) {
+const Workflow = async (files: Files) => {
+	for (const { Path, Name, File } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await Packages("Cloudflare")
+			await Package("Cloudflare")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
 
 			if (Path === "/workflows/" && Name === "Cloudflare.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
+					const packageDirectory = Dir(_package).replace(
 						directory,
 						""
 					);
+					const packageFile = (
+						await readFile(_package, "utf-8")
+					).toString();
 
-					const environment = (await Types()).get(
+					const environment = (await Type()).get(
 						_package.split("/").pop()
 					);
 
@@ -42,13 +40,105 @@ const Workflow = async (Files: Files) => {
 						typeof environment !== "undefined" &&
 						environment === "Cloudflare"
 					) {
+						try {
+// 							const packageJSON = JSON.parse(packageFile);
+
+// 							for (const bundle of [
+// 								"bundledDependencies",
+// 								"bundleDependencies",
+// 								"dependencies",
+// 								"devDependencies",
+// 								"extensionDependencies",
+// 								"optionalDependencies",
+// 								"peerDependencies",
+// 								"peerDependenciesMeta",
+// 							].sort()) {
+// 								if (
+// 									typeof packageJSON[bundle] !== "undefined"
+// 								) {
+// 									workflowBase.add(`
+//             - uses: actions/setup-node@v3.8.1
+//               with:
+//                   node-version: \${{ matrix.node-version }}
+//                   cache: "pnpm"
+//                   cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
+
+//             - run: pnpm install
+//               working-directory: .${packageDirectory}
+// `);
+// 								}
+// 							}
+
+// 							for (const key in packageJSON) {
+// 								if (
+// 									Object.prototype.hasOwnProperty.call(
+// 										packageJSON,
+// 										key
+// 									)
+// 								) {
+// 									const values = packageJSON[key];
+// 									if (key === "scripts") {
+// 										for (const scripts in values) {
+// 											if (
+// 												Object.prototype.hasOwnProperty.call(
+// 													values,
+// 													scripts
+// 												)
+// 											) {
+// 												if (scripts === "build") {
+// 													workflowBase.add(`
+//             - run: pnpm run build
+//               working-directory: .
+
+//             - uses: actions/upload-artifact@v3.1.2
+//               with:
+//                   name: .${packageDirectory.replaceAll(
+// 						"/",
+// 						"-"
+// 					)}-Node-\${{ matrix.node-version }}-Target
+//                   path: .${packageDirectory}/Target
+// `);
+// 												}
+
+// 												if (
+// 													scripts === "prepublishOnly"
+// 												) {
+// 													workflowBase.add(`
+//             - run: pnpm run prepublishOnly
+//               working-directory: .
+
+//             - uses: actions/upload-artifact@v3.1.2
+//               with:
+//                   name: .${packageDirectory.replaceAll(
+// 						"/",
+// 						"-"
+// 					)}-Node-\${{ matrix.node-version }}-Target
+//                   path: .${packageDirectory}/Target
+// `);
+// 												}
+
+// 												if (scripts === "test") {
+// 													workflowBase.add(`
+//             - run: pnpm run test
+//               working-directory: .${packageDirectory}
+// `);
+// 												}
+// 											}
+// 										}
+// 									}
+// 								}
+// 							}
+						} catch (_Error) {
+							console.log(_package);
+							console.log(_Error);
+						}
 					}
 				}
 			}
 
 			if (workflowBase.size > 1) {
 				try {
-					await Make(`${githubDir}${Path}`, {
+					await mkdir(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {
@@ -56,7 +146,7 @@ const Workflow = async (Files: Files) => {
 				}
 
 				try {
-					await _File(
+					await writeFile(
 						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);
@@ -67,10 +157,10 @@ const Workflow = async (Files: Files) => {
 				}
 			} else {
 				try {
-					await Access(`${githubDir}${Path}${Name}`, Constant.F_OK);
+					await access(`${githubDir}${Path}${Name}`, Constant.F_OK);
 
 					try {
-						await Remove(`${githubDir}${Path}${Name}`);
+						await rm(`${githubDir}${Path}${Name}`);
 					} catch {
 						console.log(
 							`Could not remove ${Path}${Name} for: ${githubDir}`
@@ -82,4 +172,4 @@ const Workflow = async (Files: Files) => {
 	}
 };
 
-export default async () => await Workflow(Rust);
+export default async () => await Workflow(Cloudflare);

@@ -1,20 +1,29 @@
-export default async (Filter: string | false = false) => {
-	const results = new Map<string, string>();
+export type Filter =
+	| "npm"
+	| "cargo"
+	| "composer"
+	| "nuget"
+	| "nuget"
+	| "Cloudflare"
+	| false;
 
-	results.set("package.json", "npm");
-	results.set("Cargo.toml", "cargo");
-	results.set("composer.json", "composer");
-	results.set("packages.config", "nuget");
-	results.set("*.csproj", "nuget");
-	results.set("wrangler.toml", "Cloudflare");
+export default async (Filter: Filter = false) => {
+	const Result = new Map<string, string>();
+
+	Result.set("package.json", "npm");
+	Result.set("Cargo.toml", "cargo");
+	Result.set("composer.json", "composer");
+	Result.set("packages.config", "nuget");
+	Result.set("*.csproj", "nuget");
+	Result.set("wrangler.toml", "Cloudflare");
 
 	if (Filter) {
-		results.forEach((value, key) => {
+		Result.forEach((value, key) => {
 			if (value !== Filter) {
-				results.delete(key);
+				Result.delete(key);
 			}
 		});
 	}
 
-	return results;
+	return Result;
 };
