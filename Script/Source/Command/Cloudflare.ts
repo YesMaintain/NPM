@@ -22,7 +22,7 @@ const Workflow = async (files: Files) => {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
 
-			if (Path === "/workflows/" && Name === "Node.yml") {
+			if (Path === "/workflows/" && Name === "Cloudflare.yml") {
 				for (const _package of packageFiles) {
 					const packageDirectory = Dir(_package).replace(
 						directory,
