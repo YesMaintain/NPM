@@ -52,7 +52,7 @@ const Workflow = async (Files: Files) => {
 			typeof Environment !== "undefined"
 				? (() => {
 						switch (Environment) {
-							case "cargo":
+							case "Cargo":
 								return "lockfile-only";
 							default:
 								return "increase";

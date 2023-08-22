@@ -3,5 +3,5 @@ import{constants as m}from"fs";import{access as p,writeFile as $,mkdir as d,rm a
       directory: "${c||"/"}"
       schedule:
           interval: "daily"
-      versioning-strategy: ${typeof a<"u"?(()=>{switch(a){case"cargo":return"lockfile-only";default:return"increase"}})():"increase"}
+      versioning-strategy: ${typeof a<"u"?(()=>{switch(a){case"Cargo":return"lockfile-only";default:return"increase"}})():"increase"}
 `)}if(r.size>0){try{await d(`${t}${e}`,{recursive:!0})}catch{console.log(`Could not create: ${t}${e}`)}try{await $(`${t}${e}${o}`,`${[...r].join("")}`)}catch{console.log(`Could not create workflow for: ${t}/dependabot.yml`)}}else try{await p(`${t}${e}${o}`,m.F_OK);try{await u(`${t}${e}${o}`)}catch{console.log(`Could not remove ${e}${o} for: ${t}`)}}catch{}}};var x=async()=>await F(h);export{x as default};

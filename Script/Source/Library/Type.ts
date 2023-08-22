@@ -1,20 +1,19 @@
 export type Filter =
-	| "npm"
-	| "cargo"
-	| "composer"
-	| "nuget"
-	| "nuget"
+	| "NPM"
+	| "Cargo"
+	| "Composer"
+	| "Nuget"
 	| "Cloudflare"
 	| false;
 
 export default async (Filter: Filter = false) => {
-	const Result = new Map<string, string>();
+	const Result = new Map<string, Filter>();
 
-	Result.set("package.json", "npm");
-	Result.set("Cargo.toml", "cargo");
-	Result.set("composer.json", "composer");
-	Result.set("packages.config", "nuget");
-	Result.set("*.csproj", "nuget");
+	Result.set("package.json", "NPM");
+	Result.set("Cargo.toml", "Cargo");
+	Result.set("composer.json", "Composer");
+	Result.set("packages.config", "Nuget");
+	Result.set("*.csproj", "Nuget");
 	Result.set("wrangler.toml", "Cloudflare");
 
 	if (Filter) {

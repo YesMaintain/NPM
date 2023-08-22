@@ -17,7 +17,7 @@ import type { Files } from "../Option/Index.js";
 const Workflow = async (files: Files) => {
 	for (const { Path, Name, File } of files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await Package("npm")
+			await Package("NPM")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
@@ -38,7 +38,7 @@ const Workflow = async (files: Files) => {
 
 					if (
 						typeof environment !== "undefined" &&
-						environment === "npm"
+						environment === "NPM"
 					) {
 						try {
 							const packageJSON = JSON.parse(packageFile);

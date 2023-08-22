@@ -4,7 +4,7 @@ import Environment from "../Library/Environment.js";
 import Star from "../Library/Star.js";
 
 export default async () => {
-	const Dependencies = new Set<string>();
+	const Dependency = new Set<string>();
 
 	for (const Package of await Glob(["**/package.json", "!**/node_modules"], {
 		absolute: true,
@@ -15,14 +15,14 @@ export default async () => {
 		for (const Key in _JSON) {
 			if (Object.prototype.hasOwnProperty.call(_JSON, Key)) {
 				if (Key === "dependencies" || Key === "devDependencies") {
-					for (const dependency in _JSON[Key]) {
+					for (const Package in _JSON[Key]) {
 						if (
 							Object.prototype.hasOwnProperty.call(
 								_JSON[Key],
-								dependency
+								Package
 							)
 						) {
-							Dependencies.add(dependency);
+							Dependency.add(Package);
 						}
 					}
 				}
@@ -30,13 +30,9 @@ export default async () => {
 		}
 	}
 
-	for (const Dependency of Dependencies) {
-		Star(
-			(
-				await (
-					await fetch(`https://registry.npmjs.org/${Dependency}`)
-				).json()
-			).repository.url
-		);
-	}
+	Dependency.forEach((Dependency) =>
+		fetch(`https://registry.npmjs.org/${Dependency}`).then(({ json }) =>
+			json().then(({ repository }) => Star(repository.url))
+		)
+	);
 };

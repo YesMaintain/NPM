@@ -22,7 +22,7 @@ import type { Files } from "../Option/Index.js";
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await Packages("cargo")
+			await Packages("Cargo")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
@@ -40,7 +40,7 @@ const Workflow = async (Files: Files) => {
 
 					if (
 						typeof environment !== "undefined" &&
-						environment === "cargo"
+						environment === "Cargo"
 					) {
 						workflowBase.add(`
             - uses: actions/cache@v3.3.1

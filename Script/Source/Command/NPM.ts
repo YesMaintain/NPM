@@ -2,9 +2,9 @@ import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../Library/Directory.js";
-import packages from "../Library/Package.js";
-import packageTypes from "../Library/Type.js";
-import npm from "../Option/NPM.js";
+import Package from "../Library/Package.js";
+import Type from "../Library/Type.js";
+import NPM from "../Option/NPM.js";
 import type { Files } from "../Option/Index.js";
 
 /**
@@ -15,7 +15,7 @@ import type { Files } from "../Option/Index.js";
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {
 		for (const [directory, packageFiles] of await gitDirectories(
-			await packages("npm")
+			await Package("NPM")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
@@ -30,13 +30,13 @@ const Workflow = async (Files: Files) => {
 						await readFile(_package, "utf-8")
 					).toString();
 
-					const environment = (await packageTypes()).get(
+					const environment = (await Type()).get(
 						_package.split("/").pop()
 					);
 
 					if (
 						typeof environment !== "undefined" &&
-						environment === "npm"
+						environment === "NPM"
 					) {
 						try {
 							const packageJSON = JSON.parse(packageFile);
@@ -120,4 +120,4 @@ const Workflow = async (Files: Files) => {
 	}
 };
 
-export default async () => await Workflow(npm);
+export default async () => await Workflow(NPM);
