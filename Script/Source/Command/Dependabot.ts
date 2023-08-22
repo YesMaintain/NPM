@@ -1,9 +1,9 @@
 import { constants as Constant } from "fs";
 import {
 	access as Access,
-	writeFile as _File,
 	mkdir as Make,
 	rm as Remove,
+	writeFile as _File,
 } from "fs/promises";
 import { dirname as Dir } from "path";
 import DirsGit from "../Library/Directory.js";
@@ -32,10 +32,11 @@ const Workflow = async (Files: Files) => {
 						Package.split("/").pop()
 					);
 
-					Base.add(`
+					if (Environment !== "Cloudflare") {
+						Base.add(`
     - package-ecosystem: "${
 		typeof Environment !== "undefined"
-			? Environment
+			? String(Environment).toLowerCase()
 			: (() => {
 					switch (Package.split(".").pop()) {
 						case "csproj":
@@ -61,6 +62,7 @@ const Workflow = async (Files: Files) => {
 				: "increase"
 		}
 `);
+					}
 				}
 			}
 

@@ -30,9 +30,13 @@ export default async () => {
 		}
 	}
 
-	Dependency.forEach((Dependency) =>
-		fetch(`https://registry.npmjs.org/${Dependency}`).then(({ json }) =>
-			json().then(({ repository }) => Star(repository.url))
-		)
-	);
+	for (const _Dependency of Dependency) {
+		Star(
+			(
+				await (
+					await fetch(`https://registry.npmjs.org/${_Dependency}`)
+				).json()
+			).repository.url
+		);
+	}
 };
