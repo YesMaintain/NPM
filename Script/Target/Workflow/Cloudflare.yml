@@ -1,7 +1,7 @@
-name: Rust
+name: Cloudflare
 
 concurrency:
-    group: Rust-${{ github.workflow }}-${{ github.ref }}
+    group: Cloudflare-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 permissions:
@@ -49,13 +49,9 @@ jobs:
             STNOUPGRADE: 1
             STRIPE_CLI_TELEMETRY_OPTOUT: 1
 
-        strategy:
-            matrix:
-                toolchain: ["stable", "nightly"]
-
         steps:
             - uses: actions/checkout@v3.5.3
-            - uses: actions-rs/toolchain@v1.0.7
+            
+            - uses: cloudflare/wrangler-action@v3
               with:
-                  profile: minimal
-                  toolchain: ${{ matrix.toolchain }}
+                  apiToken: ${{ secrets.CF_API_TOKEN }}
