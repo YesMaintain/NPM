@@ -1,7 +1,6 @@
 import { constants as Constant } from "fs";
 import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
 import { dirname as Dir } from "path";
-import toml from "toml";
 import gitDirectories from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
@@ -9,11 +8,10 @@ import Cloudflare from "../Option/Cloudflare.js";
 import type { Files } from "../Option/Index.js";
 
 /**
- * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
- * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
- * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
- * workflow file
- * @param {Files} files - containers
+ * The function `Workflow` iterates through a list of files, checks if a specific file exists, and
+ * performs certain actions based on the conditions.
+ * @param {Files} files - The `files` parameter is an array of objects. Each object represents a file
+ * and has the following properties:
  */
 const Workflow = async (files: Files) => {
 	for (const { Path, Name, File } of files) {
@@ -29,9 +27,6 @@ const Workflow = async (files: Files) => {
 						directory,
 						""
 					);
-					const packageFile = (
-						await readFile(_package, "utf-8")
-					).toString();
 
 					const environment = (await Type()).get(
 						_package.split("/").pop()
@@ -47,8 +42,8 @@ const Workflow = async (files: Files) => {
               with:
                   apiToken: \${{ secrets.CF_API_TOKEN }}
                   accountId: \${{ secrets.CF_ACCOUNT_ID }}
-                  workingDirectory: "subfoldername"
-`)
+                  workingDirectory: .${packageDirectory}
+`);
 						} catch (_Error) {
 							console.log(_package);
 							console.log(_Error);
