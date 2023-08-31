@@ -57,8 +57,8 @@ const Workflow = async (Files: Files) => {
               with:
                 command: build
                 args: --release --all-features --manifest-path .${packageDirectory}/${basename(
-							_package
-						)}
+					_package
+				)}
 `);
 					}
 				}
