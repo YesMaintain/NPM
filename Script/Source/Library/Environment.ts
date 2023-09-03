@@ -1,8 +1,8 @@
-import * as dotenv from "dotenv";
+import { config } from "dotenv";
 import { cwd } from "process";
 import { z } from "zod";
 
-dotenv.config();
+config();
 
 export default z
 	.object({
