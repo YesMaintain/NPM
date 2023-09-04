@@ -1,0 +1,1 @@
+var s=async(t=!1)=>{const e=new Map;return e.set("package.json","NPM"),e.set("Cargo.toml","Cargo"),e.set("composer.json","Composer"),e.set("packages.config","Nuget"),e.set("*.csproj","Nuget"),e.set("wrangler.toml","Cloudflare"),t&&e.forEach((o,r)=>{o!==t&&e.delete(r)}),e};export{s as default};

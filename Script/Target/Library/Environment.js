@@ -1,0 +1,1 @@
+import{config as e}from"dotenv";import{cwd as t}from"process";import{z as r}from"zod";e();var i=r.object({User:r.string().default(""),Base:r.string().default(t()),Token:r.string().default("")}).parse(process.env);export{i as default};
