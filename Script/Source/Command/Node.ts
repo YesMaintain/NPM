@@ -90,7 +90,7 @@ const Workflow = async (files: Files) => {
             - run: pnpm run build
               working-directory: .
 
-            - uses: actions/upload-artifact@v3.1.2
+            - uses: actions/upload-artifact@v3.1.3
               with:
                   name: .${packageDirectory.replaceAll(
 						"/",
@@ -107,7 +107,7 @@ const Workflow = async (files: Files) => {
             - run: pnpm run prepublishOnly
               working-directory: .
 
-            - uses: actions/upload-artifact@v3.1.2
+            - uses: actions/upload-artifact@v3.1.3
               with:
                   name: .${packageDirectory.replaceAll(
 						"/",

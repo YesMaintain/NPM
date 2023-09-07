@@ -11,7 +11,7 @@ import{constants as $}from"fs";import{access as y,mkdir as g,readFile as h,rm as
             - run: pnpm run build
               working-directory: .
 
-            - uses: actions/upload-artifact@v3.1.2
+            - uses: actions/upload-artifact@v3.1.3
               with:
                   name: .${t.replaceAll("/","-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${t}/Target
@@ -19,7 +19,7 @@ import{constants as $}from"fs";import{access as y,mkdir as g,readFile as h,rm as
             - run: pnpm run prepublishOnly
               working-directory: .
 
-            - uses: actions/upload-artifact@v3.1.2
+            - uses: actions/upload-artifact@v3.1.3
               with:
                   name: .${t.replaceAll("/","-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${t}/Target
