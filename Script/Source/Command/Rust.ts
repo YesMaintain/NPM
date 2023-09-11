@@ -2,7 +2,7 @@ import { constants as Constant } from "fs";
 import {
 	access as Access,
 	writeFile as _File,
-	mkdir as Make,
+	mkdir as Dir,
 	rm as Remove,
 } from "fs/promises";
 import { basename, dirname } from "path";
@@ -66,7 +66,7 @@ const Workflow = async (Files: Files) => {
 
 			if (workflowBase.size > 1) {
 				try {
-					await Make(`${githubDir}${Path}`, {
+					await Dir(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {

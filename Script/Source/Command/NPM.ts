@@ -1,11 +1,11 @@
 import { constants as Constant } from "fs";
-import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { access as Access, mkdir as Dir, rm as Remove, readFile as _File, writeFile as __File } from "fs/promises";
 import { dirname } from "path";
 import gitDirectories from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
-import NPM from "../Option/NPM.js";
 import type { Files } from "../Option/Index.js";
+import NPM from "../Option/NPM.js";
 
 /**
  * This function writes workflows for npm packages based on their package.json files.
@@ -27,7 +27,7 @@ const Workflow = async (Files: Files) => {
 						""
 					);
 					const packageFile = (
-						await readFile(_package, "utf-8")
+						await _File(_package, "utf-8")
 					).toString();
 
 					const environment = (await Type()).get(
@@ -86,7 +86,7 @@ const Workflow = async (Files: Files) => {
 
 			if (workflowBase.size > 1) {
 				try {
-					await mkdir(`${githubDir}${Path}`, {
+					await Dir(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {
@@ -94,7 +94,7 @@ const Workflow = async (Files: Files) => {
 				}
 
 				try {
-					await writeFile(
+					await __File(
 						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);
@@ -105,10 +105,10 @@ const Workflow = async (Files: Files) => {
 				}
 			} else {
 				try {
-					await access(`${githubDir}${Path}${Name}`, Constant.F_OK);
+					await Access(`${githubDir}${Path}${Name}`, Constant.F_OK);
 
 					try {
-						await rm(`${githubDir}${Path}${Name}`);
+						await Remove(`${githubDir}${Path}${Name}`);
 					} catch {
 						console.log(
 							`Could not remove ${Path}${Name} for: ${githubDir}`
