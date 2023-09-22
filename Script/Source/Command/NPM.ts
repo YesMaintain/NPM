@@ -34,6 +34,7 @@ const Workflow = async (Files: Files) => {
 						directory,
 						""
 					);
+
 					const packageFile = (
 						await _File(_package, "utf-8")
 					).toString();
@@ -46,29 +47,26 @@ const Workflow = async (Files: Files) => {
 						typeof environment !== "undefined" &&
 						environment === "NPM"
 					) {
-						try {
-							const packageJSON = JSON.parse(packageFile);
+						const packageJSON = JSON.parse(packageFile);
 
-							for (const key in packageJSON) {
-								if (
-									Object.prototype.hasOwnProperty.call(
-										packageJSON,
-										key
-									)
-								) {
-									const values = packageJSON[key];
-									if (key === "scripts") {
-										for (const scripts in values) {
-											if (
-												Object.prototype.hasOwnProperty.call(
-													values,
-													scripts
-												)
-											) {
-												if (
-													scripts === "prepublishOnly"
-												) {
-													workflowBase.add(`
+						for (const key in packageJSON) {
+							if (
+								Object.prototype.hasOwnProperty.call(
+									packageJSON,
+									key
+								)
+							) {
+								const values = packageJSON[key];
+								if (key === "scripts") {
+									for (const scripts in values) {
+										if (
+											Object.prototype.hasOwnProperty.call(
+												values,
+												scripts
+											)
+										) {
+											if (scripts === "prepublishOnly") {
+												workflowBase.add(`
             - name: Publish .${packageDirectory}
               continue-on-error: true
               working-directory: .${packageDirectory}
@@ -78,15 +76,11 @@ const Workflow = async (Files: Files) => {
               env:
                   NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
 `);
-												}
 											}
 										}
 									}
 								}
 							}
-						} catch (_Error) {
-							console.log(_package);
-							console.log(_Error);
 						}
 					}
 				}

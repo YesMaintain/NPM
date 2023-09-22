@@ -42,23 +42,20 @@ const Workflow = async (files: Files) => {
 						typeof environment !== "undefined" &&
 						environment === "NPM"
 					) {
-						try {
-							const packageJSON = JSON.parse(packageFile);
+						const packageJSON = JSON.parse(packageFile);
 
-							for (const bundle of [
-								"bundledDependencies",
-								"bundleDependencies",
-								"dependencies",
-								"devDependencies",
-								"extensionDependencies",
-								"optionalDependencies",
-								"peerDependencies",
-								"peerDependenciesMeta",
-							].sort()) {
-								if (
-									typeof packageJSON[bundle] !== "undefined"
-								) {
-									workflowBase.add(`
+						for (const bundle of [
+							"bundledDependencies",
+							"bundleDependencies",
+							"dependencies",
+							"devDependencies",
+							"extensionDependencies",
+							"optionalDependencies",
+							"peerDependencies",
+							"peerDependenciesMeta",
+						].sort()) {
+							if (typeof packageJSON[bundle] !== "undefined") {
+								workflowBase.add(`
             - uses: actions/setup-node@v3.8.1
               with:
                   node-version: \${{ matrix.node-version }}
@@ -68,27 +65,27 @@ const Workflow = async (files: Files) => {
             - run: pnpm install
               working-directory: .${packageDirectory}
 `);
-								}
 							}
+						}
 
-							for (const key in packageJSON) {
-								if (
-									Object.prototype.hasOwnProperty.call(
-										packageJSON,
-										key
-									)
-								) {
-									const values = packageJSON[key];
-									if (key === "scripts") {
-										for (const scripts in values) {
-											if (
-												Object.prototype.hasOwnProperty.call(
-													values,
-													scripts
-												)
-											) {
-												if (scripts === "build") {
-													workflowBase.add(`
+						for (const key in packageJSON) {
+							if (
+								Object.prototype.hasOwnProperty.call(
+									packageJSON,
+									key
+								)
+							) {
+								const values = packageJSON[key];
+								if (key === "scripts") {
+									for (const scripts in values) {
+										if (
+											Object.prototype.hasOwnProperty.call(
+												values,
+												scripts
+											)
+										) {
+											if (scripts === "build") {
+												workflowBase.add(`
             - run: pnpm run build
               working-directory: .
 
@@ -100,12 +97,10 @@ const Workflow = async (files: Files) => {
 					)}-Node-\${{ matrix.node-version }}-Target
                   path: .${packageDirectory}/Target
 `);
-												}
+											}
 
-												if (
-													scripts === "prepublishOnly"
-												) {
-													workflowBase.add(`
+											if (scripts === "prepublishOnly") {
+												workflowBase.add(`
             - run: pnpm run prepublishOnly
               working-directory: .
 
@@ -117,22 +112,18 @@ const Workflow = async (files: Files) => {
 					)}-Node-\${{ matrix.node-version }}-Target
                   path: .${packageDirectory}/Target
 `);
-												}
+											}
 
-												if (scripts === "test") {
-													workflowBase.add(`
+											if (scripts === "test") {
+												workflowBase.add(`
             - run: pnpm run test
               working-directory: .${packageDirectory}
 `);
-												}
 											}
 										}
 									}
 								}
 							}
-						} catch (_Error) {
-							console.log(_package);
-							console.log(_Error);
 						}
 					}
 				}

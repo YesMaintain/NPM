@@ -31,8 +31,5 @@ export default async (
 				);
 			}
 		}
-	} catch (_Error) {
-		console.log(_Error);
-		console.log(`Could not ${Where}`);
-	}
+	} catch (_Error) {}
 };

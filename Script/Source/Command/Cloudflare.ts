@@ -38,18 +38,13 @@ const Workflow = async (files: Files) => {
 						typeof environment !== "undefined" &&
 						environment === "Cloudflare"
 					) {
-						try {
-							workflowBase.add(`
+						workflowBase.add(`
             - uses: cloudflare/wrangler-action@v3
               with:
                   apiToken: \${{ secrets.CF_API_TOKEN }}
                   accountId: \${{ secrets.CF_ACCOUNT_ID }}
                   workingDirectory: .${packageDirectory}
 `);
-						} catch (_Error) {
-							console.log(_package);
-							console.log(_Error);
-						}
 					}
 				}
 			}
