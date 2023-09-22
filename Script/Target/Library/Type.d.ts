@@ -1,3 +1,3 @@
-export type Filter = "NPM" | "Cargo" | "Composer" | "Nuget" | "Cloudflare" | false;
-declare const _default: (Filter?: Filter) => Promise<Map<string, Filter>>;
+export type Type = "NPM" | "Cargo" | "Composer" | "Nuget" | "Cloudflare" | false;
+declare const _default: (Filter?: Type) => Promise<Map<string, Type>>;
 export default _default;

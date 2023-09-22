@@ -1,6 +1,3 @@
-declare const _default: Set<{
-    Path: string;
-    Name: string;
-    File: () => Promise<Set<string>>;
-}>;
+import type { Type as Files } from "../Interface/Files.js";
+declare const _default: Files;
 export default _default;
