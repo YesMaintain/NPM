@@ -1,11 +1,13 @@
-import { constants as Constant } from "fs";
-import { access, mkdir, rm, writeFile } from "fs/promises";
-import { dirname as Dir } from "path";
-import gitDirectories from "../Library/Directory.js";
+import type { Type as Files } from "../Interface/Files.js";
+
+import Directory from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
 import Cloudflare from "../Option/Cloudflare.js";
-import type { Files } from "../Option/Index.js";
+
+import { constants as Constant } from "fs";
+import { access, mkdir, rm, writeFile } from "fs/promises";
+import { dirname as Dir } from "path";
 
 /**
  * The function `Workflow` iterates through a list of files, checks if a specific file exists, and
@@ -15,7 +17,7 @@ import type { Files } from "../Option/Index.js";
  */
 const Workflow = async (files: Files) => {
 	for (const { Path, Name, File } of files) {
-		for (const [directory, packageFiles] of await gitDirectories(
+		for (const [directory, packageFiles] of await Directory(
 			await Package("Cloudflare")
 		)) {
 			const githubDir = `${directory}/.github`;

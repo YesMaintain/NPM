@@ -1,11 +1,19 @@
-import { constants as Constant } from "fs";
-import { access as Access, mkdir as Dir, rm as Remove, readFile as _File, writeFile as __File } from "fs/promises";
-import { dirname } from "path";
-import gitDirectories from "../Library/Directory.js";
+import type { Type as Files } from "../Interface/Files.js";
+
+import Directory from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
-import type { Files } from "../Option/Index.js";
 import NPM from "../Option/NPM.js";
+
+import { constants as Constant } from "fs";
+import {
+	access as Access,
+	mkdir as Dir,
+	rm as Remove,
+	readFile as _File,
+	writeFile as __File,
+} from "fs/promises";
+import { dirname } from "path";
 
 /**
  * This function writes workflows for npm packages based on their package.json files.
@@ -14,7 +22,7 @@ import NPM from "../Option/NPM.js";
  */
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {
-		for (const [directory, packageFiles] of await gitDirectories(
+		for (const [directory, packageFiles] of await Directory(
 			await Package("NPM")
 		)) {
 			const githubDir = `${directory}/.github`;

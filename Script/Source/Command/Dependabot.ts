@@ -1,3 +1,10 @@
+import type { Type as Files } from "../Interface/Files.js";
+
+import DirsGit from "../Library/Directory.js";
+import Packages from "../Library/Package.js";
+import Types from "../Library/Type.js";
+import Dependabot from "../Option/Dependabot.js";
+
 import { constants as Constant } from "fs";
 import {
 	access as Access,
@@ -6,11 +13,6 @@ import {
 	writeFile as _File,
 } from "fs/promises";
 import { dirname as Dir } from "path";
-import DirsGit from "../Library/Directory.js";
-import Packages from "../Library/Package.js";
-import Types from "../Library/Type.js";
-import Dependabot from "../Option/Dependabot.js";
-import type { Files } from "../Option/Index.js";
 
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current

@@ -1,8 +1,10 @@
-import type { CommandOptions as Options } from "commander";
+import type { CommandOptions as Type } from "commander";
 
+/* The `Commands` variable is a set of objects representing different commands that can be executed in
+a program. Each object in the set has the following properties: */
 const Commands: Set<{
 	Name: string;
-	Opts?: Options;
+	Opts?: Type;
 	Type?: "Workflow";
 	Description?: string;
 	Arguments?: Set<{

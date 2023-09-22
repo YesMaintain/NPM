@@ -1,11 +1,13 @@
-import { constants as Constant } from "fs";
-import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
-import { dirname as Dir } from "path";
-import gitDirectories from "../Library/Directory.js";
+import type { Type as Files } from "../Interface/Files.js";
+
+import Directory from "../Library/Directory.js";
 import Package from "../Library/Package.js";
 import Type from "../Library/Type.js";
 import Node from "../Option/Node.js";
-import type { Files } from "../Option/Index.js";
+
+import { constants as Constant } from "fs";
+import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { dirname as Dir } from "path";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
@@ -16,7 +18,7 @@ import type { Files } from "../Option/Index.js";
  */
 const Workflow = async (files: Files) => {
 	for (const { Path, Name, File } of files) {
-		for (const [directory, packageFiles] of await gitDirectories(
+		for (const [directory, packageFiles] of await Directory(
 			await Package("NPM")
 		)) {
 			const githubDir = `${directory}/.github`;

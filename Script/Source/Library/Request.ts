@@ -1,8 +1,10 @@
-import { Octokit } from "@octokit/core";
 import type { OctokitResponse } from "@octokit/types";
+
+import Environment from "../Library/Environment.js";
+
+import { Octokit } from "@octokit/core";
 import { deepmerge as Merge } from "deepmerge-ts";
 import Tag from "etag";
-import Environment from "../Library/Environment.js";
 
 const OCTOKIT = new Octokit({
 	auth: Environment.Token,

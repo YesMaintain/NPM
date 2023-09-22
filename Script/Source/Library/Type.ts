@@ -1,4 +1,4 @@
-export type Filter =
+export type Type =
 	| "NPM"
 	| "Cargo"
 	| "Composer"
@@ -6,8 +6,8 @@ export type Filter =
 	| "Cloudflare"
 	| false;
 
-export default async (Filter: Filter = false) => {
-	const Result = new Map<string, Filter>();
+export default async (Filter: Type = false) => {
+	const Result = new Map<string, Type>();
 
 	Result.set("package.json", "NPM");
 	Result.set("Cargo.toml", "Cargo");

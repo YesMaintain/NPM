@@ -1,4 +1,5 @@
-import type { PluginBuild as Build, BuildOptions as Option } from "esbuild";
+import type { PluginBuild as Build, BuildOptions as Type } from "esbuild";
+
 import { copy as Copy } from "esbuild-plugin-copy";
 import {
 	access as Access,
@@ -49,4 +50,4 @@ export default {
 			],
 		}),
 	],
-} satisfies Option;
+} satisfies Type as Type;

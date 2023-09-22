@@ -1,9 +1,11 @@
-import Glob from "fast-glob";
+import type { Type } from "./Type.js";
+
 import Environment from "./Environment.js";
 import Types from "./Type.js";
-import type { Filter } from "./Type.js";
 
-export default async (Filter: Filter = false) =>
+import Glob from "fast-glob";
+
+export default async (Filter: Type = false) =>
 	new Set<string>(
 		[
 			...(await Glob(

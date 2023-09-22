@@ -1,16 +1,18 @@
-import { constants as Constant } from "fs";
-import {
-	access as Access,
-	writeFile as _File,
-	mkdir as Dir,
-	rm as Remove,
-} from "fs/promises";
-import { basename, dirname } from "path";
-import gitDirectories from "../Library/Directory.js";
+import type { Type as Files } from "../Interface/Files.js";
+
+import Directory from "../Library/Directory.js";
 import Packages from "../Library/Package.js";
 import Types from "../Library/Type.js";
 import Rust from "../Option/Rust.js";
-import type { Files } from "../Option/Index.js";
+
+import { constants as Constant } from "fs";
+import {
+	access as Access,
+	mkdir as Dir,
+	rm as Remove,
+	writeFile as _File,
+} from "fs/promises";
+import { basename, dirname } from "path";
 
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
@@ -21,7 +23,7 @@ import type { Files } from "../Option/Index.js";
  */
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {
-		for (const [directory, packageFiles] of await gitDirectories(
+		for (const [directory, packageFiles] of await Directory(
 			await Packages("Cargo")
 		)) {
 			const githubDir = `${directory}/.github`;
