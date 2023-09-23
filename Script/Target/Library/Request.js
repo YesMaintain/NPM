@@ -1,1 +1,0 @@
-import r from"../Library/Environment.js";import{Octokit as i}from"@octokit/core";import{deepmerge as s}from"deepmerge-ts";import c from"etag";const n=new i({auth:r.Token});var u=async(o,t={},e="octokit")=>{try{switch(console.log(`Successfully ${o}`),e){case"octokit":return await n.request(o,s(t,{headers:{"If-None-Match":c(o)}}))}}catch{}};export{u as default};

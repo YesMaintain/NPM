@@ -1,1 +1,0 @@
-import{readFile as e}from"fs/promises";import{dirname as r,resolve as a}from"path";import{fileURLToPath as t}from"url";var s=new Set([{Path:"/workflows/",Name:"Cloudflare.yml",File:async()=>new Set([(await e(a(`${r(t(import.meta.url))}/../../Target/Workflow/Cloudflare.yml`),"utf-8")).toString()])}]);export{s as default};
