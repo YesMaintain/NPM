@@ -1,8 +1,4 @@
-import type { Type as Files } from "../Interface/Files.js";
-
-import { readFile as File } from "fs/promises";
-import { dirname as Dir, resolve as Resolve } from "path";
-import { fileURLToPath as Path } from "url";
+import type Type from "../Interface/Files.js";
 
 export default new Set([
 	{
@@ -11,10 +7,14 @@ export default new Set([
 		File: async () =>
 			new Set([
 				(
-					await File(
-						Resolve(
-							`${Dir(
-								Path(import.meta.url)
+					await (
+						await import("fs/promises")
+					).readFile(
+						(await import("path")).resolve(
+							`${(await import("path")).dirname(
+								(await import("url")).fileURLToPath(
+									import.meta.url
+								)
 							)}/../../Target/Workflow/Rust.yml`
 						),
 						"utf-8"
@@ -22,4 +22,4 @@ export default new Set([
 				).toString(),
 			]),
 	},
-]) satisfies Files;
+]) satisfies Type as Type;

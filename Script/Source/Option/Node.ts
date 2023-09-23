@@ -1,9 +1,5 @@
 import type { Type as Files } from "../Interface/Files.js";
 
-import { readFile as File } from "fs/promises";
-import { dirname as Dir, resolve as Resolve } from "path";
-import { fileURLToPath as Path } from "url";
-
 export default new Set([
 	{
 		Path: "/workflows/",
@@ -11,10 +7,14 @@ export default new Set([
 		File: async () =>
 			new Set([
 				(
-					await File(
-						Resolve(
-							`${Dir(
-								Path(import.meta.url)
+					await (
+						await import("fs/promises")
+					).readFile(
+						(await import("path")).resolve(
+							`${(await import("path")).dirname(
+								(await import("url")).fileURLToPath(
+									import.meta.url
+								)
 							)}/../../Target/Workflow/Node.yml`
 						),
 						"utf-8"

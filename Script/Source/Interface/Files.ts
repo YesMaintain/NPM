@@ -3,3 +3,5 @@ export type Type = Set<{
 	Name: string;
 	File: () => Promise<Set<string>>;
 }>;
+
+export type { Type as default };
