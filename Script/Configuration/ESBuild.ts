@@ -40,4 +40,4 @@ export default {
 			],
 		}),
 	],
-} satisfies Type as Type;
+} satisfies Type;

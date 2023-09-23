@@ -22,4 +22,4 @@ export default new Set([
 				).toString(),
 			]),
 	},
-]) satisfies Files as Files;
+]) satisfies Files;
