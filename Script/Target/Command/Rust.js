@@ -1,5 +1,5 @@
 import m from"../Library/Directory.js";import g from"../Library/Package.js";import $ from"../Library/Type.js";import p from"../Option/Rust.js";import{constants as w}from"fs";import{access as y,mkdir as u,rm as d,writeFile as h}from"fs/promises";import{basename as k,dirname as F}from"path";const C=async n=>{for(const{Path:o,Name:t,File:l}of n)for(const[s,f]of await m(await g("Cargo"))){const a=`${s}/.github`,r=await l();if(o==="/workflows/"&&t==="Rust.yml")for(const e of f){const i=F(e).replace(s,""),c=(await $()).get(e.split("/").pop());typeof c<"u"&&c==="Cargo"&&r.add(`
-            - uses: actions/cache@v3.3.1
+            - uses: actions/cache@v3.3.2
               with:
                   path: |
                       ~/.cargo/bin/
