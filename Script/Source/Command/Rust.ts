@@ -1,19 +1,5 @@
 import type { Type as Files } from "../Interface/Files.js";
 
-import Directory from "../Library/Directory.js";
-import Packages from "../Library/Package.js";
-import Types from "../Library/Type.js";
-import Rust from "../Option/Rust.js";
-
-import { constants as Constant } from "fs";
-import {
-	access as Access,
-	mkdir as Dir,
-	rm as Remove,
-	writeFile as _File,
-} from "fs/promises";
-import { basename, dirname } from "path";
-
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
@@ -23,22 +9,23 @@ import { basename, dirname } from "path";
  */
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {
-		for (const [directory, packageFiles] of await Directory(
-			await Packages("Cargo")
+		for (const [directory, packageFiles] of await (
+			await import("../Library/Directory.js")
+		).default(
+			await (await import("../Library/Package.js")).default("Cargo")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
 
 			if (Path === "/workflows/" && Name === "Rust.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = dirname(_package).replace(
-						directory,
-						""
-					);
+					const packageDirectory = (await import("path"))
+						.dirname(_package)
+						.replace(directory, "");
 
-					const environment = (await Types()).get(
-						_package.split("/").pop()
-					);
+					const environment = (
+						await (await import("../Library/Type.js")).default()
+					).get(_package.split("/").pop());
 
 					if (
 						typeof environment !== "undefined" &&
@@ -58,9 +45,9 @@ const Workflow = async (Files: Files) => {
             - uses: actions-rs/cargo@v1.0.3
               with:
                 command: build
-                args: --release --all-features --manifest-path .${packageDirectory}/${basename(
-					_package
-				)}
+                args: --release --all-features --manifest-path .${packageDirectory}/${(
+					await import("path")
+				).basename(_package)}
 `);
 					}
 				}
@@ -68,7 +55,9 @@ const Workflow = async (Files: Files) => {
 
 			if (workflowBase.size > 1) {
 				try {
-					await Dir(`${githubDir}${Path}`, {
+					await (
+						await import("fs/promises")
+					).mkdir(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {
@@ -76,7 +65,9 @@ const Workflow = async (Files: Files) => {
 				}
 
 				try {
-					await _File(
+					await (
+						await import("fs/promises")
+					).writeFile(
 						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);
@@ -87,10 +78,17 @@ const Workflow = async (Files: Files) => {
 				}
 			} else {
 				try {
-					await Access(`${githubDir}${Path}${Name}`, Constant.F_OK);
+					await (
+						await import("fs/promises")
+					).access(
+						`${githubDir}${Path}${Name}`,
+						(await import("fs")).constants.F_OK
+					);
 
 					try {
-						await Remove(`${githubDir}${Path}${Name}`);
+						await (
+							await import("fs/promises")
+						).rm(`${githubDir}${Path}${Name}`);
 					} catch {
 						console.log(
 							`Could not remove ${Path}${Name} for: ${githubDir}`
@@ -102,4 +100,5 @@ const Workflow = async (Files: Files) => {
 	}
 };
 
-export default async () => await Workflow(Rust);
+export default async () =>
+	await Workflow((await import("../Object/Rust.js")).default);

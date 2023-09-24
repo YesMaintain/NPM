@@ -1,9 +1,10 @@
-import type { Type as Files } from "../Interface/Files.js";
+import type Type from "../Interface/Files.js";
 
 export default new Set([
 	{
 		Path: "/workflows/",
-		Name: "Node.yml",
+		Name: "NPM.yml",
+
 		File: async () =>
 			new Set([
 				(
@@ -15,11 +16,11 @@ export default new Set([
 								(await import("url")).fileURLToPath(
 									import.meta.url
 								)
-							)}/../../Target/Workflow/Node.yml`
+							)}/../../Target/Workflow/NPM.yml`
 						),
 						"utf-8"
 					)
 				).toString(),
 			]),
 	},
-]) satisfies Files;
+]) satisfies Type;

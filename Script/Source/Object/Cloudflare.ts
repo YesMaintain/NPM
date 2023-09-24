@@ -3,7 +3,7 @@ import type Type from "../Interface/Files.js";
 export default new Set([
 	{
 		Path: "/workflows/",
-		Name: "NPM.yml",
+		Name: "Cloudflare.yml",
 		File: async () =>
 			new Set([
 				(
@@ -15,7 +15,7 @@ export default new Set([
 								(await import("url")).fileURLToPath(
 									import.meta.url
 								)
-							)}/../../Target/Workflow/NPM.yml`
+							)}/../../Target/Workflow/Cloudflare.yml`
 						),
 						"utf-8"
 					)

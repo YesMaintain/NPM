@@ -1,10 +1,8 @@
 import type { CommandOptions } from "commander";
 
-/* The `Commands` variable is a set of objects representing different commands that can be executed in
-a program. Each object in the set has the following properties: */
-const Commands: Set<{
+export const _Object: Set<{
 	Name: string;
-	Opts?: Type;
+	Opts?: CommandOptions;
 	Type?: "Workflow";
 	Description?: string;
 	Arguments?: Set<{
@@ -84,7 +82,7 @@ const Commands: Set<{
 		Name: "Workflow",
 		Description: "Trigger all workflow tasks.",
 		Action: async () =>
-			Commands.forEach((Command) =>
+			_Object.forEach((Command) =>
 				Command.Type === "Workflow" ? Command.Action() : {}
 			),
 	},
@@ -95,4 +93,4 @@ const Commands: Set<{
 	},
 ]);
 
-export default Commands;
+export default _Object;
