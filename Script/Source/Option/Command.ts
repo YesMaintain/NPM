@@ -1,4 +1,4 @@
-import type { CommandOptions as Type } from "commander";
+import type { CommandOptions } from "commander";
 
 /* The `Commands` variable is a set of objects representing different commands that can be executed in
 a program. Each object in the set has the following properties: */

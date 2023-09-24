@@ -22,4 +22,4 @@ export default new Set([
 				).toString(),
 			]),
 	},
-]) satisfies Type as Type;
+]) satisfies Type;
