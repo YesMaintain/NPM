@@ -80,21 +80,14 @@ const Workflow = async (Files: Files) => {
 				try {
 					await (
 						await import("fs/promises")
-					).access(
-						`${githubDir}${Path}${Name}`,
-						(await import("fs")).constants.F_OK
+					).rm(`${githubDir}${Path}${Name}`, {
+						recursive: true,
+					});
+				} catch {
+					console.log(
+						`Could not remove ${Path}${Name} for: ${githubDir}`
 					);
-
-					try {
-						await (
-							await import("fs/promises")
-						).rm(`${githubDir}${Path}${Name}`);
-					} catch {
-						console.log(
-							`Could not remove ${Path}${Name} for: ${githubDir}`
-						);
-					}
-				} catch {}
+				}
 			}
 		}
 	}
