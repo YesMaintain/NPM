@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-import "./Index.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./Index.js");
