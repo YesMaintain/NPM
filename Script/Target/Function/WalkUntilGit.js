@@ -1,6 +1,6 @@
 const _Function = async (Search, From) => {
   const Path = (await import("path")).dirname(Search);
-  const Original = From ? From : Path;
+  const Original = From ?? Path;
   if (Path === Search) {
     return Original;
   }

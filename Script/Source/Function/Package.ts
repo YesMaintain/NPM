@@ -10,7 +10,7 @@ export default async (Filter: Type = false) =>
 		[
 			...(await Glob(
 				[
-					...[...(await Types(Filter)).keys()].map(
+					...[...(await (Types)(Filter)).keys()].map(
 						(Package) => `**/${Package}`
 					),
 					"!**/node_modules",
