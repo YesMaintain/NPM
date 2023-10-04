@@ -42,11 +42,7 @@
 		"@types/node": "20.8.2",
 		"@types/pacote": "11.1.6",
 		"esbuild-plugin-copy": "2.1.1",
-<<<<<<< HEAD
 		"typescript-esbuild": "0.2.14"
-=======
-		"typescript-esbuild": "0.2.13"
->>>>>>> 2eedcd9a0d48127faad66cf0a557ad7417ed9c4e
 	},
 	"publishConfig": {
 		"access": "public"
