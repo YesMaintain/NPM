@@ -6,7 +6,7 @@ var Git_default = async () => new Set(
     })
   ].sort()
 );
-const { default: Environment } = await import("../Object/Environment.js");
+const { default: Environment } = await import("../Variable/Environment.js");
 export {
   Environment,
   Git_default as default

@@ -61,7 +61,7 @@ const Workflow = async (Files) => {
     }
   }
 };
-var Rust_default = async () => await Workflow((await import("../Object/Rust.js")).default);
+var Rust_default = async () => await Workflow((await import("../Variable/Rust.js")).default);
 export {
   Rust_default as default
 };
