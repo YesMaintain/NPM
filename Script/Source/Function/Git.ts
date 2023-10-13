@@ -11,5 +11,5 @@ export default async () =>
 	);
 
 export const { default: Environment } = await import(
-	"../Object/Environment.js"
+	"../Variable/Environment.js"
 );

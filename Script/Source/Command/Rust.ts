@@ -94,4 +94,4 @@ const Workflow = async (Files: Files) => {
 };
 
 export default async () =>
-	await Workflow((await import("../Object/Rust.js")).default);
+	await Workflow((await import("../Variable/Rust.js")).default);

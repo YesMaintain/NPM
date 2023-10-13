@@ -1,4 +1,4 @@
-const { default: _Object } = await import("../Object/Environment.js");
+const { default: _Object } = await import("../Variable/Environment.js");
 
 export type Type = Zod.infer<typeof _Object>;
 
