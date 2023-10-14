@@ -1,13 +1,10 @@
-import Environment from "./Environment.js";
-import Types from "./Type.js";
-import Glob from "fast-glob";
 var Package_default = async (Filter = false) => new Set(
   [
-    ...await Glob(
+    ...await (await import("fast-glob")).default(
       [
-        ...[...(await Types(Filter)).keys()].map(
-          (Package) => `**/${Package}`
-        ),
+        ...[
+          ...(await (await import("./Type.js")).default(Filter)).keys()
+        ].map((Package) => `**/${Package}`),
         "!**/node_modules",
         "!**/target",
         "!**/Target",
@@ -68,7 +65,7 @@ var Package_default = async (Filter = false) => new Set(
       ],
       {
         absolute: true,
-        cwd: Environment.Base
+        cwd: (await import("../Variable/Environment.js")).default.parse(process.env).Base
       }
     )
   ].sort()

@@ -1,7 +1,7 @@
-import Environment from "../Library/Environment.js";
-import Request from "../Library/Request.js";
 var Edit_default = async (repositories = []) => {
-  const User = Environment.User;
+  const User = (await import("../Variable/Environment.js")).default.parse(
+    process.env
+  ).User;
   const Organizations = [];
   const Repositories = [];
   for (const Repository of (await Request(`GET /users/${User}/repos`))?.data) {
@@ -90,6 +90,8 @@ var Edit_default = async (repositories = []) => {
     }
   }
 };
+const { default: Request } = await import("../Function/Request.js");
 export {
+  Request,
   Edit_default as default
 };

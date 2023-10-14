@@ -1,10 +1,3 @@
-import Environment from "../Library/Environment.js";
-import Request from "../Library/Request.js";
-const User = Environment.User;
-const All = {
-  Organizations: [],
-  Repositories: []
-};
 var Clean_default = async (Repositories = []) => {
   const Get = await Request(`GET /users/${User}/repos`);
   if (Get) {
@@ -93,6 +86,17 @@ var Clean_default = async (Repositories = []) => {
     }
   }
 };
+const { default: Request } = await import("../Function/Request.js");
+const User = (await import("../Variable/Environment.js")).default.parse(
+  process.env
+).User;
+const All = {
+  Organizations: [],
+  Repositories: []
+};
 export {
+  All,
+  Request,
+  User,
   Clean_default as default
 };

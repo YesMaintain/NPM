@@ -1,4 +1,3 @@
-import type { CommandOptions } from "commander";
 export declare const Variable: Set<{
     Name: string;
     Opts?: CommandOptions;
@@ -12,3 +11,4 @@ export declare const Variable: Set<{
     Action: (...args: any[]) => Promise<void>;
 }>;
 export default Variable;
+import type { CommandOptions } from "commander";

@@ -1,6 +1,3 @@
-const { readFile } = await import("fs/promises");
-const { dirname, resolve } = await import("path");
-const { fileURLToPath } = await import("url");
 var Dependabot_default = /* @__PURE__ */ new Set([
   {
     Path: "/",
@@ -31,6 +28,9 @@ var Dependabot_default = /* @__PURE__ */ new Set([
     ])
   }
 ]);
+const { readFile } = await import("fs/promises");
+const { dirname, resolve } = await import("path");
+const { fileURLToPath } = await import("url");
 export {
   Dependabot_default as default,
   dirname,

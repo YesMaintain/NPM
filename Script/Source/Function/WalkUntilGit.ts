@@ -1,18 +1,8 @@
 /**
- * The function recursively walks through directories until it finds a ".git" folder or reaches the
- * root directory.
- * @param {string} Search - The `Search` parameter is a string that represents the directory path where
- * you want to start searching for a `.git` directory.
- * @param {string} [From] - The "From" parameter is an optional parameter that specifies the starting
- * directory for the search. If provided, the function will start searching for the ".git" directory
- * from this directory. If not provided, the function will start searching from the directory specified
- * by the "Search" parameter.
- * @returns The function `WalkUntilGit` returns a promise that resolves to a string.
+ * @module WalkUntilGit
+ *
  */
-export const _Function = async (
-	Search: string,
-	From?: string
-): Promise<string> => {
+export const _Function = (async (...[Search, From]: Parameters<Type>) => {
 	const Path = (await import("path")).dirname(Search);
 	const Original = From ?? Path;
 
@@ -23,12 +13,14 @@ export const _Function = async (
 	try {
 		await (
 			await import("fs/promises")
-		).access(`${Path}/.git`, (await import("fs")).constants.R_OK);
+		).access(`${Path}/.git`, (await import("fs/promises")).constants.R_OK);
 
 		return Path;
 	} catch (_Error) {
 		return await _Function(Path, Original);
 	}
-};
+}) satisfies Type as Type;
 
 export default _Function;
+
+import type Type from "../Interface/WalkUntilGit";

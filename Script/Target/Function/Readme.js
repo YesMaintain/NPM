@@ -1,10 +1,10 @@
-import Glob from "fast-glob";
-import Environment from "./Environment.js";
 var Readme_default = async () => new Set(
   [
-    ...await Glob(["**/README.md"], {
+    ...await (await import("fast-glob")).default(["**/README.md"], {
       absolute: true,
-      cwd: Environment.Base
+      cwd: (await import("../Variable/Environment.js")).default.parse(
+        process.env
+      ).Base
     })
   ].sort()
 );

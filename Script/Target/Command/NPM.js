@@ -1,33 +1,15 @@
-import Directory from "../Library/Directory.js";
-import Package from "../Library/Package.js";
-import Type from "../Library/Type.js";
-import NPM from "../Option/NPM.js";
-import { constants as Constant } from "fs";
-import {
-  access as Access,
-  mkdir as Dir,
-  rm as Remove,
-  readFile as _File,
-  writeFile as __File
-} from "fs/promises";
-import { dirname } from "path";
 const Workflow = async (Files) => {
   for (const { Path, Name, File } of Files) {
-    for (const [directory, packageFiles] of await Directory(
-      await Package("NPM")
+    for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
+      await (await import("../Function/Package.js")).default("NPM")
     )) {
       const githubDir = `${directory}/.github`;
       const workflowBase = await File();
       if (Path === "/workflows/" && Name === "NPM.yml") {
         for (const _package of packageFiles) {
-          const packageDirectory = dirname(_package).replace(
-            directory,
-            ""
-          );
-          const packageFile = (await _File(_package, "utf-8")).toString();
-          const environment = (await Type()).get(
-            _package.split("/").pop()
-          );
+          const packageDirectory = (await import("path")).dirname(_package).replace(directory, "");
+          const packageFile = (await (await import("fs/promises")).readFile(_package, "utf-8")).toString();
+          const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "NPM") {
             const packageJSON = JSON.parse(packageFile);
             for (const key in packageJSON) {
@@ -44,15 +26,15 @@ const Workflow = async (Files) => {
                     )) {
                       if (scripts === "prepublishOnly") {
                         workflowBase.add(`
-            - name: Publish .${packageDirectory}
+												- name: Publish .${packageDirectory}
               continue-on-error: true
               working-directory: .${packageDirectory}
               run: |
                   npm install --legacy-peer-deps
                   npm publish --legacy-peer-deps --provenance
-              env:
+				  env:
                   NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
-`);
+				  `);
                       }
                     }
                   }
@@ -64,14 +46,14 @@ const Workflow = async (Files) => {
       }
       if (workflowBase.size > 1) {
         try {
-          await Dir(`${githubDir}${Path}`, {
+          await (await import("fs/promises")).mkdir(`${githubDir}${Path}`, {
             recursive: true
           });
         } catch {
           console.log(`Could not create: ${githubDir}${Path}`);
         }
         try {
-          await __File(
+          await (await import("fs/promises")).writeFile(
             `${githubDir}${Path}${Name}`,
             `${[...workflowBase].join("")}`
           );
@@ -82,9 +64,12 @@ const Workflow = async (Files) => {
         }
       } else {
         try {
-          await Access(`${githubDir}${Path}${Name}`, Constant.F_OK);
+          await (await import("fs/promises")).access(
+            `${githubDir}${Path}${Name}`,
+            (await import("fs/promises")).constants.F_OK
+          );
           try {
-            await Remove(`${githubDir}${Path}${Name}`);
+            await (await import("fs/promises")).rm(`${githubDir}${Path}${Name}`);
           } catch {
             console.log(
               `Could not remove ${Path}${Name} for: ${githubDir}`
@@ -96,7 +81,7 @@ const Workflow = async (Files) => {
     }
   }
 };
-var NPM_default = async () => await Workflow(NPM);
+var NPM_default = async () => await Workflow((await import("../Variable/NPM.js")).default);
 export {
   NPM_default as default
 };

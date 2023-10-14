@@ -1,20 +1,17 @@
-import Environment from "../Library/Environment.js";
-import { Octokit } from "@octokit/core";
-import { deepmerge as Merge } from "deepmerge-ts";
-import Tag from "etag";
-const OCTOKIT = new Octokit({
-  auth: Environment.Token
-});
 var Request_default = async (Where, With = {}, Type = "octokit") => {
   try {
     console.log(`Successfully ${Where}`);
     switch (Type) {
       case "octokit": {
-        return await OCTOKIT.request(
+        return await new (await import("@octokit/core")).Octokit({
+          auth: (await import("../Variable/Environment.js")).default.parse(process.env).Token
+        }).request(
           Where,
-          Merge(With, {
+          (await import("deepmerge-ts")).deepmerge(With, {
             headers: {
-              "If-None-Match": Tag(Where)
+              "If-None-Match": (await import("etag")).default(
+                Where
+              )
             }
           })
         );
