@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-import { Command } from "commander";
-import Commands from "./Option/Command.js";
-const Program = new Command();
-Program.name("Maintain").description("Maintains GitHub repositories");
-Commands?.forEach((Command2) => {
-  const _Program = Program.command(Command2.Name).description(
-    typeof Command2.Description !== "undefined" ? Command2.Description : ""
-  ).action(Command2.Action);
-  Command2.Arguments?.forEach((argument) => {
-    _Program.argument(argument.Name, argument.Description);
-  });
-});
-Program.parse();
+const Program = new (await import("commander")).Command().name("Maintain").description("Maintains GitHub repositories").version("0.0.1");
+(await import("../Variable/Commands.js")).default?.forEach(
+  ({ Action, Name, Description, Arguments }) => {
+    const _Program = Program.command(Name).description(typeof Description !== "undefined" ? Description : "").action(Action);
+    Arguments?.forEach((Argument) => {
+      _Program.argument(Argument.Name, Argument.Description);
+    });
+  }
+);
+var YesMaintain_default = Program.parse();
+export {
+  YesMaintain_default as default
+};

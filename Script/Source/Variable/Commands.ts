@@ -1,6 +1,6 @@
 import type { CommandOptions } from "commander";
 
-export const _Object: Set<{
+export const Variable: Set<{
 	Name: string;
 	Opts?: CommandOptions;
 	Type?: "Workflow";
@@ -8,10 +8,10 @@ export const _Object: Set<{
 	Arguments?: Set<{
 		Name: string;
 		Description?: string;
-		// rome-ignore lint/suspicious/noExplicitAny:
+		// biome-ignore lint/suspicious/noExplicitAny:
 		Value?: any;
 	}>;
-	// rome-ignore lint/suspicious/noExplicitAny:
+	// biome-ignore lint/suspicious/noExplicitAny:
 	Action: (...args: any[]) => Promise<void>;
 }> = new Set([
 	{
@@ -82,7 +82,7 @@ export const _Object: Set<{
 		Name: "Workflow",
 		Description: "Trigger all workflow tasks.",
 		Action: async () =>
-			_Object.forEach((Command) =>
+			Variable.forEach((Command) =>
 				Command.Type === "Workflow" ? Command.Action() : {}
 			),
 	},
@@ -93,4 +93,4 @@ export const _Object: Set<{
 	},
 ]);
 
-export default _Object;
+export default Variable;

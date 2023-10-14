@@ -14,7 +14,7 @@ export default async (
 	Where: string,
 	With: {} = {},
 	Type = "octokit"
-	// rome-ignore lint/suspicious/noExplicitAny:
+	// biome-ignore lint/suspicious/noExplicitAny:
 ): Promise<OctokitResponse<any, number> | void> => {
 	try {
 		console.log(`Successfully ${Where}`);
