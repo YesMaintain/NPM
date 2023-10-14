@@ -1,10 +1,3 @@
-import { Octokit } from "@octokit/core";
-import Environment from "../Library/Environment.js";
-
-const OCTOKIT = new Octokit({
-	auth: Environment.Token,
-});
-
 export default async (URL = "") => {
 	if (typeof URL !== "string") {
 		return;
@@ -17,7 +10,11 @@ export default async (URL = "") => {
 
 	// start: starred
 	try {
-		await OCTOKIT.request(`PUT /user/starred/${_URL}`);
+		await new (await import("@octokit/core")).Octokit({
+			auth: (await import("../Variable/Environment.js")).default.parse(
+				process.env
+			).Token,
+		}).request(`PUT /user/starred/${_URL}`);
 
 		console.log(`Starred repository: ${_URL}`);
 	} catch (_Error) {

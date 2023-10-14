@@ -1,18 +1,16 @@
-import type { OctokitResponse } from "@octokit/types";
-
-import Environment from "../Library/Environment.js";
-
 import { Octokit } from "@octokit/core";
 import { deepmerge as Merge } from "deepmerge-ts";
 import Tag from "etag";
 
 const OCTOKIT = new Octokit({
-	auth: Environment.Token,
+	auth: (await import("../Variable/Environment.js")).default.parse(
+		process.env
+	).Token,
 });
 
 export default async (
 	Where: string,
-	With: {} = {},
+	With = {},
 	Type = "octokit"
 	// biome-ignore lint/suspicious/noExplicitAny:
 ): Promise<OctokitResponse<any, number> | void> => {
@@ -33,3 +31,5 @@ export default async (
 		}
 	} catch (_Error) {}
 };
+
+import type { OctokitResponse } from "@octokit/types";

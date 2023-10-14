@@ -1,5 +1,3 @@
-import type { CommandOptions } from "commander";
-
 export const Variable: Set<{
 	Name: string;
 	Opts?: CommandOptions;
@@ -94,3 +92,5 @@ export const Variable: Set<{
 ]);
 
 export default Variable;
+
+import type { CommandOptions } from "commander";

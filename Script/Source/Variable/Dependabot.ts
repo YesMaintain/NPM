@@ -1,10 +1,3 @@
-import type Type from "../Interface/Files.js";
-
-export const { readFile } = await import("fs/promises");
-
-export const { dirname, resolve } = await import("path");
-
-export const { fileURLToPath } = await import("url");
 
 export default new Set([
 	{
@@ -37,8 +30,17 @@ export default new Set([
 							)}/../../Target/Workflow/InnerDependabot.yml`
 						),
 						"utf-8"
-					)
+						)
 				).toString(),
 			]),
 	},
 ]) satisfies Type;
+
+import type Type from "../Interface/Files.js";
+
+export const { readFile } = await import("fs/promises");
+
+export const { dirname, resolve } = await import("path");
+
+export const { fileURLToPath } = await import("url");
+
