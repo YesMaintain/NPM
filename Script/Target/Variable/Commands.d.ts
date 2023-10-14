@@ -1,5 +1,5 @@
 import type { CommandOptions } from "commander";
-export declare const _Object: Set<{
+export declare const Variable: Set<{
     Name: string;
     Opts?: CommandOptions;
     Type?: "Workflow";
@@ -11,4 +11,4 @@ export declare const _Object: Set<{
     }>;
     Action: (...args: any[]) => Promise<void>;
 }>;
-export default _Object;
+export default Variable;

@@ -1,4 +1,4 @@
-const _Object = /* @__PURE__ */ new Set([
+const Variable = /* @__PURE__ */ new Set([
   {
     Name: "Clean",
     Description: "Clean GitHub repositories",
@@ -65,7 +65,7 @@ const _Object = /* @__PURE__ */ new Set([
   {
     Name: "Workflow",
     Description: "Trigger all workflow tasks.",
-    Action: async () => _Object.forEach(
+    Action: async () => Variable.forEach(
       (Command) => Command.Type === "Workflow" ? Command.Action() : {}
     )
   },
@@ -75,8 +75,8 @@ const _Object = /* @__PURE__ */ new Set([
     Action: (await import("../Command/Star.js")).default
   }
 ]);
-var Commands_default = _Object;
+var Commands_default = Variable;
 export {
-  _Object,
+  Variable,
   Commands_default as default
 };

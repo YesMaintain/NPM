@@ -3,8 +3,8 @@ const Program = new (await import("commander")).Command().name("Maintain").descr
 (await import("../Variable/Commands.js")).default?.forEach(
   ({ Action, Name, Description, Arguments }) => {
     const _Program = Program.command(Name).description(typeof Description !== "undefined" ? Description : "").action(Action);
-    Arguments?.forEach((Argument) => {
-      _Program.argument(Argument.Name, Argument.Description);
+    Arguments?.forEach(({ Name: Name2, Description: Description2 }) => {
+      _Program.argument(Name2, Description2);
     });
   }
 );

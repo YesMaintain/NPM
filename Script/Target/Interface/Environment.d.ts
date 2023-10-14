@@ -1,8 +1,8 @@
-declare const _Object: import("zod").ZodObject<{
-    User: import("zod").ZodDefault<import("zod").ZodOptional<import("zod").ZodString>>;
-    Base: import("zod").ZodDefault<import("zod").ZodOptional<import("zod").ZodString>>;
-    Token: import("zod").ZodDefault<import("zod").ZodOptional<import("zod").ZodString>>;
-}, "strip", import("zod").ZodTypeAny, {
+declare const Variable: Zod.ZodObject<{
+    User: Zod.ZodDefault<Zod.ZodOptional<Zod.ZodString>>;
+    Base: Zod.ZodDefault<Zod.ZodOptional<Zod.ZodString>>;
+    Token: Zod.ZodDefault<Zod.ZodOptional<Zod.ZodString>>;
+}, "strip", Zod.ZodTypeAny, {
     User: string;
     Base: string;
     Token: string;
@@ -11,5 +11,6 @@ declare const _Object: import("zod").ZodObject<{
     Base?: string | undefined;
     Token?: string | undefined;
 }>;
-export type Type = Zod.infer<typeof _Object>;
+export type Type = Zod.infer<typeof Variable>;
+import type Zod from "zod";
 export type { Type as default };
