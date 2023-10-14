@@ -1,8 +1,7 @@
-import Environment from "../Library/Environment.js";
-import Request from "../Library/Request.js";
-
 export default async (repositories: string[] | Set<string> = []) => {
-	const User = Environment.User;
+	const User = (await import("../Variable/Environment.js")).default.parse(
+		process.env
+	).User;
 
 	const Organizations: {
 		name: string;
@@ -138,3 +137,5 @@ export default async (repositories: string[] | Set<string> = []) => {
 	}
 	// end: repos
 };
+
+export const { default: Request } = await import("../Function/Request.js");

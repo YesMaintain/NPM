@@ -1,21 +1,3 @@
-import Environment from "../Library/Environment.js";
-import Request from "../Library/Request.js";
-
-const User = Environment.User;
-
-const All: {
-	Organizations: {
-		Name: string;
-	}[];
-	Repositories: {
-		Owner: string;
-		Name: string;
-	}[];
-} = {
-	Organizations: [],
-	Repositories: [],
-};
-
 export default async (Repositories: string[] = []) => {
 	const Get = await Request(`GET /users/${User}/repos`);
 
@@ -121,4 +103,23 @@ export default async (Repositories: string[] = []) => {
 		}
 	}
 	// end: repos
+};
+
+export const { default: Request } = await import("../Function/Request.js");
+
+export const User = (await import("../Variable/Environment.js")).default.parse(
+	process.env
+).User;
+
+export const All: {
+	Organizations: {
+		Name: string;
+	}[];
+	Repositories: {
+		Owner: string;
+		Name: string;
+	}[];
+} = {
+	Organizations: [],
+	Repositories: [],
 };

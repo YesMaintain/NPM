@@ -1,8 +1,7 @@
-import Environment from "../Library/Environment.js";
-import Request from "../Library/Request.js";
-
 export default async (repositories: string[] | Set<string> = []) => {
-	const User = Environment.User;
+	const User = (await import("../Variable/Environment.js")).default.parse(
+		process.env
+	).User;
 
 	const Organizations: {
 		name: string;
@@ -37,10 +36,10 @@ export default async (repositories: string[] | Set<string> = []) => {
 	// start: repos
 	let pass: boolean | undefined = undefined;
 
-	for (const repo of Repositories) {
+	for (const { name, owner } of Repositories) {
 		/* Checking if the repository is in the list of repositories. */
 		for (const repository of repositories) {
-			if (repo.name === repository) {
+			if (name === repository) {
 				pass = true;
 			} else {
 				pass = false;
@@ -50,13 +49,13 @@ export default async (repositories: string[] | Set<string> = []) => {
 		if (typeof pass === "undefined" || pass) {
 			// start: actions/workflows
 			for (const workflow of (
-				await Request(
-					`GET /repos/${repo.owner}/${repo.name}/actions/workflows`,
-					{ owner: repo.owner, repo: repo.name }
-				)
+				await Request(`GET /repos/${owner}/${name}/actions/workflows`, {
+					owner: owner,
+					repo: name,
+				})
 			)?.data?.workflows) {
 				await Request(
-					`POST /repos/${repo.owner}/${repo.name}/actions/workflows/${workflow.id}/dispatches`,
+					`POST /repos/${owner}/${name}/actions/workflows/${workflow.id}/dispatches`,
 					{
 						ref: "main",
 					}
@@ -67,3 +66,5 @@ export default async (repositories: string[] | Set<string> = []) => {
 	}
 	// end: repos
 };
+
+export const { default: Request } = await import("../Function/Request.js");

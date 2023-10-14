@@ -1,12 +1,13 @@
-import Glob from "fast-glob";
-import Environment from "./Environment.js";
-
 export default async () =>
 	new Set<string>(
 		[
-			...(await Glob(["**/README.md"], {
+			...(await (
+				await import("fast-glob")
+			).default(["**/README.md"], {
 				absolute: true,
-				cwd: Environment.Base,
+				cwd: (await import("../Variable/Environment.js")).default.parse(
+					process.env
+				).Base,
 			})),
 		].sort()
 	);

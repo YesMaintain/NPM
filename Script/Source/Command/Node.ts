@@ -1,42 +1,36 @@
-import type { Type as Files } from "../Interface/Files.js";
-
-import Directory from "../Library/Directory.js";
-import Package from "../Library/Package.js";
-import Type from "../Library/Type.js";
-import Node from "../Option/Node.js";
-
-import { constants as Constant } from "fs";
-import { access, mkdir, readFile, rm, writeFile } from "fs/promises";
-import { dirname as Dir } from "path";
-
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {Files} files - containers
+ *
+ * @param {Files} Files - containers
+ * 
  */
-const Workflow = async (files: Files) => {
-	for (const { Path, Name, File } of files) {
-		for (const [directory, packageFiles] of await Directory(
-			await Package("NPM")
+const Workflow = async (Files: Files) => {
+	for (const { Path, Name, File } of Files) {
+		for (const [directory, packageFiles] of await (
+			await import("../Function/Directory.js")
+		).default(
+			await (await import("../Function/Package.js")).default("NPM")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
 
 			if (Path === "/workflows/" && Name === "Node.yml") {
 				for (const _package of packageFiles) {
-					const packageDirectory = Dir(_package).replace(
-						directory,
-						""
-					);
+					const packageDirectory = (await import("path"))
+						.dirname(_package)
+						.replace(directory, "");
 					const packageFile = (
-						await readFile(_package, "utf-8")
+						await (
+							await import("fs/promises")
+						).readFile(_package, "utf-8")
 					).toString();
 
-					const environment = (await Type()).get(
-						_package.split("/").pop()
-					);
+					const environment = (
+						await (await import("../Function/Type.js")).default()
+					).get(_package.split("/").pop());
 
 					if (
 						typeof environment !== "undefined" &&
@@ -64,7 +58,7 @@ const Workflow = async (files: Files) => {
 
             - run: pnpm install
               working-directory: .${packageDirectory}
-`);
+			  `);
 							}
 						}
 
@@ -86,8 +80,8 @@ const Workflow = async (files: Files) => {
 										) {
 											if (scripts === "build") {
 												workflowBase.add(`
-            - run: pnpm run build
-              working-directory: .
+												- run: pnpm run build
+												working-directory: .
 
             - uses: actions/upload-artifact@v3.1.3
               with:
@@ -102,7 +96,7 @@ const Workflow = async (files: Files) => {
 											if (scripts === "prepublishOnly") {
 												workflowBase.add(`
             - run: pnpm run prepublishOnly
-              working-directory: .
+			working-directory: .
 
             - uses: actions/upload-artifact@v3.1.3
               with:
@@ -110,7 +104,7 @@ const Workflow = async (files: Files) => {
 						"/",
 						"-"
 					)}-Node-\${{ matrix.node-version }}-Target
-                  path: .${packageDirectory}/Target
+					path: .${packageDirectory}/Target
 `);
 											}
 
@@ -118,7 +112,7 @@ const Workflow = async (files: Files) => {
 												workflowBase.add(`
             - run: pnpm run test
               working-directory: .${packageDirectory}
-`);
+			  `);
 											}
 										}
 									}
@@ -131,7 +125,9 @@ const Workflow = async (files: Files) => {
 
 			if (workflowBase.size > 1) {
 				try {
-					await mkdir(`${githubDir}${Path}`, {
+					await (
+						await import("fs/promises")
+					).mkdir(`${githubDir}${Path}`, {
 						recursive: true,
 					});
 				} catch {
@@ -139,7 +135,9 @@ const Workflow = async (files: Files) => {
 				}
 
 				try {
-					await writeFile(
+					await (
+						await import("fs/promises")
+					).writeFile(
 						`${githubDir}${Path}${Name}`,
 						`${[...workflowBase].join("")}`
 					);
@@ -150,10 +148,17 @@ const Workflow = async (files: Files) => {
 				}
 			} else {
 				try {
-					await access(`${githubDir}${Path}${Name}`, Constant.F_OK);
+					await (
+						await import("fs/promises")
+					).access(
+						`${githubDir}${Path}${Name}`,
+						(await import("fs/promises")).constants.F_OK
+					);
 
 					try {
-						await rm(`${githubDir}${Path}${Name}`);
+						await (
+							await import("fs/promises")
+						).rm(`${githubDir}${Path}${Name}`);
 					} catch {
 						console.log(
 							`Could not remove ${Path}${Name} for: ${githubDir}`
@@ -165,4 +170,7 @@ const Workflow = async (files: Files) => {
 	}
 };
 
-export default async () => await Workflow(Node);
+export default async () =>
+	await Workflow((await import("../Variable/Node.js")).default);
+
+import type { Type as Files } from "../Interface/Files.js";
