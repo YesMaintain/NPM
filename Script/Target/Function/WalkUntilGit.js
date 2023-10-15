@@ -1,11 +1,11 @@
-const _Function = async (Search, From) => {
+const _Function = async (...[Search, From]) => {
   const Path = (await import("path")).dirname(Search);
   const Original = From ?? Path;
   if (Path === Search) {
     return Original;
   }
   try {
-    await (await import("fs/promises")).access(`${Path}/.git`, (await import("fs")).constants.R_OK);
+    await (await import("fs/promises")).access(`${Path}/.git`, (await import("fs/promises")).constants.R_OK);
     return Path;
   } catch (_Error) {
     return await _Function(Path, Original);
