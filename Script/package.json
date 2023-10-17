@@ -41,7 +41,7 @@
 		"@types/etag": "1.8.1",
 		"@types/node": "20.8.6",
 		"@types/pacote": "11.1.6",
-		"esbuild": "0.19.4",
+		"esbuild": "0.19.5",
 		"esbuild-plugin-copy": "2.1.1",
 		"typescript-esbuild": "0.2.17"
 	},
