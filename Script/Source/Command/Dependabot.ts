@@ -1,8 +1,10 @@
 /**
  * It creates a `dependabot.yml` file in each `.github` directory of each repository in the current
  * working directory
- * @param {Files} Files - This is an array of objects that contain the path, name, and workflow
+ *
+ * @param Files - This is an array of objects that contain the path, name, and workflow
  * function.
+ *
  */
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {

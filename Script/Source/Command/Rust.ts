@@ -5,14 +5,14 @@ import type { Type as Files } from "../Interface/Files.js";
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
- * @param {Files} Files - containers
+ * @param Files - containers
  */
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {
 		for (const [directory, packageFiles] of await (
-			await import("../Library/Directory.js")
+			await import("../Function/Directory.js")
 		).default(
-			await (await import("../Library/Package.js")).default("Cargo")
+			await (await import("../Function/Package.js")).default("Cargo")
 		)) {
 			const githubDir = `${directory}/.github`;
 			const workflowBase = await File();
@@ -24,7 +24,7 @@ const Workflow = async (Files: Files) => {
 						.replace(directory, "");
 
 					const environment = (
-						await (await import("../Library/Type.js")).default()
+						await (await import("../Function/Type.js")).default()
 					).get(_package.split("/").pop());
 
 					if (

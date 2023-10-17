@@ -1,8 +1,10 @@
 /**
  * The function `Workflow` iterates through a list of files, checks if a specific file exists, and
  * performs certain actions based on the conditions.
- * @param {Files} Files - The `files` parameter is an array of objects. Each object represents a file
+ *
+ * @param Files - The `files` parameter is an array of objects. Each object represents a file
  * and has the following properties:
+ *
  */
 const Workflow = async (Files: Files) => {
 	for (const { Path, Name, File } of Files) {

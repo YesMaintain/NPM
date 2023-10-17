@@ -4,7 +4,7 @@
  * workflow file for a package that has dependencies, and if it is, it adds the dependencies to the
  * workflow file
  *
- * @param {Files} Files - containers
+ * @param Files - containers
  * 
  */
 const Workflow = async (Files: Files) => {
