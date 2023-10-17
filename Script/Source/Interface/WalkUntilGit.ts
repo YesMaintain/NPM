@@ -15,8 +15,6 @@ export default interface Type {
 	 * from this directory. If not provided, the function will start searching from the directory specified
 	 * by the "Search" parameter.
 	 *
-	 * @returns The function `WalkUntilGit` returns a promise that resolves to a string.
-	 *
 	 */
 	(Search: string, From?: string): Promise<string>;
 }
