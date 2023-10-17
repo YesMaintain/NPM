@@ -1,3 +1,7 @@
+/**
+ * @module Files
+ *
+ */
 export type Type = Set<{
 	Path: string;
 	Name: string;

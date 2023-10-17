@@ -1,13 +1,9 @@
-export type Type =
-	| "NPM"
-	| "Cargo"
-	| "Composer"
-	| "Nuget"
-	| "Cloudflare"
-	| false;
-
-export default async (Filter: Type = false) => {
-	const Result = new Map<string, Type>();
+/**
+ * @module Type
+ *
+ */
+export default (async (...[Filter = false]: Parameters<Type>) => {
+	const Result = new Map<string, Package>();
 
 	Result.set("package.json", "NPM");
 	Result.set("Cargo.toml", "Cargo");
@@ -25,4 +21,7 @@ export default async (Filter: Type = false) => {
 	}
 
 	return Result;
-};
+}) satisfies Type as Type;
+
+import type Type from "../Interface/Type.js";
+import type Package from "../Type/Package.js";
