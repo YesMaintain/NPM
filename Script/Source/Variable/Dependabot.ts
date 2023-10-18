@@ -1,4 +1,3 @@
-
 export default new Set([
 	{
 		Path: "/",
@@ -30,7 +29,7 @@ export default new Set([
 							)}/../../Target/Workflow/InnerDependabot.yml`
 						),
 						"utf-8"
-						)
+					)
 				).toString(),
 			]),
 	},
@@ -43,4 +42,3 @@ export const { readFile } = await import("fs/promises");
 export const { dirname, resolve } = await import("path");
 
 export const { fileURLToPath } = await import("url");
-
