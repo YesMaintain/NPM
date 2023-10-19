@@ -1,10 +1,6 @@
 /// <reference types="node" />
 /// <reference types="node" />
-declare const _default: Set<{
-    Path: string;
-    Name: string;
-    File: () => Promise<Set<string>>;
-}>;
+declare const _default: Type;
 export default _default;
 export declare const readFile: typeof import("fs/promises").readFile;
 export declare const dirname: (path: string) => string, resolve: (...paths: string[]) => string;

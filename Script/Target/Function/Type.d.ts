@@ -1,3 +1,7 @@
-export type Type = "NPM" | "Cargo" | "Composer" | "Nuget" | "Cloudflare" | false;
-declare const _default: (Filter?: Type) => Promise<Map<string, Type>>;
+/**
+ * @module Type
+ *
+ */
+declare const _default: Type;
 export default _default;
+import type Type from "../Interface/Type.js";

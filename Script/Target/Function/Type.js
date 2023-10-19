@@ -1,4 +1,4 @@
-var Type_default = async (Filter = false) => {
+var Type_default = async (...[Filter = false]) => {
   const Result = /* @__PURE__ */ new Map();
   Result.set("package.json", "NPM");
   Result.set("Cargo.toml", "Cargo");

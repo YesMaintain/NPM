@@ -1,6 +1,2 @@
-declare const _default: Set<{
-    Path: string;
-    Name: string;
-    File: () => Promise<Set<string>>;
-}>;
+declare const _default: Type;
 export default _default;

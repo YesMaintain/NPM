@@ -1,14 +1,14 @@
 const Workflow = async (Files) => {
   for (const { Path, Name, File } of Files) {
-    for (const [directory, packageFiles] of await (await import("../Library/Directory.js")).default(
-      await (await import("../Library/Package.js")).default("Cargo")
+    for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
+      await (await import("../Function/Package.js")).default("Cargo")
     )) {
       const githubDir = `${directory}/.github`;
       const workflowBase = await File();
       if (Path === "/workflows/" && Name === "Rust.yml") {
         for (const _package of packageFiles) {
           const packageDirectory = (await import("path")).dirname(_package).replace(directory, "");
-          const environment = (await (await import("../Library/Type.js")).default()).get(_package.split("/").pop());
+          const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cargo") {
             workflowBase.add(`
             - uses: actions/cache@v3.3.2
