@@ -43,7 +43,7 @@
 		"@types/pacote": "11.1.7",
 		"esbuild": "0.19.5",
 		"esbuild-plugin-copy": "2.1.1",
-		"typescript-esbuild": "0.2.24"
+		"typescript-esbuild": "0.2.25"
 	},
 	"publishConfig": {
 		"access": "public"
