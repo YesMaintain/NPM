@@ -50,7 +50,7 @@ const Workflow = async (Files: Files) => {
 						].sort()) {
 							if (typeof packageJSON[bundle] !== "undefined") {
 								workflowBase.add(`
-            - uses: actions/setup-node@v3.8.1
+            - uses: actions/setup-node@v4.0.0
               with:
                   node-version: \${{ matrix.node-version }}
                   cache: "pnpm"
