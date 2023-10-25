@@ -1,3 +1,7 @@
+/**
+ * @module Package
+ *
+ */
 export default async (Filter: Type = false) =>
 	new Set<string>(
 		[

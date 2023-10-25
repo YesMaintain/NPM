@@ -1,9 +1,13 @@
+/**
+ * @module Request
+ *
+ */
 export default async (
 	Where: string,
 	With = {},
 	Type = "octokit"
 	// biome-ignore lint/suspicious/noExplicitAny:
-): Promise<OctokitResponse<any, number> | void> => {
+): Promise<OctokitResponse<any, number> | any> => {
 	try {
 		console.log(`Successfully ${Where}`);
 
@@ -25,7 +29,9 @@ export default async (
 				);
 			}
 		}
-	} catch (_Error) {}
+	} catch (_Error) {
+		return {};
+	}
 };
 
 import type { OctokitResponse } from "@octokit/types";

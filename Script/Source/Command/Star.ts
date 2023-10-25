@@ -1,3 +1,7 @@
+/**
+ * @module Star
+ *
+ */
 export default async () => {
 	const Dependency = new Set<string>();
 

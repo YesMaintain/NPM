@@ -1,3 +1,7 @@
+/**
+ * @module Star
+ *
+ */
 export default async (URL = "") => {
 	if (typeof URL !== "string") {
 		return;

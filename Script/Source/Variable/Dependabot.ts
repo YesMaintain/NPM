@@ -1,3 +1,7 @@
+/**
+ * @module Dependabot
+ *
+ */
 export default new Set([
 	{
 		Path: "/",
@@ -35,7 +39,7 @@ export default new Set([
 	},
 ]) satisfies Type;
 
-import type Type from "../Interface/Files.js";
+import type Type from "../Type/Files.js";
 
 export const { readFile } = await import("fs/promises");
 

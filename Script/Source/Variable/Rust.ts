@@ -1,3 +1,7 @@
+/**
+ * @module Rust
+ *
+ */
 export default new Set([
 	{
 		Path: "/workflows/",
@@ -22,4 +26,4 @@ export default new Set([
 	},
 ]) satisfies Type;
 
-import type Type from "../Interface/Files.js";
+import type Type from "../Type/Files.js";

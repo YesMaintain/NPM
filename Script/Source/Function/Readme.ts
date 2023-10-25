@@ -1,3 +1,7 @@
+/**
+ * @module Readme
+ *
+ */
 export default async () =>
 	new Set<string>(
 		[

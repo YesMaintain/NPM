@@ -1,3 +1,7 @@
+/**
+ * @module Git
+ *
+ */
 export default async () =>
 	new Set<string>(
 		[

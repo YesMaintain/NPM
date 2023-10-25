@@ -2,6 +2,10 @@
 
 export const { string } = await import("zod");
 
+/**
+ * @module Environment
+ *
+ */
 export default (await import("zod")).object({
 	User: string().optional().default(""),
 	Base: string()

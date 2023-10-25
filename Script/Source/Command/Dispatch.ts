@@ -1,6 +1,6 @@
 /**
  * @module Dispatch
- * 
+ *
  */
 export default async (repositories: string[] | Set<string> = []) => {
 	const User = (await import("../Variable/Environment.js")).default.parse(
@@ -52,7 +52,8 @@ export default async (repositories: string[] | Set<string> = []) => {
 
 		if (typeof pass === "undefined" || pass) {
 			// start: actions/workflows
-			for (const workflow of (
+			for (const workflow of
+			(
 				await Request(`GET /repos/${owner}/${name}/actions/workflows`, {
 					owner: owner,
 					repo: name,
