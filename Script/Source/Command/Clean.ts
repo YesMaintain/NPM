@@ -1,3 +1,7 @@
+/**
+ * @module Clean
+ *
+ */
 export default async (Repositories: string[] = []) => {
 	const Get = await Request(`GET /users/${User}/repos`);
 

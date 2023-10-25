@@ -1,5 +1,3 @@
-import type { Type as Files } from "../Interface/Files.js";
-
 /**
  * It takes a list of files, and for each file, it checks if the file is a workflow file, and if it is,
  * it checks if the file is a node workflow file, and if it is, it checks if the file is a node
@@ -95,3 +93,5 @@ const Workflow = async (Files: Files) => {
 
 export default async () =>
 	await Workflow((await import("../Variable/Rust.js")).default);
+
+import type Files from "../Type/Files.js";

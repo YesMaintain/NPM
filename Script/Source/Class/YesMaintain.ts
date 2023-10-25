@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+/**
+ * @module YesMaintain
+ */
 const Program = new (await import("commander")).Command()
 	.name("Maintain")
 	.description("Maintains GitHub repositories")

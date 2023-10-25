@@ -1,94 +1,100 @@
 /**
- * The function `Workflow` iterates through a list of files, checks if a specific file exists, and
+ * @module Cloudflare
+ *
+ */
+/**
+ * The function `Cloudflare` iterates through a list of files, checks if a specific file exists, and
  * performs certain actions based on the conditions.
  *
  * @param Files - The `files` parameter is an array of objects. Each object represents a file
  * and has the following properties:
  *
  */
-const Workflow = async (Files: Files) => {
-	for (const { Path, Name, File } of Files) {
-		for (const [directory, packageFiles] of await (
-			await import("../Function/Directory.js")
-		).default(
-			await (await import("../Function/Package.js")).default("Cloudflare")
-		)) {
-			const githubDir = `${directory}/.github`;
-			const workflowBase = await File();
+export default async () =>
+	await (async (Files: Files) => {
+		for (const { Path, Name, File } of Files) {
+			for (const [directory, packageFiles] of await (
+				await import("../Function/Directory.js")
+			).default(
+				await (
+					await import("../Function/Package.js")
+				).default("Cloudflare")
+			)) {
+				const githubDir = `${directory}/.github`;
+				const workflowBase = await File();
 
-			if (Path === "/workflows/" && Name === "Cloudflare.yml") {
-				for (const _package of packageFiles) {
-					const packageDirectory = (await import("path"))
-						.dirname(_package)
-						.replace(directory, "");
+				if (Path === "/workflows/" && Name === "Cloudflare.yml") {
+					for (const _package of packageFiles) {
+						const packageDirectory = (await import("path"))
+							.dirname(_package)
+							.replace(directory, "");
 
-					const environment = (
-						await (await import("../Function/Type.js")).default()
-					).get(_package.split("/").pop());
+						const environment = (
+							await (
+								await import("../Function/Type.js")
+							).default()
+						).get(_package.split("/").pop());
 
-					if (
-						typeof environment !== "undefined" &&
-						environment === "Cloudflare"
-					) {
-						workflowBase.add(`
-            - uses: cloudflare/wrangler-action@v3
-              with:
-                  apiToken: \${{ secrets.CF_API_TOKEN }}
-                  accountId: \${{ secrets.CF_ACCOUNT_ID }}
-                  workingDirectory: .${packageDirectory}
-`);
+						if (
+							typeof environment !== "undefined" &&
+							environment === "Cloudflare"
+						) {
+							workflowBase.add(`
+				- uses: cloudflare/wrangler-action@v3
+				  with:
+					  apiToken: \${{ secrets.CF_API_TOKEN }}
+					  accountId: \${{ secrets.CF_ACCOUNT_ID }}
+					  workingDirectory: .${packageDirectory}
+	`);
+						}
 					}
 				}
-			}
 
-			if (workflowBase.size > 1) {
-				try {
-					await (
-						await import("fs/promises")
-					).mkdir(`${githubDir}${Path}`, {
-						recursive: true,
-					});
-				} catch {
-					console.log(`Could not create: ${githubDir}${Path}`);
-				}
-
-				try {
-					await (
-						await import("fs/promises")
-					).writeFile(
-						`${githubDir}${Path}${Name}`,
-						`${[...workflowBase].join("")}`
-					);
-				} catch {
-					console.log(
-						`Could not create workflow for: ${githubDir}/workflows/Cloudflare.yml`
-					);
-				}
-			} else {
-				try {
-					await (
-						await import("fs/promises")
-					).access(
-						`${githubDir}${Path}${Name}`,
-						(await import("fs/promises")).constants.F_OK
-					);
+				if (workflowBase.size > 1) {
+					try {
+						await (
+							await import("fs/promises")
+						).mkdir(`${githubDir}${Path}`, {
+							recursive: true,
+						});
+					} catch {
+						console.log(`Could not create: ${githubDir}${Path}`);
+					}
 
 					try {
 						await (
 							await import("fs/promises")
-						).rm(`${githubDir}${Path}${Name}`);
+						).writeFile(
+							`${githubDir}${Path}${Name}`,
+							`${[...workflowBase].join("")}`
+						);
 					} catch {
 						console.log(
-							`Could not remove ${Path}${Name} for: ${githubDir}`
+							`Could not create workflow for: ${githubDir}/workflows/Cloudflare.yml`
 						);
 					}
-				} catch {}
+				} else {
+					try {
+						await (
+							await import("fs/promises")
+						).access(
+							`${githubDir}${Path}${Name}`,
+							(await import("fs/promises")).constants.F_OK
+						);
+
+						try {
+							await (
+								await import("fs/promises")
+							).rm(`${githubDir}${Path}${Name}`);
+						} catch {
+							console.log(
+								`Could not remove ${Path}${Name} for: ${githubDir}`
+							);
+						}
+					} catch {}
+				}
 			}
 		}
-	}
-};
+	})((await import("../Variable/Cloudflare.js")).default);
 
-export default async () =>
-	await Workflow((await import("../Variable/Cloudflare.js")).default);
-
-import type Files from "../Interface/Files.js";
+import type Files from "../Type/Files.js";

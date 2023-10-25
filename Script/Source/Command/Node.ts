@@ -173,4 +173,4 @@ const Workflow = async (Files: Files) => {
 export default async () =>
 	await Workflow((await import("../Variable/Node.js")).default);
 
-import type { Type as Files } from "../Interface/Files.js";
+import type Files from "../Type/Files.js";

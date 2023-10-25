@@ -121,7 +121,7 @@ const Workflow = async (Files: Files) => {
 	}
 };
 
-import type { Type as Files } from "../Interface/Files.js";
+import type Files from "../Type/Files.js";
 
 export default async () =>
 	await Workflow((await import("../Variable/NPM.js")).default);

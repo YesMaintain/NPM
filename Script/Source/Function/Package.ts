@@ -78,4 +78,4 @@ export default async (Filter: Type = false) =>
 		].sort()
 	);
 
-import type { Type } from "./Type.js";
+import type Type from "../Type/Package.js";
