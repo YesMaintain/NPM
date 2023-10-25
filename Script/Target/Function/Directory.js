@@ -1,12 +1,12 @@
 var Directory_default = async (Search) => {
   const Results = /* @__PURE__ */ new Map();
-  Search.forEach(async (Search2) => {
-    const Directory = await (await import("./WalkUntilGit.js")).default(Search2);
+  for (const _Search of Search) {
+    const Directory = await (await import("./WalkUntilGit.js")).default(_Search);
     Results.set(
       Directory,
-      Results.has(Directory) ? Results.get(Directory).add(Search2) : new Set([Search2].sort())
+      Results.has(Directory) ? Results.get(Directory).add(_Search) : new Set([_Search].sort())
     );
-  });
+  }
   return Results;
 };
 export {
