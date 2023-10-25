@@ -1,6 +1,8 @@
-const Workflow = async (Files) => {
+var Dependabot_default = async () => await (async (Files) => {
   for (const { Path, Name, File } of Files) {
-    for (const [_Dir, FilesPackage] of await (await import("../Function/Directory.js")).default(await (await import("../Function/Package.js")).default())) {
+    for (const [_Dir, FilesPackage] of await (await import("../Function/Directory.js")).default(
+      await (await import("../Function/Package.js")).default()
+    )) {
       const GitHub = `${_Dir}/.github`;
       const Base = await File();
       if (Path === "/") {
@@ -9,7 +11,7 @@ const Workflow = async (Files) => {
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
           if (Environment !== "Cloudflare") {
             Base.add(`
-							- package-ecosystem: "${typeof Environment !== "undefined" ? String(Environment).toLowerCase() : (() => {
+								- package-ecosystem: "${typeof Environment !== "undefined" ? String(Environment).toLowerCase() : (() => {
               switch (Package.split(".").pop()) {
                 case "csproj":
                   return "nuget";
@@ -17,10 +19,10 @@ const Workflow = async (Files) => {
                   return "npm";
               }
             })()}"
-	directory: "${DirPackage ? DirPackage : "/"}"
-	schedule:
-	interval: "daily"
-	versioning-strategy: ${typeof Environment !== "undefined" ? (() => {
+		directory: "${DirPackage ? DirPackage : "/"}"
+		schedule:
+		interval: "daily"
+		versioning-strategy: ${typeof Environment !== "undefined" ? (() => {
               switch (Environment) {
                 case "Cargo":
                   return "lockfile-only";
@@ -28,7 +30,7 @@ const Workflow = async (Files) => {
                   return "increase";
               }
             })() : "increase"}
-`);
+	`);
           }
         }
       }
@@ -68,8 +70,7 @@ const Workflow = async (Files) => {
       }
     }
   }
-};
-var Dependabot_default = async () => await Workflow((await import("../Variable/Dependabot.js")).default);
+})((await import("../Variable/Dependabot.js")).default);
 export {
   Dependabot_default as default
 };

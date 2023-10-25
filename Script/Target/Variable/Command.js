@@ -75,8 +75,8 @@ const Variable = /* @__PURE__ */ new Set([
     Action: (await import("../Command/Star.js")).default
   }
 ]);
-var Commands_default = Variable;
+var Command_default = Variable;
 export {
   Variable,
-  Commands_default as default
+  Command_default as default
 };

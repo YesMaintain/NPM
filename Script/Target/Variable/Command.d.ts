@@ -1,3 +1,7 @@
+/**
+ * @module Command
+ *
+ */
 export declare const Variable: Set<{
     Name: string;
     Opts?: CommandOptions;

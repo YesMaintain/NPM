@@ -1,4 +1,4 @@
-const Workflow = async (Files) => {
+var NPM_default = async () => await (async (Files) => {
   for (const { Path, Name, File } of Files) {
     for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
       await (await import("../Function/Package.js")).default("NPM")
@@ -26,15 +26,15 @@ const Workflow = async (Files) => {
                     )) {
                       if (scripts === "prepublishOnly") {
                         workflowBase.add(`
-												- name: Publish .${packageDirectory}
-              continue-on-error: true
-              working-directory: .${packageDirectory}
-              run: |
-                  npm install --legacy-peer-deps
-                  npm publish --legacy-peer-deps --provenance
-				  env:
-                  NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
-				  `);
+													- name: Publish .${packageDirectory}
+				  continue-on-error: true
+				  working-directory: .${packageDirectory}
+				  run: |
+					  npm install --legacy-peer-deps
+					  npm publish --legacy-peer-deps --provenance
+					  env:
+					  NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
+					  `);
                       }
                     }
                   }
@@ -80,8 +80,7 @@ const Workflow = async (Files) => {
       }
     }
   }
-};
-var NPM_default = async () => await Workflow((await import("../Variable/NPM.js")).default);
+})((await import("../Variable/NPM.js")).default);
 export {
   NPM_default as default
 };

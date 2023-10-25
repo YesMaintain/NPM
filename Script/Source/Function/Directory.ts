@@ -17,18 +17,18 @@
 export default async (Search: Set<string>) => {
 	const Results = new Map();
 
-	Search.forEach(async (Search) => {
+	for (const _Search of Search) {
 		const Directory = await (
 			await import("./WalkUntilGit.js")
-		).default(Search);
+		).default(_Search);
 
 		Results.set(
 			Directory,
 			Results.has(Directory)
-				? Results.get(Directory).add(Search)
-				: new Set<string>([Search].sort())
+				? Results.get(Directory).add(_Search)
+				: new Set<string>([_Search].sort())
 		);
-	});
+	}
 
 	return Results;
 };

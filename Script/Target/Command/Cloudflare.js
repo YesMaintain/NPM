@@ -1,4 +1,4 @@
-const Workflow = async (Files) => {
+var Cloudflare_default = async () => await (async (Files) => {
   for (const { Path, Name, File } of Files) {
     for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
       await (await import("../Function/Package.js")).default("Cloudflare")
@@ -11,12 +11,12 @@ const Workflow = async (Files) => {
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cloudflare") {
             workflowBase.add(`
-            - uses: cloudflare/wrangler-action@v3
-              with:
-                  apiToken: \${{ secrets.CF_API_TOKEN }}
-                  accountId: \${{ secrets.CF_ACCOUNT_ID }}
-                  workingDirectory: .${packageDirectory}
-`);
+				- uses: cloudflare/wrangler-action@v3
+				  with:
+					  apiToken: \${{ secrets.CF_API_TOKEN }}
+					  accountId: \${{ secrets.CF_ACCOUNT_ID }}
+					  workingDirectory: .${packageDirectory}
+	`);
           }
         }
       }
@@ -56,8 +56,7 @@ const Workflow = async (Files) => {
       }
     }
   }
-};
-var Cloudflare_default = async () => await Workflow((await import("../Variable/Cloudflare.js")).default);
+})((await import("../Variable/Cloudflare.js")).default);
 export {
   Cloudflare_default as default
 };

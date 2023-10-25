@@ -1,4 +1,4 @@
-const Workflow = async (Files) => {
+var Node_default = async () => await (async (Files) => {
   for (const { Path, Name, File } of Files) {
     for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
       await (await import("../Function/Package.js")).default("NPM")
@@ -24,15 +24,15 @@ const Workflow = async (Files) => {
             ].sort()) {
               if (typeof packageJSON[bundle] !== "undefined") {
                 workflowBase.add(`
-            - uses: actions/setup-node@v4.0.0
-              with:
-                  node-version: \${{ matrix.node-version }}
-                  cache: "pnpm"
-                  cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
-
-            - run: pnpm install
-              working-directory: .${packageDirectory}
-			  `);
+				- uses: actions/setup-node@v4.0.0
+				  with:
+					  node-version: \${{ matrix.node-version }}
+					  cache: "pnpm"
+					  cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
+	
+				- run: pnpm install
+				  working-directory: .${packageDirectory}
+				  `);
               }
             }
             for (const key in packageJSON) {
@@ -49,37 +49,37 @@ const Workflow = async (Files) => {
                     )) {
                       if (scripts === "build") {
                         workflowBase.add(`
-												- run: pnpm run build
-												working-directory: .
-
-            - uses: actions/upload-artifact@v3.1.3
-              with:
-                  name: .${packageDirectory.replaceAll(
+													- run: pnpm run build
+													working-directory: .
+	
+				- uses: actions/upload-artifact@v3.1.3
+				  with:
+					  name: .${packageDirectory.replaceAll(
                           "/",
                           "-"
                         )}-Node-\${{ matrix.node-version }}-Target
-                  path: .${packageDirectory}/Target
-`);
+					  path: .${packageDirectory}/Target
+	`);
                       }
                       if (scripts === "prepublishOnly") {
                         workflowBase.add(`
-            - run: pnpm run prepublishOnly
-			working-directory: .
-
-            - uses: actions/upload-artifact@v3.1.3
-              with:
-                  name: .${packageDirectory.replaceAll(
+				- run: pnpm run prepublishOnly
+				working-directory: .
+	
+				- uses: actions/upload-artifact@v3.1.3
+				  with:
+					  name: .${packageDirectory.replaceAll(
                           "/",
                           "-"
                         )}-Node-\${{ matrix.node-version }}-Target
-					path: .${packageDirectory}/Target
-`);
+						path: .${packageDirectory}/Target
+	`);
                       }
                       if (scripts === "test") {
                         workflowBase.add(`
-            - run: pnpm run test
-              working-directory: .${packageDirectory}
-			  `);
+				- run: pnpm run test
+				  working-directory: .${packageDirectory}
+				  `);
                       }
                     }
                   }
@@ -120,13 +120,13 @@ const Workflow = async (Files) => {
               `Could not remove ${Path}${Name} for: ${githubDir}`
             );
           }
-        } catch {
+        } catch (_Error) {
+          console.log(_Error);
         }
       }
     }
   }
-};
-var Node_default = async () => await Workflow((await import("../Variable/Node.js")).default);
+})((await import("../Variable/Node.js")).default);
 export {
   Node_default as default
 };

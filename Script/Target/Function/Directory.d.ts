@@ -1,4 +1,8 @@
 /**
+ * @module Search
+ *
+ */
+/**
  * The function `Directory` takes a set of file globs, walks through the directories
  * until it finds a Git repository, and returns a map where the keys are the directories
  * and the values are sets of globs associated with each directory.

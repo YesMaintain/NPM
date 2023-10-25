@@ -6,6 +6,10 @@ export declare const string: (params?: ({
 } & {
     coerce?: true | undefined;
 }) | undefined) => import("zod").ZodString;
+/**
+ * @module Environment
+ *
+ */
 declare const _default: import("zod").ZodObject<{
     User: import("zod").ZodDefault<import("zod").ZodOptional<import("zod").ZodString>>;
     Base: import("zod").ZodDefault<import("zod").ZodOptional<import("zod").ZodString>>;

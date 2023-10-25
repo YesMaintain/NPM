@@ -18,6 +18,7 @@ var Request_default = async (Where, With = {}, Type = "octokit") => {
       }
     }
   } catch (_Error) {
+    return {};
   }
 };
 export {
