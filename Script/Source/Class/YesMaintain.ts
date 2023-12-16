@@ -14,9 +14,9 @@ const Program = new (await import("commander")).Command()
 			.description(typeof Description !== "undefined" ? Description : "")
 			.action(Action);
 
-		Arguments?.forEach(({ Name, Description }) => {
-			_Program.argument(Name, Description);
-		});
+		Arguments?.forEach(({ Name, Description }) =>
+			_Program.argument(Name, Description)
+		);
 	}
 );
 

@@ -3,9 +3,9 @@ const Program = new (await import("commander")).Command().name("Maintain").descr
 (await import("../Variable/Command.js")).default?.forEach(
   ({ Action, Name, Description, Arguments }) => {
     const _Program = Program.command(Name).description(typeof Description !== "undefined" ? Description : "").action(Action);
-    Arguments?.forEach(({ Name: Name2, Description: Description2 }) => {
-      _Program.argument(Name2, Description2);
-    });
+    Arguments?.forEach(
+      ({ Name: Name2, Description: Description2 }) => _Program.argument(Name2, Description2)
+    );
   }
 );
 var YesMaintain_default = Program.parse();

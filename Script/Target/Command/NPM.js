@@ -26,15 +26,15 @@ var NPM_default = async () => await (async (Files) => {
                     )) {
                       if (scripts === "prepublishOnly") {
                         workflowBase.add(`
-													- name: Publish .${packageDirectory}
-				  continue-on-error: true
-				  working-directory: .${packageDirectory}
-				  run: |
-					  npm install --legacy-peer-deps
-					  npm publish --legacy-peer-deps --provenance
-					  env:
-					  NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
-					  `);
+            - name: Publish .${packageDirectory}
+              continue-on-error: true
+              working-directory: .${packageDirectory}
+              run: |
+                  npm install --legacy-peer-deps
+                  npm publish --legacy-peer-deps --provenance
+              env:
+                  NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
+`);
                       }
                     }
                   }
@@ -66,7 +66,7 @@ var NPM_default = async () => await (async (Files) => {
         try {
           await (await import("fs/promises")).access(
             `${githubDir}${Path}${Name}`,
-            (await import("fs/promises")).constants.F_OK
+            (await import("fs/promises")).constants.W_OK
           );
           try {
             await (await import("fs/promises")).rm(`${githubDir}${Path}${Name}`);

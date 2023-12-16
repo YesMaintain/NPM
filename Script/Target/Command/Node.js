@@ -24,15 +24,15 @@ var Node_default = async () => await (async (Files) => {
             ].sort()) {
               if (typeof packageJSON[bundle] !== "undefined") {
                 workflowBase.add(`
-				- uses: actions/setup-node@v4.0.0
-				  with:
-					  node-version: \${{ matrix.node-version }}
-					  cache: "pnpm"
-					  cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
-	
-				- run: pnpm install
-				  working-directory: .${packageDirectory}
-				  `);
+            - uses: actions/setup-node@v4.0.0
+              with:
+                  node-version: \${{ matrix.node-version }}
+                  cache: "pnpm"
+                  cache-dependency-path: .${packageDirectory}/pnpm-lock.yaml
+
+            - run: pnpm install
+              working-directory: .${packageDirectory}
+`);
               }
             }
             for (const key in packageJSON) {
@@ -51,35 +51,35 @@ var Node_default = async () => await (async (Files) => {
                         workflowBase.add(`
 													- run: pnpm run build
 													working-directory: .
-	
-				- uses: actions/upload-artifact@v3.1.3
-				  with:
-					  name: .${packageDirectory.replaceAll(
+
+            - uses: actions/upload-artifact@v4.0.0
+              with:
+                  name: .${packageDirectory.replaceAll(
                           "/",
                           "-"
                         )}-Node-\${{ matrix.node-version }}-Target
-					  path: .${packageDirectory}/Target
-	`);
+                  path: .${packageDirectory}/Target
+`);
                       }
                       if (scripts === "prepublishOnly") {
                         workflowBase.add(`
-				- run: pnpm run prepublishOnly
-				working-directory: .
-	
-				- uses: actions/upload-artifact@v3.1.3
-				  with:
-					  name: .${packageDirectory.replaceAll(
+            - run: pnpm run prepublishOnly
+              working-directory: .
+
+            - uses: actions/upload-artifact@v4.0.0
+              with:
+                  name: .${packageDirectory.replaceAll(
                           "/",
                           "-"
                         )}-Node-\${{ matrix.node-version }}-Target
-						path: .${packageDirectory}/Target
-	`);
+                  path: .${packageDirectory}/Target
+`);
                       }
                       if (scripts === "test") {
                         workflowBase.add(`
-				- run: pnpm run test
-				  working-directory: .${packageDirectory}
-				  `);
+            - run: pnpm run test
+              working-directory: .${packageDirectory}
+`);
                       }
                     }
                   }
@@ -111,7 +111,7 @@ var Node_default = async () => await (async (Files) => {
         try {
           await (await import("fs/promises")).access(
             `${githubDir}${Path}${Name}`,
-            (await import("fs/promises")).constants.F_OK
+            (await import("fs/promises")).constants.W_OK
           );
           try {
             await (await import("fs/promises")).rm(`${githubDir}${Path}${Name}`);

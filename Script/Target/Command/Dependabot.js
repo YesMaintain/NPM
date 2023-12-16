@@ -11,7 +11,7 @@ var Dependabot_default = async () => await (async (Files) => {
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
           if (Environment !== "Cloudflare") {
             Base.add(`
-								- package-ecosystem: "${typeof Environment !== "undefined" ? String(Environment).toLowerCase() : (() => {
+    - package-ecosystem: "${typeof Environment !== "undefined" ? String(Environment).toLowerCase() : (() => {
               switch (Package.split(".").pop()) {
                 case "csproj":
                   return "nuget";
@@ -19,10 +19,10 @@ var Dependabot_default = async () => await (async (Files) => {
                   return "npm";
               }
             })()}"
-		directory: "${DirPackage ? DirPackage : "/"}"
-		schedule:
-		interval: "daily"
-		versioning-strategy: ${typeof Environment !== "undefined" ? (() => {
+      directory: "${DirPackage ? DirPackage : "/"}"
+      schedule:
+          interval: "daily"
+      versioning-strategy: ${typeof Environment !== "undefined" ? (() => {
               switch (Environment) {
                 case "Cargo":
                   return "lockfile-only";
@@ -30,7 +30,7 @@ var Dependabot_default = async () => await (async (Files) => {
                   return "increase";
               }
             })() : "increase"}
-	`);
+`);
           }
         }
       }
@@ -56,7 +56,7 @@ var Dependabot_default = async () => await (async (Files) => {
         try {
           await (await import("fs/promises")).access(
             `${GitHub}${Path}${Name}`,
-            (await import("fs/promises")).constants.F_OK
+            (await import("fs/promises")).constants.W_OK
           );
           try {
             await (await import("fs/promises")).rm(`${GitHub}${Path}${Name}`);

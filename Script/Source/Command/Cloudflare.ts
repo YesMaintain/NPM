@@ -40,12 +40,12 @@ export default async () =>
 							environment === "Cloudflare"
 						) {
 							workflowBase.add(`
-				- uses: cloudflare/wrangler-action@v3
-				  with:
-					  apiToken: \${{ secrets.CF_API_TOKEN }}
-					  accountId: \${{ secrets.CF_ACCOUNT_ID }}
-					  workingDirectory: .${packageDirectory}
-	`);
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: \${{ secrets.CF_API_TOKEN }}
+                  accountId: \${{ secrets.CF_ACCOUNT_ID }}
+                  workingDirectory: .${packageDirectory}
+`);
 						}
 					}
 				}
@@ -79,7 +79,7 @@ export default async () =>
 							await import("fs/promises")
 						).access(
 							`${githubDir}${Path}${Name}`,
-							(await import("fs/promises")).constants.F_OK
+							(await import("fs/promises")).constants.W_OK
 						);
 
 						try {

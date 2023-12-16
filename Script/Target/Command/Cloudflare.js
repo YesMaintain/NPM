@@ -11,12 +11,12 @@ var Cloudflare_default = async () => await (async (Files) => {
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cloudflare") {
             workflowBase.add(`
-				- uses: cloudflare/wrangler-action@v3
-				  with:
-					  apiToken: \${{ secrets.CF_API_TOKEN }}
-					  accountId: \${{ secrets.CF_ACCOUNT_ID }}
-					  workingDirectory: .${packageDirectory}
-	`);
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: \${{ secrets.CF_API_TOKEN }}
+                  accountId: \${{ secrets.CF_ACCOUNT_ID }}
+                  workingDirectory: .${packageDirectory}
+`);
           }
         }
       }
@@ -42,7 +42,7 @@ var Cloudflare_default = async () => await (async (Files) => {
         try {
           await (await import("fs/promises")).access(
             `${githubDir}${Path}${Name}`,
-            (await import("fs/promises")).constants.F_OK
+            (await import("fs/promises")).constants.W_OK
           );
           try {
             await (await import("fs/promises")).rm(`${githubDir}${Path}${Name}`);

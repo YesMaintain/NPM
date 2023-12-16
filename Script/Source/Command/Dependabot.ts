@@ -35,7 +35,7 @@ export default async () =>
 
 						if (Environment !== "Cloudflare") {
 							Base.add(`
-								- package-ecosystem: "${
+    - package-ecosystem: "${
 									typeof Environment !== "undefined"
 										? String(Environment).toLowerCase()
 										: (() => {
@@ -49,10 +49,10 @@ export default async () =>
 												}
 										  })()
 								}"
-		directory: "${DirPackage ? DirPackage : "/"}"
-		schedule:
-		interval: "daily"
-		versioning-strategy: ${
+      directory: "${DirPackage ? DirPackage : "/"}"
+      schedule:
+          interval: "daily"
+      versioning-strategy: ${
 			typeof Environment !== "undefined"
 				? (() => {
 						switch (Environment) {
@@ -64,7 +64,7 @@ export default async () =>
 				  })()
 				: "increase"
 		}
-	`);
+`);
 						}
 					}
 				}
@@ -98,7 +98,7 @@ export default async () =>
 							await import("fs/promises")
 						).access(
 							`${GitHub}${Path}${Name}`,
-							(await import("fs/promises")).constants.F_OK
+							(await import("fs/promises")).constants.W_OK
 						);
 
 						try {
