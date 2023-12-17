@@ -17,7 +17,7 @@ export default async () =>
 			for (const [directory, packageFiles] of await (
 				await import("../Function/Directory.js")
 			).default(
-				await (await import("../Function/Package.js")).default("NPM")
+				await (await import("../Function/Package.js")).default("NPM"),
 			)) {
 				const githubDir = `${directory}/.github`;
 				const workflowBase = await File();
@@ -75,7 +75,7 @@ export default async () =>
 								if (
 									Object.prototype.hasOwnProperty.call(
 										packageJSON,
-										key
+										key,
 									)
 								) {
 									const values = packageJSON[key];
@@ -84,7 +84,7 @@ export default async () =>
 											if (
 												Object.prototype.hasOwnProperty.call(
 													values,
-													scripts
+													scripts,
 												)
 											) {
 												if (scripts === "build") {
@@ -94,10 +94,7 @@ export default async () =>
 
             - uses: actions/upload-artifact@v4.0.0
               with:
-                  name: .${packageDirectory.replaceAll(
-						"/",
-						"-"
-					)}-Node-\${{ matrix.node-version }}-Target
+                  name: .${packageDirectory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${packageDirectory}/Target
 `);
 												}
@@ -111,10 +108,7 @@ export default async () =>
 
             - uses: actions/upload-artifact@v4.0.0
               with:
-                  name: .${packageDirectory.replaceAll(
-						"/",
-						"-"
-					)}-Node-\${{ matrix.node-version }}-Target
+                  name: .${packageDirectory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${packageDirectory}/Target
 `);
 												}
@@ -136,43 +130,40 @@ export default async () =>
 
 				if (workflowBase.size > 1) {
 					try {
-						await (
-							await import("fs/promises")
-						).mkdir(`${githubDir}${Path}`, {
-							recursive: true,
-						});
+						await (await import("fs/promises")).mkdir(
+							`${githubDir}${Path}`,
+							{
+								recursive: true,
+							},
+						);
 					} catch {
 						console.log(`Could not create: ${githubDir}${Path}`);
 					}
 
 					try {
-						await (
-							await import("fs/promises")
-						).writeFile(
+						await (await import("fs/promises")).writeFile(
 							`${githubDir}${Path}${Name}`,
-							`${[...workflowBase].join("")}`
+							`${[...workflowBase].join("")}`,
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${githubDir}/workflows/Node.yml`
+							`Could not create workflow for: ${githubDir}/workflows/Node.yml`,
 						);
 					}
 				} else {
 					try {
-						await (
-							await import("fs/promises")
-						).access(
+						await (await import("fs/promises")).access(
 							`${githubDir}${Path}${Name}`,
-							(await import("fs/promises")).constants.W_OK
+							(await import("fs/promises")).constants.W_OK,
 						);
 
 						try {
-							await (
-								await import("fs/promises")
-							).rm(`${githubDir}${Path}${Name}`);
+							await (await import("fs/promises")).rm(
+								`${githubDir}${Path}${Name}`,
+							);
 						} catch {
 							console.log(
-								`Could not remove ${Path}${Name} for: ${githubDir}`
+								`Could not remove ${Path}${Name} for: ${githubDir}`,
 							);
 						}
 					} catch (_Error) {

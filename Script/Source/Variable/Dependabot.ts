@@ -2,7 +2,7 @@
  * @module Dependabot
  *
  */
-export default new Set([
+export default (new Set([
 	{
 		Path: "/",
 		Name: "dependabot.yml",
@@ -12,10 +12,10 @@ export default new Set([
 					await readFile(
 						resolve(
 							`${dirname(
-								fileURLToPath(import.meta.url)
-							)}/../../Target/Workflow/dependabot.yml`
+								fileURLToPath(import.meta.url),
+							)}/../../Target/Workflow/dependabot.yml`,
 						),
-						"utf-8"
+						"utf-8",
 					)
 				).toString(),
 			]),
@@ -29,15 +29,15 @@ export default new Set([
 					await readFile(
 						resolve(
 							`${dirname(
-								fileURLToPath(import.meta.url)
-							)}/../../Target/Workflow/InnerDependabot.yml`
+								fileURLToPath(import.meta.url),
+							)}/../../Target/Workflow/InnerDependabot.yml`,
 						),
-						"utf-8"
+						"utf-8",
 					)
 				).toString(),
 			]),
 	},
-]) satisfies Type;
+]) satisfies Type);
 
 import type Type from "../Type/Files.js";
 
