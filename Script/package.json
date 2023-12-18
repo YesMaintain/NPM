@@ -1,6 +1,6 @@
 {
 	"name": "@yesmaintain/script",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"private": false,
 	"description": "🔧 Maintains GitHub repositories.",
 	"homepage": "https://github.com/YesMaintain/NPM#readme",
