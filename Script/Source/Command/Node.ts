@@ -89,8 +89,8 @@ export default async () =>
 											) {
 												if (scripts === "build") {
 													workflowBase.add(`
-													- run: pnpm run build
-													working-directory: .
+            - run: pnpm run build
+              working-directory: .
 
             - uses: actions/upload-artifact@v4.0.0
               with:
