@@ -7,7 +7,7 @@ var Dependabot_default = async () => await (async (Files) => {
       const Base = await File();
       if (Path === "/") {
         for (const Package of FilesPackage) {
-          const DirPackage = (await import("path")).dirname(Package).replace(_Dir, "");
+          const Directory = (await import("path")).dirname(Package).replace(_Dir, "");
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
           if (Environment !== "Cloudflare") {
             Base.add(`
@@ -19,7 +19,7 @@ var Dependabot_default = async () => await (async (Files) => {
                   return "npm";
               }
             })()}"
-      directory: "${DirPackage ? DirPackage : "/"}"
+      directory: "${Directory ? Directory : "/"}"
       schedule:
           interval: "daily"
       versioning-strategy: ${typeof Environment !== "undefined" ? (() => {
@@ -36,12 +36,9 @@ var Dependabot_default = async () => await (async (Files) => {
       }
       if (Base.size > 0) {
         try {
-          await (await import("fs/promises")).mkdir(
-            `${GitHub}${Path}`,
-            {
-              recursive: true
-            }
-          );
+          await (await import("fs/promises")).mkdir(`${GitHub}${Path}`, {
+            recursive: true
+          });
         } catch {
           console.log(`Could not create: ${GitHub}${Path}`);
         }
@@ -54,23 +51,6 @@ var Dependabot_default = async () => await (async (Files) => {
           console.log(
             `Could not create workflow for: ${GitHub}/dependabot.yml`
           );
-        }
-      } else {
-        try {
-          await (await import("fs/promises")).access(
-            `${GitHub}${Path}${Name}`,
-            (await import("fs/promises")).constants.W_OK
-          );
-          try {
-            await (await import("fs/promises")).rm(
-              `${GitHub}${Path}${Name}`
-            );
-          } catch {
-            console.log(
-              `Could not remove ${Path}${Name} for: ${GitHub}`
-            );
-          }
-        } catch {
         }
       }
     }

@@ -16,14 +16,14 @@ export default async () =>
 			for (const [_Dir, FilesPackage] of await (
 				await import("../Function/Directory.js")
 			).default(
-				await (await import("../Function/Package.js")).default(),
+				await (await import("../Function/Package.js")).default()
 			)) {
 				const GitHub = `${_Dir}/.github`;
 				const Base = await File();
 
 				if (Path === "/") {
 					for (const Package of FilesPackage) {
-						const DirPackage = (await import("path"))
+						const Directory = (await import("path"))
 							.dirname(Package)
 							.replace(_Dir, "");
 
@@ -45,9 +45,9 @@ export default async () =>
 						default:
 							return "npm";
 					}
-			  })()
+				})()
 	}"
-      directory: "${DirPackage ? DirPackage : "/"}"
+      directory: "${Directory ? Directory : "/"}"
       schedule:
           interval: "daily"
       versioning-strategy: ${
@@ -59,7 +59,7 @@ export default async () =>
 							default:
 								return "increase";
 						}
-				  })()
+					})()
 				: "increase"
 		}
 `);
@@ -69,43 +69,27 @@ export default async () =>
 
 				if (Base.size > 0) {
 					try {
-						await (await import("fs/promises")).mkdir(
-							`${GitHub}${Path}`,
-							{
-								recursive: true,
-							},
-						);
+						await (
+							await import("fs/promises")
+						).mkdir(`${GitHub}${Path}`, {
+							recursive: true,
+						});
 					} catch {
 						console.log(`Could not create: ${GitHub}${Path}`);
 					}
 
 					try {
-						await (await import("fs/promises")).writeFile(
+						await (
+							await import("fs/promises")
+						).writeFile(
 							`${GitHub}${Path}${Name}`,
-							`${[...Base].join("")}`,
+							`${[...Base].join("")}`
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${GitHub}/dependabot.yml`,
+							`Could not create workflow for: ${GitHub}/dependabot.yml`
 						);
 					}
-				} else {
-					try {
-						await (await import("fs/promises")).access(
-							`${GitHub}${Path}${Name}`,
-							(await import("fs/promises")).constants.W_OK,
-						);
-
-						try {
-							await (await import("fs/promises")).rm(
-								`${GitHub}${Path}${Name}`,
-							);
-						} catch {
-							console.log(
-								`Could not remove ${Path}${Name} for: ${GitHub}`,
-							);
-						}
-					} catch {}
 				}
 			}
 		}

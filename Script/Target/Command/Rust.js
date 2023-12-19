@@ -31,12 +31,9 @@ var Rust_default = async () => await (async (Files) => {
       }
       if (workflowBase.size > 1) {
         try {
-          await (await import("fs/promises")).mkdir(
-            `${githubDir}${Path}`,
-            {
-              recursive: true
-            }
-          );
+          await (await import("fs/promises")).mkdir(`${githubDir}${Path}`, {
+            recursive: true
+          });
         } catch {
           console.log(`Could not create: ${githubDir}${Path}`);
         }
@@ -48,19 +45,6 @@ var Rust_default = async () => await (async (Files) => {
         } catch {
           console.log(
             `Could not create workflow for: ${githubDir}/workflows/Rust.yml`
-          );
-        }
-      } else {
-        try {
-          await (await import("fs/promises")).rm(
-            `${githubDir}${Path}${Name}`,
-            {
-              recursive: true
-            }
-          );
-        } catch {
-          console.log(
-            `Could not remove ${Path}${Name} for: ${githubDir}`
           );
         }
       }

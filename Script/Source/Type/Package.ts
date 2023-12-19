@@ -8,6 +8,7 @@ export type Type =
 	| "Composer"
 	| "Nuget"
 	| "Cloudflare"
+	| "Python"
 	| false;
 
 export type { Type as default };

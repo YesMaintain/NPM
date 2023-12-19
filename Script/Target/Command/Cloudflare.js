@@ -1,9 +1,7 @@
 var Cloudflare_default = async () => await (async (Files) => {
   for (const { Path, Name, File } of Files) {
     for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
-      await (await import("../Function/Package.js")).default(
-        "Cloudflare"
-      )
+      await (await import("../Function/Package.js")).default("Cloudflare")
     )) {
       const githubDir = `${directory}/.github`;
       const workflowBase = await File();
@@ -24,12 +22,9 @@ var Cloudflare_default = async () => await (async (Files) => {
       }
       if (workflowBase.size > 1) {
         try {
-          await (await import("fs/promises")).mkdir(
-            `${githubDir}${Path}`,
-            {
-              recursive: true
-            }
-          );
+          await (await import("fs/promises")).mkdir(`${githubDir}${Path}`, {
+            recursive: true
+          });
         } catch {
           console.log(`Could not create: ${githubDir}${Path}`);
         }
@@ -42,23 +37,6 @@ var Cloudflare_default = async () => await (async (Files) => {
           console.log(
             `Could not create workflow for: ${githubDir}/workflows/Cloudflare.yml`
           );
-        }
-      } else {
-        try {
-          await (await import("fs/promises")).access(
-            `${githubDir}${Path}${Name}`,
-            (await import("fs/promises")).constants.W_OK
-          );
-          try {
-            await (await import("fs/promises")).rm(
-              `${githubDir}${Path}${Name}`
-            );
-          } catch {
-            console.log(
-              `Could not remove ${Path}${Name} for: ${githubDir}`
-            );
-          }
-        } catch {
         }
       }
     }

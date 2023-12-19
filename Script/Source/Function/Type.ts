@@ -11,6 +11,7 @@ export default ((async (...[Filter = false]: Parameters<Type>) => {
 	Result.set("packages.config", "Nuget");
 	Result.set("*.csproj", "Nuget");
 	Result.set("wrangler.toml", "Cloudflare");
+	Result.set("requirements.txt", "Python");
 
 	if (Filter) {
 		Result.forEach((value, key) => {

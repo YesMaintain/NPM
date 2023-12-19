@@ -6,6 +6,7 @@ var Type_default = async (...[Filter = false]) => {
   Result.set("packages.config", "Nuget");
   Result.set("*.csproj", "Nuget");
   Result.set("wrangler.toml", "Cloudflare");
+  Result.set("requirements.txt", "Python");
   if (Filter) {
     Result.forEach((value, key) => {
       if (value !== Filter) {
