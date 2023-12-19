@@ -13,19 +13,19 @@
 export default async () =>
 	await (async (Files: Files) => {
 		for (const { Path, Name, File } of Files) {
-			for (const [_Dir, FilesPackage] of await (
+			for (const [_Directory, FilesPackage] of await (
 				await import("../Function/Directory.js")
 			).default(
 				await (await import("../Function/Package.js")).default()
 			)) {
-				const GitHub = `${_Dir}/.github`;
+				const GitHub = `${_Directory}/.github`;
 				const Base = await File();
 
 				if (Path === "/") {
 					for (const Package of FilesPackage) {
 						const Directory = (await import("path"))
 							.dirname(Package)
-							.replace(_Dir, "");
+							.replace(_Directory, "");
 
 						const Environment = (
 							await (

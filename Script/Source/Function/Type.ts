@@ -2,16 +2,16 @@
  * @module Type
  *
  */
-export default ((async (...[Filter = false]: Parameters<Type>) => {
+export default (async (...[Filter = false]: Parameters<Type>) => {
 	const Result = new Map<string, Package>();
 
-	Result.set("package.json", "NPM");
+	Result.set("*.csproj", "Nuget");
 	Result.set("Cargo.toml", "Cargo");
 	Result.set("composer.json", "Composer");
+	Result.set("package.json", "NPM");
 	Result.set("packages.config", "Nuget");
-	Result.set("*.csproj", "Nuget");
+	Result.set("requirements.txt", "PIP");
 	Result.set("wrangler.toml", "Cloudflare");
-	Result.set("requirements.txt", "Python");
 
 	if (Filter) {
 		Result.forEach((value, key) => {
@@ -22,7 +22,7 @@ export default ((async (...[Filter = false]: Parameters<Type>) => {
 	}
 
 	return Result;
-}) satisfies Type as Type);
+}) satisfies Type as Type;
 
 import type Type from "../Interface/Type.js";
 import type Package from "../Type/Package.js";

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const Program = new (await import("commander")).Command().name("Maintain").description("Maintains GitHub repositories").version("0.0.3");
+const Program = new (await import("commander")).Command().name("Maintain").description("Maintains GitHub repositories").version("0.0.4");
 (await import("../Variable/Command.js")).default?.forEach(
   ({ Action, Name, Description, Arguments }) => {
     const _Program = Program.command(Name).description(typeof Description !== "undefined" ? Description : "").action(Action);

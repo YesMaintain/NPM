@@ -10,13 +10,13 @@ var Edit_default = async (repositories = []) => {
       name: Repository.name
     });
   }
-  for (const Organization of (await Request(`GET /users/${User}/orgs`))?.data) {
+  for (const RequestOrganization of (await Request(`GET /users/${User}/orgs`))?.data) {
     Organizations.push({
-      name: Organization.login
+      name: RequestOrganization.login
     });
-    for (const Repository of (await Request(`GET /orgs/${Organization.login}/repos`))?.data) {
+    for (const Repository of (await Request(`GET /orgs/${RequestOrganization.login}/repos`))?.data) {
       Repositories.push({
-        owner: Organization.login,
+        owner: RequestOrganization.login,
         name: Repository.name
       });
     }
