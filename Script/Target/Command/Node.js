@@ -24,7 +24,7 @@ var Node_default = async () => await (async (Files) => {
             ].sort()) {
               if (typeof JSONPackage[bundle] !== "undefined") {
                 Base.add(`
-            - uses: actions/setup-node@v4.0.0
+            - uses: actions/setup-node@v4.0.1
               with:
                   node-version: \${{ matrix.node-version }}
                   cache: "pnpm"
