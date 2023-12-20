@@ -1,3 +1,7 @@
+## 0.0.6
+
+-   Ruby bundler support added
+
 ## 0.0.5
 
 -   Cleanup

@@ -3,6 +3,7 @@ var Type_default = async (...[Filter = false]) => {
   Result.set("*.csproj", "Nuget");
   Result.set("Cargo.toml", "Cargo");
   Result.set("composer.json", "Composer");
+  Result.set("Gemfile", "Bundler");
   Result.set("package.json", "NPM");
   Result.set("packages.config", "Nuget");
   Result.set("requirements.txt", "PIP");

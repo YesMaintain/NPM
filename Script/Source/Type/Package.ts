@@ -3,11 +3,12 @@
  *
  */
 export type Type =
-	| "NPM"
+	| "Bundler"
 	| "Cargo"
-	| "Composer"
-	| "Nuget"
 	| "Cloudflare"
+	| "Composer"
+	| "NPM"
+	| "Nuget"
 	| "PIP"
 	| false;
 
