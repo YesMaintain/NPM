@@ -1,14 +1,11 @@
 var Star_default = async () => {
   const Dependency = /* @__PURE__ */ new Set();
-  for (const Package of await (await import("fast-glob")).default(
-    ["**/package.json", "!**/node_modules"],
-    {
-      absolute: true,
-      cwd: (await import("../Variable/Environment.js")).default.parse(
-        process.env
-      ).Base
-    }
-  )) {
+  for (const Package of await (await import("fast-glob")).default(["**/package.json", "!**/node_modules"], {
+    absolute: true,
+    cwd: (await import("../Variable/Environment.js")).default.parse(
+      process.env
+    ).Base
+  })) {
     const _JSON = JSON.parse(
       (await (await import("fs/promises")).readFile(Package, "utf-8")).toString()
     );

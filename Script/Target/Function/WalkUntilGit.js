@@ -5,10 +5,7 @@ const _Function = async (...[Search, From]) => {
     return Original;
   }
   try {
-    await (await import("fs/promises")).access(
-      `${Path}/.git`,
-      (await import("fs/promises")).constants.R_OK
-    );
+    await (await import("fs/promises")).access(`${Path}/.git`, (await import("fs/promises")).constants.R_OK);
     return Path;
   } catch (_Error) {
     return await _Function(Path, Original);

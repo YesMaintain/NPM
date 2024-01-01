@@ -2,7 +2,7 @@
  * @module NPM
  *
  */
-export default (new Set([
+export default new Set([
 	{
 		Path: "/workflows/",
 		Name: "NPM.yml",
@@ -13,22 +13,18 @@ export default (new Set([
 					await (
 						await import("fs/promises")
 					).readFile(
-						(
-							await import("path")
-						).resolve(
-							`${(
-								await import("path")
-							).dirname(
-								(
-									await import("url")
-								).fileURLToPath(import.meta.url),
-							)}/../../Target/Workflow/NPM.yml`,
+						(await import("path")).resolve(
+							`${(await import("path")).dirname(
+								(await import("url")).fileURLToPath(
+									import.meta.url
+								)
+							)}/../../Target/Workflow/NPM.yml`
 						),
-						"utf-8",
+						"utf-8"
 					)
 				).toString(),
 			]),
 	},
-]) satisfies Type);
+]) satisfies Type;
 
 import type Type from "../Type/Files.js";
