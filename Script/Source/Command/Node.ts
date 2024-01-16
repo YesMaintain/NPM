@@ -93,7 +93,7 @@ export default async () =>
             - run: pnpm run build
               working-directory: .
 
-            - uses: actions/upload-artifact@v4.0.0
+            - uses: actions/upload-artifact@v4.1.0
               with:
                   name: .${Directory.replaceAll(
 						"/",
@@ -110,7 +110,7 @@ export default async () =>
             - run: pnpm run prepublishOnly
               working-directory: .
 
-            - uses: actions/upload-artifact@v4.0.0
+            - uses: actions/upload-artifact@v4.1.0
               with:
                   name: .${Directory.replaceAll(
 						"/",

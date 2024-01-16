@@ -11,7 +11,7 @@ var Rust_default = async () => await (async (Files) => {
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cargo") {
             workflowBase.add(`
-            - uses: actions/cache@v3.3.2
+            - uses: actions/cache@v3.3.3
               with:
                   path: |
                       ~/.cargo/bin/

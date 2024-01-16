@@ -1,6 +1,6 @@
 {
 	"name": "@yesmaintain/script",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"private": false,
 	"description": "🔧 Maintains GitHub repositories.",
 	"homepage": "https://github.com/YesMaintain/NPM#readme",
@@ -39,7 +39,7 @@
 	"devDependencies": {
 		"@octokit/types": "12.4.0",
 		"@types/etag": "1.8.3",
-		"@types/node": "20.11.2",
+		"@types/node": "20.11.3",
 		"@types/pacote": "11.1.8",
 		"esbuild": "0.19.11",
 		"esbuild-plugin-copy": "2.1.1",
