@@ -31,12 +31,12 @@ var Dispatch_default = async (repositories = []) => {
       }
     }
     if (typeof pass === "undefined" || pass) {
-      for (const workflow of (await Request(`GET /repos/${owner}/${name}/actions/workflows`, {
+      for (const Workflow of (await Request(`GET /repos/${owner}/${name}/actions/workflows`, {
         owner,
         repo: name
       }))?.data?.workflows) {
         await Request(
-          `POST /repos/${owner}/${name}/actions/workflows/${workflow.id}/dispatches`,
+          `POST /repos/${owner}/${name}/actions/workflows/${Workflow.id}/dispatches`,
           {
             ref: "main"
           }

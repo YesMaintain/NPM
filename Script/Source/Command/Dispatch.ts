@@ -52,14 +52,14 @@ export default async (repositories: string[] | Set<string> = []) => {
 
 		if (typeof pass === "undefined" || pass) {
 			// start: actions/workflows
-			for (const workflow of (
+			for (const Workflow of (
 				await Request(`GET /repos/${owner}/${name}/actions/workflows`, {
 					owner: owner,
 					repo: name,
 				})
 			)?.data?.workflows) {
 				await Request(
-					`POST /repos/${owner}/${name}/actions/workflows/${workflow.id}/dispatches`,
+					`POST /repos/${owner}/${name}/actions/workflows/${Workflow.id}/dispatches`,
 					{
 						ref: "main",
 					}

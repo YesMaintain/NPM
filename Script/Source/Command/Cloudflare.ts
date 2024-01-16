@@ -40,7 +40,7 @@ export default async () =>
 							environment === "Cloudflare"
 						) {
 							workflowBase.add(`
-            - uses: cloudflare/wrangler-action@v3
+            - uses: cloudflare/wrangler-action@v3.4.1
               with:
                   apiToken: \${{ secrets.CF_API_TOKEN }}
                   accountId: \${{ secrets.CF_ACCOUNT_ID }}

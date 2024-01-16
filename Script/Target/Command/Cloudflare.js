@@ -11,7 +11,7 @@ var Cloudflare_default = async () => await (async (Files) => {
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cloudflare") {
             workflowBase.add(`
-            - uses: cloudflare/wrangler-action@v3
+            - uses: cloudflare/wrangler-action@v3.4.1
               with:
                   apiToken: \${{ secrets.CF_API_TOKEN }}
                   accountId: \${{ secrets.CF_ACCOUNT_ID }}
