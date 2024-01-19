@@ -17,7 +17,7 @@ export default async () =>
 			for (const [_Directory, FilesPackage] of await (
 				await import("../Function/Directory.js")
 			).default(
-				await (await import("../Function/Package.js")).default("NPM")
+				await (await import("../Function/Package.js")).default("NPM"),
 			)) {
 				const GitHub = `${_Directory}/.github`;
 				const Base = await File();
@@ -76,7 +76,7 @@ export default async () =>
 								if (
 									Object.prototype.hasOwnProperty.call(
 										JSONPackage,
-										key
+										key,
 									)
 								) {
 									const values = JSONPackage[key];
@@ -85,7 +85,7 @@ export default async () =>
 											if (
 												Object.prototype.hasOwnProperty.call(
 													values,
-													scripts
+													scripts,
 												)
 											) {
 												if (scripts === "build") {
@@ -95,10 +95,7 @@ export default async () =>
 
             - uses: actions/upload-artifact@v4.1.0
               with:
-                  name: .${Directory.replaceAll(
-						"/",
-						"-"
-					)}-Node-\${{ matrix.node-version }}-Target
+                  name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
 `);
 												}
@@ -112,10 +109,7 @@ export default async () =>
 
             - uses: actions/upload-artifact@v4.1.0
               with:
-                  name: .${Directory.replaceAll(
-						"/",
-						"-"
-					)}-Node-\${{ matrix.node-version }}-Target
+                  name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
 `);
 												}
@@ -137,25 +131,24 @@ export default async () =>
 
 				if (Base.size > 1) {
 					try {
-						await (
-							await import("fs/promises")
-						).mkdir(`${GitHub}${Path}`, {
-							recursive: true,
-						});
+						await (await import("fs/promises")).mkdir(
+							`${GitHub}${Path}`,
+							{
+								recursive: true,
+							},
+						);
 					} catch {
 						console.log(`Could not create: ${GitHub}${Path}`);
 					}
 
 					try {
-						await (
-							await import("fs/promises")
-						).writeFile(
+						await (await import("fs/promises")).writeFile(
 							`${GitHub}${Path}${Name}`,
-							`${[...Base].join("")}`
+							`${[...Base].join("")}`,
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${GitHub}/workflows/Node.yml`
+							`Could not create workflow for: ${GitHub}/workflows/Node.yml`,
 						);
 					}
 				}

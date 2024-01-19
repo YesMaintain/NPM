@@ -15,7 +15,7 @@ export default async () =>
 			for (const [directory, packageFiles] of await (
 				await import("../Function/Directory.js")
 			).default(
-				await (await import("../Function/Package.js")).default("NPM")
+				await (await import("../Function/Package.js")).default("NPM"),
 			)) {
 				const githubDir = `${directory}/.github`;
 				const workflowBase = await File();
@@ -48,7 +48,7 @@ export default async () =>
 								if (
 									Object.prototype.hasOwnProperty.call(
 										packageJSON,
-										key
+										key,
 									)
 								) {
 									const values = packageJSON[key];
@@ -57,7 +57,7 @@ export default async () =>
 											if (
 												Object.prototype.hasOwnProperty.call(
 													values,
-													scripts
+													scripts,
 												)
 											) {
 												if (
@@ -85,25 +85,24 @@ export default async () =>
 
 				if (workflowBase.size > 1) {
 					try {
-						await (
-							await import("fs/promises")
-						).mkdir(`${githubDir}${Path}`, {
-							recursive: true,
-						});
+						await (await import("fs/promises")).mkdir(
+							`${githubDir}${Path}`,
+							{
+								recursive: true,
+							},
+						);
 					} catch {
 						console.log(`Could not create: ${githubDir}${Path}`);
 					}
 
 					try {
-						await (
-							await import("fs/promises")
-						).writeFile(
+						await (await import("fs/promises")).writeFile(
 							`${githubDir}${Path}${Name}`,
-							`${[...workflowBase].join("")}`
+							`${[...workflowBase].join("")}`,
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${githubDir}/workflows/NPM.yml`
+							`Could not create workflow for: ${githubDir}/workflows/NPM.yml`,
 						);
 					}
 				}

@@ -16,7 +16,7 @@ export default async () =>
 			for (const [directory, packageFiles] of await (
 				await import("../Function/Directory.js")
 			).default(
-				await (await import("../Function/Package.js")).default("Cargo")
+				await (await import("../Function/Package.js")).default("Cargo"),
 			)) {
 				const githubDir = `${directory}/.github`;
 				const workflowBase = await File();
@@ -61,25 +61,24 @@ export default async () =>
 
 				if (workflowBase.size > 1) {
 					try {
-						await (
-							await import("fs/promises")
-						).mkdir(`${githubDir}${Path}`, {
-							recursive: true,
-						});
+						await (await import("fs/promises")).mkdir(
+							`${githubDir}${Path}`,
+							{
+								recursive: true,
+							},
+						);
 					} catch {
 						console.log(`Could not create: ${githubDir}${Path}`);
 					}
 
 					try {
-						await (
-							await import("fs/promises")
-						).writeFile(
+						await (await import("fs/promises")).writeFile(
 							`${githubDir}${Path}${Name}`,
-							`${[...workflowBase].join("")}`
+							`${[...workflowBase].join("")}`,
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${githubDir}/workflows/Rust.yml`
+							`Could not create workflow for: ${githubDir}/workflows/Rust.yml`,
 						);
 					}
 				}
