@@ -14,7 +14,9 @@ export default {
 						await (await import("node:fs/promises")).rm(outdir, {
 							recursive: true,
 						});
-					} catch (_Error) {}
+					} catch (_Error) {
+						console.log(_Error);
+					}
 				});
 			},
 		},
