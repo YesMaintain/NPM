@@ -10,6 +10,6 @@ export default (await import("zod")).object({
 	User: string().optional().default(""),
 	Base: string()
 		.optional()
-		.default((await import("process")).cwd()),
+		.default((await import("node:process")).cwd()),
 	Token: string().optional().default(""),
 });

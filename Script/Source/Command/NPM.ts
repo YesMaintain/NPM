@@ -22,13 +22,13 @@ export default async () =>
 
 				if (Path === "/workflows/" && Name === "NPM.yml") {
 					for (const _package of packageFiles) {
-						const packageDirectory = (await import("path"))
+						const packageDirectory = (await import("node:path"))
 							.dirname(_package)
 							.replace(directory, "");
 
 						const packageFile = (
 							await (
-								await import("fs/promises")
+								await import("node:fs/promises")
 							).readFile(_package, "utf-8")
 						).toString();
 
@@ -85,7 +85,7 @@ export default async () =>
 
 				if (workflowBase.size > 1) {
 					try {
-						await (await import("fs/promises")).mkdir(
+						await (await import("node:fs/promises")).mkdir(
 							`${githubDir}${Path}`,
 							{
 								recursive: true,
@@ -96,7 +96,7 @@ export default async () =>
 					}
 
 					try {
-						await (await import("fs/promises")).writeFile(
+						await (await import("node:fs/promises")).writeFile(
 							`${githubDir}${Path}${Name}`,
 							`${[...workflowBase].join("")}`,
 						);

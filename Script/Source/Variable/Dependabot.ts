@@ -2,7 +2,7 @@
  * @module Dependabot
  *
  */
-export default (new Set([
+export default new Set([
 	{
 		Path: "/",
 		Name: "dependabot.yml",
@@ -37,12 +37,12 @@ export default (new Set([
 				).toString(),
 			]),
 	},
-]) satisfies Type);
+]) satisfies Type;
 
 import type Type from "../Type/Files.js";
 
-export const { readFile } = await import("fs/promises");
+export const { readFile } = await import("node:fs/promises");
 
-export const { dirname, resolve } = await import("path");
+export const { dirname, resolve } = await import("node:path");
 
-export const { fileURLToPath } = await import("url");
+export const { fileURLToPath } = await import("node:url");

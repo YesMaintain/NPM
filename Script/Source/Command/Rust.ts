@@ -24,7 +24,7 @@ export default async () =>
 
 				if (Path === "/workflows/" && Name === "Rust.yml") {
 					for (const _package of packageFiles) {
-						const packageDirectory = (await import("path"))
+						const packageDirectory = (await import("node:path"))
 							.dirname(_package)
 							.replace(directory, "");
 
@@ -53,7 +53,7 @@ export default async () =>
               with:
                 command: build
                 args: --release --all-features --manifest-path .${packageDirectory}/${(
-					await import("path")
+					await import("node:path")
 				).basename(_package)}
 `);
 						}
@@ -62,7 +62,7 @@ export default async () =>
 
 				if (workflowBase.size > 1) {
 					try {
-						await (await import("fs/promises")).mkdir(
+						await (await import("node:fs/promises")).mkdir(
 							`${githubDir}${Path}`,
 							{
 								recursive: true,
@@ -73,7 +73,7 @@ export default async () =>
 					}
 
 					try {
-						await (await import("fs/promises")).writeFile(
+						await (await import("node:fs/promises")).writeFile(
 							`${githubDir}${Path}${Name}`,
 							`${[...workflowBase].join("")}`,
 						);
