@@ -9,7 +9,7 @@ var Cloudflare_default = async () => await (async (Files) => {
       const workflowBase = await File();
       if (Path === "/workflows/" && Name === "Cloudflare.yml") {
         for (const _package of packageFiles) {
-          const packageDirectory = (await import("node:path")).dirname(_package).replace(directory, "");
+          const packageDirectory = (await import("path")).dirname(_package).replace(directory, "");
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cloudflare") {
             workflowBase.add(`
@@ -24,7 +24,7 @@ var Cloudflare_default = async () => await (async (Files) => {
       }
       if (workflowBase.size > 1) {
         try {
-          await (await import("node:fs/promises")).mkdir(
+          await (await import("fs/promises")).mkdir(
             `${githubDir}${Path}`,
             {
               recursive: true
@@ -34,7 +34,7 @@ var Cloudflare_default = async () => await (async (Files) => {
           console.log(`Could not create: ${githubDir}${Path}`);
         }
         try {
-          await (await import("node:fs/promises")).writeFile(
+          await (await import("fs/promises")).writeFile(
             `${githubDir}${Path}${Name}`,
             `${[...workflowBase].join("")}`
           );

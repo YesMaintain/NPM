@@ -10,7 +10,7 @@ var Star_default = async () => {
     }
   )) {
     const _JSON = JSON.parse(
-      (await (await import("node:fs/promises")).readFile(Package, "utf-8")).toString()
+      (await (await import("fs/promises")).readFile(Package, "utf-8")).toString()
     );
     for (const Key in _JSON) {
       if (Object.prototype.hasOwnProperty.call(_JSON, Key)) {

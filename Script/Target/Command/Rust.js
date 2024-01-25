@@ -7,11 +7,11 @@ var Rust_default = async () => await (async (Files) => {
       const workflowBase = await File();
       if (Path === "/workflows/" && Name === "Rust.yml") {
         for (const _package of packageFiles) {
-          const packageDirectory = (await import("node:path")).dirname(_package).replace(directory, "");
+          const packageDirectory = (await import("path")).dirname(_package).replace(directory, "");
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "Cargo") {
             workflowBase.add(`
-            - uses: actions/cache@v3.3.3
+            - uses: actions/cache@v4.0.0
               with:
                   path: |
                       ~/.cargo/bin/
@@ -24,14 +24,14 @@ var Rust_default = async () => await (async (Files) => {
             - uses: actions-rs/cargo@v1.0.3
               with:
                 command: build
-                args: --release --all-features --manifest-path .${packageDirectory}/${(await import("node:path")).basename(_package)}
+                args: --release --all-features --manifest-path .${packageDirectory}/${(await import("path")).basename(_package)}
 `);
           }
         }
       }
       if (workflowBase.size > 1) {
         try {
-          await (await import("node:fs/promises")).mkdir(
+          await (await import("fs/promises")).mkdir(
             `${githubDir}${Path}`,
             {
               recursive: true
@@ -41,7 +41,7 @@ var Rust_default = async () => await (async (Files) => {
           console.log(`Could not create: ${githubDir}${Path}`);
         }
         try {
-          await (await import("node:fs/promises")).writeFile(
+          await (await import("fs/promises")).writeFile(
             `${githubDir}${Path}${Name}`,
             `${[...workflowBase].join("")}`
           );

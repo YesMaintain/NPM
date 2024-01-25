@@ -7,7 +7,7 @@ var Dependabot_default = async () => await (async (Files) => {
       const Base = await File();
       if (Path === "/") {
         for (const Package of FilesPackage) {
-          const Directory = (await import("node:path")).dirname(Package).replace(_Directory, "");
+          const Directory = (await import("path")).dirname(Package).replace(_Directory, "");
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
           if (Environment !== "Cloudflare") {
             Base.add(`
@@ -36,7 +36,7 @@ var Dependabot_default = async () => await (async (Files) => {
       }
       if (Base.size > 0) {
         try {
-          await (await import("node:fs/promises")).mkdir(
+          await (await import("fs/promises")).mkdir(
             `${GitHub}${Path}`,
             {
               recursive: true
@@ -46,7 +46,7 @@ var Dependabot_default = async () => await (async (Files) => {
           console.log(`Could not create: ${GitHub}${Path}`);
         }
         try {
-          await (await import("node:fs/promises")).writeFile(
+          await (await import("fs/promises")).writeFile(
             `${GitHub}${Path}${Name}`,
             `${[...Base].join("")}`
           );

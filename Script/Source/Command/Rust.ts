@@ -39,7 +39,7 @@ export default async () =>
 							environment === "Cargo"
 						) {
 							workflowBase.add(`
-            - uses: actions/cache@v3.3.3
+            - uses: actions/cache@v4.0.0
               with:
                   path: |
                       ~/.cargo/bin/

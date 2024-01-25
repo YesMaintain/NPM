@@ -7,8 +7,8 @@ var Node_default = async () => await (async (Files) => {
       const Base = await File();
       if (Path === "/workflows/" && Name === "Node.yml") {
         for (const Package of FilesPackage) {
-          const Directory = (await import("node:path")).dirname(Package).replace(_Directory, "");
-          const FilePackage = (await (await import("node:fs/promises")).readFile(Package, "utf-8")).toString();
+          const Directory = (await import("path")).dirname(Package).replace(_Directory, "");
+          const FilePackage = (await (await import("fs/promises")).readFile(Package, "utf-8")).toString();
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
           if (typeof Environment !== "undefined" && Environment === "NPM") {
             const JSONPackage = JSON.parse(FilePackage);
@@ -52,7 +52,7 @@ var Node_default = async () => await (async (Files) => {
             - run: pnpm run build
               working-directory: .
 
-            - uses: actions/upload-artifact@v4.1.0
+            - uses: actions/upload-artifact@v4.3.0
               with:
                   name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
@@ -63,7 +63,7 @@ var Node_default = async () => await (async (Files) => {
             - run: pnpm run prepublishOnly
               working-directory: .
 
-            - uses: actions/upload-artifact@v4.1.0
+            - uses: actions/upload-artifact@v4.3.0
               with:
                   name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
@@ -85,7 +85,7 @@ var Node_default = async () => await (async (Files) => {
       }
       if (Base.size > 1) {
         try {
-          await (await import("node:fs/promises")).mkdir(
+          await (await import("fs/promises")).mkdir(
             `${GitHub}${Path}`,
             {
               recursive: true
@@ -95,7 +95,7 @@ var Node_default = async () => await (async (Files) => {
           console.log(`Could not create: ${GitHub}${Path}`);
         }
         try {
-          await (await import("node:fs/promises")).writeFile(
+          await (await import("fs/promises")).writeFile(
             `${GitHub}${Path}${Name}`,
             `${[...Base].join("")}`
           );

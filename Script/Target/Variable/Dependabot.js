@@ -28,9 +28,9 @@ var Dependabot_default = /* @__PURE__ */ new Set([
     ])
   }
 ]);
-const { readFile } = await import("node:fs/promises");
-const { dirname, resolve } = await import("node:path");
-const { fileURLToPath } = await import("node:url");
+const { readFile } = await import("fs/promises");
+const { dirname, resolve } = await import("path");
+const { fileURLToPath } = await import("url");
 export {
   Dependabot_default as default,
   dirname,
