@@ -44,20 +44,20 @@ pnpx @yesmaintain/script
 
 ## CLI Usage:
 
-Delete all GitHub Actions runs and their logs for all of your repositories:
+Deletes all GitHub Actions runs and their logs for all of your repositories:
 
 ```sh
 Maintain Clean
 ```
 
-Create a `dependabot.yml` file in each of the .github directories for each of
+Creates a `dependabot.yml` file in each of the .github directories for each of
 the packages in the monorepo:
 
 ```sh
 Maintain Dependabot
 ```
 
-Dispatch all workflows for all repositories for a given user:
+Dispatches all workflows for all repositories for a given user:
 
 ```sh
 Maintain Dispatch
@@ -69,41 +69,41 @@ or specific repositories by name:
 Maintain Dispatch Repository1 Repository2
 ```
 
-Enable / disable all the features that GitHub offers for all the repositories
+Enables / disables all the features that GitHub offers for all the repositories
 that you have access to:
 
 ```sh
 Maintain Edit
 ```
 
-Create a `Node.yml` file in the `.github/workflows` directory for each
+Creates a `Node.yml` file in the `.github/workflows` directory for each
 repository that has a `package.json` file.
 
 ```sh
 Maintain Node
 ```
 
-Create a `NPM.yml` file in the `.github/workflows` directory for each repository
+Creates a `NPM.yml` file in the `.github/workflows` directory for each repository
 that has a `package.json` file.
 
 ```sh
 Maintain NPM
 ```
 
-Create a `Rust.yml` file in the `.github/workflows` directory for each
+Creates a `Rust.yml` file in the `.github/workflows` directory for each
 repository that has a `Cargo.toml` file.
 
 ```sh
 Maintain Rust
 ```
 
-Run all workflow tasks.
+Runs all workflow tasks.
 
 ```sh
 Maintain Workflow
 ```
 
-Find all the `package.json` files in the project, and then star all the
+Finds all the `package.json` files in the project, and then star all the
 dependencies in that `package.json`.
 
 ```sh
