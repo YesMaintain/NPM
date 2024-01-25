@@ -7,8 +7,8 @@ var Node_default = async () => await (async (Files) => {
       const Base = await File();
       if (Path === "/workflows/" && Name === "Node.yml") {
         for (const Package of FilesPackage) {
-          const Directory = (await import("path")).dirname(Package).replace(_Directory, "");
-          const FilePackage = (await (await import("fs/promises")).readFile(Package, "utf-8")).toString();
+          const Directory = (await import("node:path")).dirname(Package).replace(_Directory, "");
+          const FilePackage = (await (await import("node:fs/promises")).readFile(Package, "utf-8")).toString();
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
           if (typeof Environment !== "undefined" && Environment === "NPM") {
             const JSONPackage = JSON.parse(FilePackage);
@@ -54,10 +54,7 @@ var Node_default = async () => await (async (Files) => {
 
             - uses: actions/upload-artifact@v4.1.0
               with:
-                  name: .${Directory.replaceAll(
-                          "/",
-                          "-"
-                        )}-Node-\${{ matrix.node-version }}-Target
+                  name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
 `);
                       }
@@ -68,10 +65,7 @@ var Node_default = async () => await (async (Files) => {
 
             - uses: actions/upload-artifact@v4.1.0
               with:
-                  name: .${Directory.replaceAll(
-                          "/",
-                          "-"
-                        )}-Node-\${{ matrix.node-version }}-Target
+                  name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
 `);
                       }
@@ -91,14 +85,17 @@ var Node_default = async () => await (async (Files) => {
       }
       if (Base.size > 1) {
         try {
-          await (await import("fs/promises")).mkdir(`${GitHub}${Path}`, {
-            recursive: true
-          });
+          await (await import("node:fs/promises")).mkdir(
+            `${GitHub}${Path}`,
+            {
+              recursive: true
+            }
+          );
         } catch {
           console.log(`Could not create: ${GitHub}${Path}`);
         }
         try {
-          await (await import("fs/promises")).writeFile(
+          await (await import("node:fs/promises")).writeFile(
             `${GitHub}${Path}${Name}`,
             `${[...Base].join("")}`
           );

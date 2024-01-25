@@ -7,8 +7,8 @@ var NPM_default = async () => await (async (Files) => {
       const workflowBase = await File();
       if (Path === "/workflows/" && Name === "NPM.yml") {
         for (const _package of packageFiles) {
-          const packageDirectory = (await import("path")).dirname(_package).replace(directory, "");
-          const packageFile = (await (await import("fs/promises")).readFile(_package, "utf-8")).toString();
+          const packageDirectory = (await import("node:path")).dirname(_package).replace(directory, "");
+          const packageFile = (await (await import("node:fs/promises")).readFile(_package, "utf-8")).toString();
           const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
           if (typeof environment !== "undefined" && environment === "NPM") {
             const packageJSON = JSON.parse(packageFile);
@@ -46,14 +46,17 @@ var NPM_default = async () => await (async (Files) => {
       }
       if (workflowBase.size > 1) {
         try {
-          await (await import("fs/promises")).mkdir(`${githubDir}${Path}`, {
-            recursive: true
-          });
+          await (await import("node:fs/promises")).mkdir(
+            `${githubDir}${Path}`,
+            {
+              recursive: true
+            }
+          );
         } catch {
           console.log(`Could not create: ${githubDir}${Path}`);
         }
         try {
-          await (await import("fs/promises")).writeFile(
+          await (await import("node:fs/promises")).writeFile(
             `${githubDir}${Path}${Name}`,
             `${[...workflowBase].join("")}`
           );
