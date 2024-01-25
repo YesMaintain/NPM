@@ -3,7 +3,7 @@
  *
  */
 export const _Function = (async (...[Search, From]: Parameters<Type>) => {
-	const Path = (await import("node:path")).dirname(Search);
+	const Path = (await import("path")).dirname(Search);
 	const Original = From ?? Path;
 
 	if (Path === Search) {
@@ -11,9 +11,9 @@ export const _Function = (async (...[Search, From]: Parameters<Type>) => {
 	}
 
 	try {
-		await (await import("node:fs/promises")).access(
+		await (await import("fs/promises")).access(
 			`${Path}/.git`,
-			(await import("node:fs/promises")).constants.R_OK,
+			(await import("fs/promises")).constants.R_OK,
 		);
 
 		return Path;

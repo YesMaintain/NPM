@@ -10,16 +10,16 @@ export default new Set([
 			new Set([
 				(
 					await (
-						await import("node:fs/promises")
+						await import("fs/promises")
 					).readFile(
 						(
-							await import("node:path")
+							await import("path")
 						).resolve(
 							`${(
-								await import("node:path")
+								await import("path")
 							).dirname(
 								(
-									await import("node:url")
+									await import("url")
 								).fileURLToPath(import.meta.url),
 							)}/../../Target/Workflow/Node.yml`,
 						),

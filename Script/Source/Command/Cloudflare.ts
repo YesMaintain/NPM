@@ -25,7 +25,7 @@ export default async () =>
 
 				if (Path === "/workflows/" && Name === "Cloudflare.yml") {
 					for (const _package of packageFiles) {
-						const packageDirectory = (await import("node:path"))
+						const packageDirectory = (await import("path"))
 							.dirname(_package)
 							.replace(directory, "");
 
@@ -52,7 +52,7 @@ export default async () =>
 
 				if (workflowBase.size > 1) {
 					try {
-						await (await import("node:fs/promises")).mkdir(
+						await (await import("fs/promises")).mkdir(
 							`${githubDir}${Path}`,
 							{
 								recursive: true,
@@ -63,7 +63,7 @@ export default async () =>
 					}
 
 					try {
-						await (await import("node:fs/promises")).writeFile(
+						await (await import("fs/promises")).writeFile(
 							`${githubDir}${Path}${Name}`,
 							`${[...workflowBase].join("")}`,
 						);
