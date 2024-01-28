@@ -12,97 +12,103 @@
 export default async () =>
 	await (async (Files: Files) => {
 		for (const { Path, Name, File } of Files) {
-			for (const [directory, packageFiles] of await (
+			for (const [_Directory, FilesPackage] of await (
 				await import("../Function/Directory.js")
 			).default(
 				await (await import("../Function/Package.js")).default("NPM"),
 			)) {
-				const githubDir = `${directory}/.github`;
-				const workflowBase = await File();
+				const GitHub = `${_Directory}/.github`;
+				const Base = await File();
 
 				if (Path === "/workflows/" && Name === "NPM.yml") {
-					for (const _package of packageFiles) {
-						const packageDirectory = (await import("path"))
-							.dirname(_package)
-							.replace(directory, "");
+					for (const Package of FilesPackage) {
+						const Directory = (await import("path"))
+							.dirname(Package)
+							.replace(_Directory, "");
 
-						const packageFile = (
+						const FilePackage = (
 							await (
 								await import("fs/promises")
-							).readFile(_package, "utf-8")
+							).readFile(Package, "utf-8")
 						).toString();
 
-						const environment = (
+						const Environment = (
 							await (
 								await import("../Function/Type.js")
 							).default()
-						).get(_package.split("/").pop());
+						).get(Package.split("/").pop());
 
-						if (
-							typeof environment !== "undefined" &&
-							environment === "NPM"
-						) {
-							const packageJSON = JSON.parse(packageFile);
+						try {
+							if (
+								typeof Environment !== "undefined" &&
+								Environment === "NPM"
+							) {
+								const JSONPackage = JSON.parse(FilePackage);
 
-							for (const key in packageJSON) {
-								if (
-									Object.prototype.hasOwnProperty.call(
-										packageJSON,
-										key,
-									)
-								) {
-									const values = packageJSON[key];
-									if (key === "scripts") {
-										for (const scripts in values) {
-											if (
-												Object.prototype.hasOwnProperty.call(
-													values,
-													scripts,
-												)
-											) {
+								for (const key in JSONPackage) {
+									if (
+										Object.prototype.hasOwnProperty.call(
+											JSONPackage,
+											key,
+										)
+									) {
+										const values = JSONPackage[key];
+										if (key === "scripts") {
+											for (const scripts in values) {
 												if (
-													scripts === "prepublishOnly"
+													Object.prototype.hasOwnProperty.call(
+														values,
+														scripts,
+													)
 												) {
-													workflowBase.add(`
-            - name: Publish .${packageDirectory}
+													if (
+														scripts ===
+														"prepublishOnly"
+													) {
+														Base.add(`
+            - name: Publish .${Directory}
               continue-on-error: true
-              working-directory: .${packageDirectory}
+              working-directory: .${Directory}
               run: |
                   npm install --legacy-peer-deps
                   npm publish --legacy-peer-deps --provenance
               env:
                   NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
 `);
+													}
 												}
 											}
 										}
 									}
 								}
 							}
+						} catch (_Error) {
+							console.log(`Could not create: ${Package}`);
+							console.log(_Error);
 						}
 					}
 				}
 
-				if (workflowBase.size > 1) {
+				if (Base.size > 1) {
 					try {
 						await (await import("fs/promises")).mkdir(
-							`${githubDir}${Path}`,
+							`${GitHub}${Path}`,
 							{
 								recursive: true,
 							},
 						);
 					} catch {
-						console.log(`Could not create: ${githubDir}${Path}`);
+						console.log(`Could not create: ${GitHub}${Path}`);
 					}
 
 					try {
 						await (await import("fs/promises")).writeFile(
-							`${githubDir}${Path}${Name}`,
-							`${[...workflowBase].join("")}`,
+							`${GitHub}${Path}${Name}`,
+							`${[...Base].join("")}`,
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${githubDir}/workflows/NPM.yml`,
+							`Could not create workflow for: ${GitHub}/workflows/NPM.yml`,
 						);
 					}
 				}

@@ -2,7 +2,7 @@
  * @module Edit
  *
  */
-export default async (repositories: string[] | Set<string> = []) => {
+export default async (_Repository: string[] | Set<string> = []) => {
 	const User = (await import("../Variable/Environment.js")).default.parse(
 		process.env,
 	).User;
@@ -67,7 +67,7 @@ export default async (repositories: string[] | Set<string> = []) => {
 	let pass = null;
 
 	for (const repo of Repositories) {
-		for (const repository of repositories) {
+		for (const repository of _Repository) {
 			if (repo.name === repository) {
 				pass = true;
 			} else {

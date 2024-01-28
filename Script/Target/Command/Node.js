@@ -10,20 +10,21 @@ var Node_default = async () => await (async (Files) => {
           const Directory = (await import("path")).dirname(Package).replace(_Directory, "");
           const FilePackage = (await (await import("fs/promises")).readFile(Package, "utf-8")).toString();
           const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
-          if (typeof Environment !== "undefined" && Environment === "NPM") {
-            const JSONPackage = JSON.parse(FilePackage);
-            for (const bundle of [
-              "bundledDependencies",
-              "bundleDependencies",
-              "dependencies",
-              "devDependencies",
-              "extensionDependencies",
-              "optionalDependencies",
-              "peerDependencies",
-              "peerDependenciesMeta"
-            ].sort()) {
-              if (typeof JSONPackage[bundle] !== "undefined") {
-                Base.add(`
+          try {
+            if (typeof Environment !== "undefined" && Environment === "NPM") {
+              const JSONPackage = JSON.parse(FilePackage);
+              for (const bundle of [
+                "bundledDependencies",
+                "bundleDependencies",
+                "dependencies",
+                "devDependencies",
+                "extensionDependencies",
+                "optionalDependencies",
+                "peerDependencies",
+                "peerDependenciesMeta"
+              ].sort()) {
+                if (typeof JSONPackage[bundle] !== "undefined") {
+                  Base.add(`
             - uses: actions/setup-node@v4.0.1
               with:
                   node-version: \${{ matrix.node-version }}
@@ -33,22 +34,22 @@ var Node_default = async () => await (async (Files) => {
             - run: pnpm install
               working-directory: .${Directory}
 `);
+                }
               }
-            }
-            for (const key in JSONPackage) {
-              if (Object.prototype.hasOwnProperty.call(
-                JSONPackage,
-                key
-              )) {
-                const values = JSONPackage[key];
-                if (key === "scripts") {
-                  for (const scripts in values) {
-                    if (Object.prototype.hasOwnProperty.call(
-                      values,
-                      scripts
-                    )) {
-                      if (scripts === "build") {
-                        Base.add(`
+              for (const key in JSONPackage) {
+                if (Object.prototype.hasOwnProperty.call(
+                  JSONPackage,
+                  key
+                )) {
+                  const values = JSONPackage[key];
+                  if (key === "scripts") {
+                    for (const scripts in values) {
+                      if (Object.prototype.hasOwnProperty.call(
+                        values,
+                        scripts
+                      )) {
+                        if (scripts === "build") {
+                          Base.add(`
             - run: pnpm run build
               working-directory: .
 
@@ -57,9 +58,9 @@ var Node_default = async () => await (async (Files) => {
                   name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
 `);
-                      }
-                      if (scripts === "prepublishOnly") {
-                        Base.add(`
+                        }
+                        if (scripts === "prepublishOnly") {
+                          Base.add(`
             - run: pnpm run prepublishOnly
               working-directory: .
 
@@ -68,18 +69,22 @@ var Node_default = async () => await (async (Files) => {
                   name: .${Directory.replaceAll("/", "-")}-Node-\${{ matrix.node-version }}-Target
                   path: .${Directory}/Target
 `);
-                      }
-                      if (scripts === "test") {
-                        Base.add(`
+                        }
+                        if (scripts === "test") {
+                          Base.add(`
             - run: pnpm run test
               working-directory: .${Directory}
 `);
+                        }
                       }
                     }
                   }
                 }
               }
             }
+          } catch (_Error) {
+            console.log(`Could not create: ${Package}`);
+            console.log(_Error);
           }
         }
       }

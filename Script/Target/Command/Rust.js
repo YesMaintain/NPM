@@ -1,16 +1,16 @@
 var Rust_default = async () => await (async (Files) => {
   for (const { Path, Name, File } of Files) {
-    for (const [directory, packageFiles] of await (await import("../Function/Directory.js")).default(
+    for (const [_Directory, FilesPackage] of await (await import("../Function/Directory.js")).default(
       await (await import("../Function/Package.js")).default("Cargo")
     )) {
-      const githubDir = `${directory}/.github`;
-      const workflowBase = await File();
+      const GitHub = `${_Directory}/.github`;
+      const Base = await File();
       if (Path === "/workflows/" && Name === "Rust.yml") {
-        for (const _package of packageFiles) {
-          const packageDirectory = (await import("path")).dirname(_package).replace(directory, "");
-          const environment = (await (await import("../Function/Type.js")).default()).get(_package.split("/").pop());
-          if (typeof environment !== "undefined" && environment === "Cargo") {
-            workflowBase.add(`
+        for (const Package of FilesPackage) {
+          const Directory = (await import("path")).dirname(Package).replace(_Directory, "");
+          const Environment = (await (await import("../Function/Type.js")).default()).get(Package.split("/").pop());
+          if (typeof Environment !== "undefined" && Environment === "Cargo") {
+            Base.add(`
             - uses: actions/cache@v4.0.0
               with:
                   path: |
@@ -20,34 +20,34 @@ var Rust_default = async () => await (async (Files) => {
                       ~/.cargo/git/db/
                       target/
                       Target/
-                  key: \${{ runner.os }}-cargo-\${{ hashFiles('.${packageDirectory}/Cargo.toml') }}
+                  key: \${{ runner.os }}-cargo-\${{ hashFiles('.${Directory}/Cargo.toml') }}
             - uses: actions-rs/cargo@v1.0.3
               with:
                 command: build
-                args: --release --all-features --manifest-path .${packageDirectory}/${(await import("path")).basename(_package)}
+                args: --release --all-features --manifest-path .${Directory}/${(await import("path")).basename(Package)}
 `);
           }
         }
       }
-      if (workflowBase.size > 1) {
+      if (Base.size > 1) {
         try {
           await (await import("fs/promises")).mkdir(
-            `${githubDir}${Path}`,
+            `${GitHub}${Path}`,
             {
               recursive: true
             }
           );
         } catch {
-          console.log(`Could not create: ${githubDir}${Path}`);
+          console.log(`Could not create: ${GitHub}${Path}`);
         }
         try {
           await (await import("fs/promises")).writeFile(
-            `${githubDir}${Path}${Name}`,
-            `${[...workflowBase].join("")}`
+            `${GitHub}${Path}${Name}`,
+            `${[...Base].join("")}`
           );
         } catch {
           console.log(
-            `Could not create workflow for: ${githubDir}/workflows/Rust.yml`
+            `Could not create workflow for: ${GitHub}/workflows/Rust.yml`
           );
         }
       }

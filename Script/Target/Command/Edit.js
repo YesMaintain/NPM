@@ -1,4 +1,4 @@
-var Edit_default = async (repositories = []) => {
+var Edit_default = async (_Repository = []) => {
   const User = (await import("../Variable/Environment.js")).default.parse(
     process.env
   ).User;
@@ -38,7 +38,7 @@ var Edit_default = async (repositories = []) => {
   }
   let pass = null;
   for (const repo of Repositories) {
-    for (const repository of repositories) {
+    for (const repository of _Repository) {
       if (repo.name === repository) {
         pass = true;
       } else {

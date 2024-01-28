@@ -20,8 +20,8 @@ export default async () =>
 					"Cloudflare",
 				),
 			)) {
-				const githubDir = `${directory}/.github`;
-				const workflowBase = await File();
+				const GitHub = `${directory}/.github`;
+				const Base = await File();
 
 				if (Path === "/workflows/" && Name === "Cloudflare.yml") {
 					for (const _package of packageFiles) {
@@ -39,7 +39,7 @@ export default async () =>
 							typeof environment !== "undefined" &&
 							environment === "Cloudflare"
 						) {
-							workflowBase.add(`
+							Base.add(`
             - uses: cloudflare/wrangler-action@v3.4.1
               with:
                   apiToken: \${{ secrets.CF_API_TOKEN }}
@@ -50,26 +50,26 @@ export default async () =>
 					}
 				}
 
-				if (workflowBase.size > 1) {
+				if (Base.size > 1) {
 					try {
 						await (await import("fs/promises")).mkdir(
-							`${githubDir}${Path}`,
+							`${GitHub}${Path}`,
 							{
 								recursive: true,
 							},
 						);
 					} catch {
-						console.log(`Could not create: ${githubDir}${Path}`);
+						console.log(`Could not create: ${GitHub}${Path}`);
 					}
 
 					try {
 						await (await import("fs/promises")).writeFile(
-							`${githubDir}${Path}${Name}`,
-							`${[...workflowBase].join("")}`,
+							`${GitHub}${Path}${Name}`,
+							`${[...Base].join("")}`,
 						);
 					} catch {
 						console.log(
-							`Could not create workflow for: ${githubDir}/workflows/Cloudflare.yml`,
+							`Could not create workflow for: ${GitHub}/workflows/Cloudflare.yml`,
 						);
 					}
 				}
