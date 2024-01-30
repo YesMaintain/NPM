@@ -81,6 +81,12 @@ export const Variable: Set<{
 		Action: (await import("../Command/Rust.js")).default,
 	},
 	{
+		Name: "GitHub",
+		Type: "Workflow",
+		Description: "Put GitHub into GitHub Actions.",
+		Action: (await import("../Command/GitHub.js")).default,
+	},
+	{
 		Name: "Workflow",
 		Description: "Trigger all workflow tasks.",
 		Action: async () =>
