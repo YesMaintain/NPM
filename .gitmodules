@@ -1,0 +1,3 @@
+[submodule "CLI"]
+	path = CLI
+	url = ssh://git@github.com/YesMaintain/NPMCLI.git
